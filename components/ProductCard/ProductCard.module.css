@@ -1,0 +1,71 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.link {
+  display: block;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+.link:hover {
+  color: var(--color-ink);
+}
+.link:hover .name {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.info {
+  padding: 8px 8px 0;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.name {
+  flex: 1;
+  min-width: 0;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 1.25;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.price {
+  font-size: 12px;
+  line-height: 1.25;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.sold {
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 1.25;
+  letter-spacing: 0.6px;
+  white-space: nowrap;
+  color: var(--color-signal);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--space-gutter);
+  row-gap: 20px;
+}
+@media (max-width: 899.98px) {
+  .limit2 > :nth-child(n + 3) {
+    display: none;
+  }
+}
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(clamp(160px, 22%, 400px), 1fr));
+    gap: 32px var(--space-gutter);
+  }
+}

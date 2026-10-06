@@ -1,0 +1,219 @@
+.header {
+  flex-shrink: 0;
+  height: 56px;
+  padding: 0 4px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+}
+.back {
+  justify-self: start;
+  min-height: 44px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.wordmark {
+  justify-self: center;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-logo);
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 0.32em;
+  text-decoration: none;
+}
+
+.head {
+  padding: 24px 16px 8px;
+}
+.first {
+  padding-top: 24px;
+}
+
+.postRow {
+  display: flex;
+  gap: 8px;
+}
+.postInput {
+  flex: 1;
+  min-width: 0;
+}
+.findBtn {
+  flex-shrink: 0;
+  padding: 0 16px;
+  font-size: 13px;
+}
+.street {
+  margin-top: 8px;
+}
+
+.methods {
+  display: flex;
+  flex-direction: column;
+}
+.method {
+  min-height: 52px;
+  margin-top: -1px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--color-ink);
+  background: var(--color-paper);
+  cursor: pointer;
+}
+.method:first-child {
+  margin-top: 0;
+}
+.methodOn {
+  background: var(--color-paper-2);
+}
+.methodLabel {
+  flex: 1;
+  font-size: 15px;
+}
+.methodKo {
+  font-family: var(--font-kr);
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--color-ink-2);
+}
+.bankBox {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--color-paper-2);
+}
+.bankNote {
+  margin: 8px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-ink-2);
+}
+
+.items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-rule-soft);
+}
+.items li {
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--color-rule-soft);
+}
+.itemThumb {
+  width: 48px;
+  aspect-ratio: 4 / 5;
+  flex-shrink: 0;
+  background: var(--color-paper-2);
+}
+.itemText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.itemName {
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.itemSize {
+  font-size: 12px;
+  color: var(--color-ink-2);
+}
+.itemPrice {
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.emptyNote {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-ink-2);
+}
+
+.sum {
+  margin: 12px 0 0;
+  font-size: 14px;
+}
+.sum > div {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sum dt {
+  color: var(--color-ink-2);
+}
+.sum dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+.sum > .total {
+  height: auto;
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-ink);
+}
+.total dt {
+  color: var(--color-ink);
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.total dd {
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.agreeSection {
+  padding: 32px 16px 0;
+}
+.agree {
+  min-height: 44px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+.agreeBox {
+  margin-top: 2px;
+}
+.terms {
+  margin-left: 32px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  text-underline-offset: 3px;
+}
+.agreeErr {
+  margin: 0 0 0 32px;
+}
+
+.paySection {
+  padding: 24px 16px 48px;
+}
+.payBtn {
+  width: 100%;
+}
+.payNote {
+  margin: 12px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-ink-2);
+}

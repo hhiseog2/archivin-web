@@ -1,0 +1,39 @@
+{
+  "_todo": "Lookbook photos, [SEASON], [PIECE] names and the intro copy are still blank. pieces[].productId links a piece to its product page (null → /shop).",
+  "lookbooks": [
+    {
+      "n": 1,
+      "title": "Lookbook 01",
+      "season": "[SEASON]",
+      "intro": "[One or two lines about the lookbook: where it was shot, who is in it, what ties the pieces together.]",
+      "looks": [
+        { "label": "Look 01", "photo": null, "caption": "[PIECE] tee · [PIECE] trousers · [PIECE] boots" },
+        { "label": "Look 02", "photo": null, "caption": "[PIECE] cap · [PIECE] hoodie" },
+        { "label": "Look 03", "photo": null, "caption": "[PIECE] trousers" }
+      ],
+      "pieces": [
+        { "name": "[Piece name] tee", "productId": null, "sold": false },
+        { "name": "[Piece name] cap", "productId": null, "sold": false },
+        { "name": "[Piece name] hoodie", "productId": null, "sold": true },
+        { "name": "[Piece name] trousers", "productId": null, "sold": false }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "Lookbook 02",
+      "season": "[SEASON]",
+      "intro": "[One or two lines about the lookbook: where it was shot, who is in it, what ties the pieces together.]",
+      "looks": [
+        { "label": "Look 01", "photo": null, "caption": "[PIECE] · [PIECE]" },
+        { "label": "Look 02", "photo": null, "caption": "[PIECE] · [PIECE]" },
+        { "label": "Look 03", "photo": null, "caption": "[PIECE]" }
+      ],
+      "pieces": [
+        { "name": "[Piece name]", "productId": null, "sold": false },
+        { "name": "[Piece name]", "productId": null, "sold": false },
+        { "name": "[Piece name]", "productId": null, "sold": false },
+        { "name": "[Piece name]", "productId": null, "sold": false }
+      ]
+    }
+  ]
+}

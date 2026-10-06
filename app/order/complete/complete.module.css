@@ -1,0 +1,150 @@
+.head {
+  padding: 40px 16px 0;
+}
+.title {
+  margin: 0;
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 0.95;
+  letter-spacing: -0.3px;
+  text-transform: uppercase;
+}
+.lead {
+  margin: 16px 0 0;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.box {
+  margin: 32px 16px 0;
+  padding: 20px 16px;
+  background: var(--color-paper-2);
+}
+.boxTitle {
+  margin: 0;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.boxNote {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-ink-2);
+}
+.paid {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.dl {
+  margin: 16px 0 0;
+  font-size: 14px;
+}
+.dl > div {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-top: 1px solid var(--color-rule-soft);
+}
+.dl > div:last-child {
+  border-bottom: 1px solid var(--color-rule-soft);
+}
+.dl > .accRow {
+  min-height: 48px;
+}
+.dl dt {
+  color: var(--color-ink-2);
+}
+.dl dd {
+  margin: 0;
+}
+.accDd {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.accNo,
+.strong {
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.copy {
+  height: 36px;
+  min-width: 72px;
+  padding: 0 10px;
+  border: 2px solid var(--color-ink);
+  background: transparent;
+  color: var(--color-ink);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.copied {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+.ko {
+  margin: 12px 0 0;
+  font-family: var(--font-kr);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--color-ink-2);
+}
+.copyStatus {
+  margin: 8px 0 0;
+  min-height: 18px;
+  font-size: 12px;
+}
+
+.next {
+  padding: 32px 16px 0;
+}
+.next h2 {
+  margin-bottom: 8px;
+}
+.body {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.actions {
+  padding: 32px 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.account {
+  margin: 32px 16px 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-rule-soft);
+  display: flex;
+  flex-direction: column;
+}
+.accountNote {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--color-ink-2);
+}
+.create {
+  margin-top: 16px;
+}
+.notNow {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ink-2);
+  font-size: 13px;
+  text-underline-offset: 3px;
+}

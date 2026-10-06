@@ -1,0 +1,30 @@
+{
+  "_todo": "instagram.handle / url, naverMap / kakaoMap URLs, terms / privacy URLs are still blank.",
+  "store": {
+    "addressEn": "16 Sinheung-ro 3-gil, Yongsan-gu, Seoul",
+    "addressKo": "서울 용산구 신흥로3길 16 (해방촌)",
+    "hours": [["Mon–Sat", "2–8 PM"], ["Sunday", "2–7 PM"]],
+    "hoursLine": "Mon–Sat 2–8 PM · Sun 2–7 PM"
+  },
+  "contact": {
+    "email": "eatery01@naver.com",
+    "phone": "010-2070-4268",
+    "phoneHref": "tel:01020704268"
+  },
+  "business": {
+    "name": "아카이빈",
+    "ceo": "안인영",
+    "regNo": "746-39-00917",
+    "mailOrderNo": "2021서울강남01322",
+    "address": "서울 용산구 신흥로3길 16"
+  },
+  "links": {
+    "instagramHandle": "[@HANDLE]",
+    "instagram": "#",
+    "naverMap": "#",
+    "kakaoMap": "#",
+    "terms": "#",
+    "privacy": "#"
+  },
+  "shippingFee": 3000
+}

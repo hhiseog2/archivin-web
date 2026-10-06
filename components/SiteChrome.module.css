@@ -1,0 +1,40 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.spacer {
+  flex-grow: 1;
+  min-height: var(--m-gap, 0px);
+}
+@media (min-width: 900px) {
+  .spacer {
+    min-height: 80px;
+  }
+}
+
+.skip {
+  position: absolute;
+  left: 8px;
+  top: -100px;
+  z-index: 200;
+  padding: 12px 16px;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.skip:focus {
+  top: 8px;
+  color: var(--color-paper);
+}

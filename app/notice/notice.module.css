@@ -1,0 +1,245 @@
+.main {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 900px) {
+  .main {
+    width: 100%;
+    max-width: 1128px;
+    padding: 0 24px;
+  }
+}
+
+.head {
+  padding: 24px 16px 16px;
+}
+@media (min-width: 900px) {
+  .head {
+    padding: 40px 0 24px;
+  }
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-ink);
+}
+.item {
+  border-bottom: 1px solid var(--color-rule-soft);
+}
+
+.ko {
+  font-family: var(--font-kr);
+  font-weight: 400;
+}
+.bold {
+  font-weight: 800;
+}
+.date {
+  flex-shrink: 0;
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--color-ink-2);
+}
+
+/* ---------- Mobile rows ---------- */
+.mLink {
+  min-height: 76px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+.mTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mTitle {
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+/* ---------- Desktop accordion ---------- */
+.accH {
+  margin: 0;
+}
+.accBtn {
+  width: 100%;
+  min-height: 72px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  text-align: left;
+  cursor: pointer;
+}
+.accTitle {
+  flex: 1;
+  min-width: 0;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.3;
+}
+.accTitle.bold {
+  font-weight: 800;
+}
+.accIcon {
+  flex-shrink: 0;
+  width: 24px;
+  display: flex;
+  justify-content: center;
+}
+.accPanel {
+  max-width: 720px;
+  padding: 4px 0 32px;
+}
+
+/* ---------- Body blocks (shared) ---------- */
+.bodyH {
+  margin: 24px 0 8px;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.accPanel > .bodyH:first-child {
+  margin-top: 0;
+}
+.bodyP {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.bodyP + .bodyP {
+  margin-top: 12px;
+}
+.bodyDl + .bodyP {
+  margin-top: 16px;
+}
+.bodyP.muted {
+  color: var(--color-ink-2);
+}
+.bodyP a {
+  text-underline-offset: 3px;
+}
+.bodyP:lang(ko) {
+  line-height: 1.7;
+}
+.noteKo {
+  margin: 24px 0 0;
+  padding: 12px 14px;
+  background: var(--color-paper-2);
+  font-family: var(--font-kr);
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+.bodyDl {
+  margin: 0;
+  max-width: 420px;
+  font-size: 15px;
+}
+.bodyDl > div {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--color-rule-soft);
+}
+.bodyDl > div:last-child {
+  border-bottom: 1px solid var(--color-rule-soft);
+}
+.bodyDl dt {
+  color: var(--color-ink-2);
+}
+.bodyDl dd {
+  margin: 0;
+}
+
+/* ---------- Mobile post ---------- */
+.post {
+  display: flex;
+  flex-direction: column;
+}
+.back {
+  padding: 0 4px;
+}
+.backLink {
+  min-height: 44px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-ink);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.article {
+  padding: 12px 16px 0;
+}
+.articleHead {
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--color-ink);
+}
+.articleTitle {
+  margin-top: 12px;
+}
+.articleTitle.ko {
+  font-weight: 700;
+}
+.byline {
+  margin: 8px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-ink-2);
+}
+.article .bodyDl {
+  margin-top: 24px;
+}
+.article > .bodyP:nth-child(2) {
+  margin-top: 24px;
+}
+
+.more {
+  margin-top: 32px;
+  border-top: 1px solid var(--color-rule-soft);
+}
+.nextLink {
+  min-height: 56px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--color-rule-soft);
+  color: var(--color-ink);
+  text-decoration: none;
+}
+.nextText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 14px;
+}
+.nextKicker {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-ink-2);
+}
+.allWrap {
+  padding: 24px 16px 0;
+}

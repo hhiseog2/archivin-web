@@ -1,0 +1,82 @@
+.main {
+  padding: 24px 16px 0;
+}
+
+.form {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+}
+.pw {
+  margin-top: 16px;
+}
+.pwBox {
+  display: flex;
+  border: 1px solid var(--color-ink);
+}
+.pwInput {
+  flex: 1;
+  min-width: 0;
+  height: 46px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-size: 16px;
+  outline-offset: -4px;
+}
+.pwToggle {
+  flex-shrink: 0;
+  min-width: 64px;
+  height: 46px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+.keep {
+  margin-top: 8px;
+}
+.submit {
+  margin-top: 16px;
+}
+
+.help {
+  margin-top: 4px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  font-size: 13px;
+}
+.help a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  text-underline-offset: 3px;
+}
+
+.note {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-ink-2);
+}
+.create {
+  margin-top: 16px;
+}
+.lookup {
+  margin-top: 4px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  text-underline-offset: 3px;
+}

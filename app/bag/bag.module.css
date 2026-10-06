@@ -1,0 +1,277 @@
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+.head {
+  padding: 24px 16px 16px;
+}
+@media (min-width: 900px) {
+  .head {
+    padding: 40px 24px 24px;
+  }
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 900px) {
+  .layout {
+    padding: 0 24px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 40px 48px;
+  }
+}
+
+/* ---------- Items ---------- */
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-rule-soft);
+}
+@media (min-width: 900px) {
+  .list {
+    flex: 999 1 560px;
+    min-width: 0;
+    border-top-color: var(--color-ink);
+  }
+}
+.row {
+  border-bottom: 1px solid var(--color-rule-soft);
+}
+
+.item {
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+}
+@media (min-width: 900px) {
+  .item {
+    padding: 24px 0;
+    align-items: flex-start;
+    gap: 24px;
+  }
+}
+
+.thumb {
+  flex-shrink: 0;
+  width: 96px;
+  text-decoration: none;
+}
+.thumbWell {
+  font-size: 10px;
+}
+@media (min-width: 900px) {
+  .thumb {
+    width: 120px;
+  }
+}
+
+.itemBody {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+}
+@media (min-width: 900px) {
+  .itemBody {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px 24px;
+  }
+}
+
+.itemText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.itemText > :nth-child(2) {
+  margin-top: 4px;
+}
+@media (min-width: 900px) {
+  .itemText {
+    flex: 0 1 auto;
+    gap: 4px;
+  }
+  .itemText > :nth-child(2) {
+    margin-top: 0;
+  }
+}
+
+.itemName {
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 1.25;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+@media (min-width: 900px) {
+  .itemName {
+    font-size: 13px;
+  }
+}
+
+.itemPrice {
+  margin-top: 8px;
+  font-size: 15px;
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+}
+@media (min-width: 900px) {
+  .itemPrice {
+    margin-top: 0;
+  }
+}
+
+.remove {
+  margin-top: auto;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+@media (min-width: 900px) {
+  .remove {
+    margin-top: 8px;
+  }
+}
+
+.removed {
+  min-height: 56px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--color-paper-2);
+  font-size: 13px;
+  line-height: 1.4;
+}
+@media (min-width: 900px) {
+  .removed {
+    min-height: 64px;
+  }
+}
+.undo {
+  min-height: 44px;
+  padding: 0 4px;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+/* ---------- Summary ---------- */
+.summary {
+  padding: 24px 16px 0;
+}
+@media (min-width: 900px) {
+  .summary {
+    flex: 1 1 340px;
+    padding: 24px;
+    border: 1px solid var(--color-ink);
+  }
+}
+.sumTitle {
+  margin: 0 0 12px;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.sumList {
+  margin: 0;
+  font-size: 14px;
+}
+.sumList > div {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sumList dt {
+  color: var(--color-ink-2);
+}
+.sumList dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+.sumList > .total {
+  height: auto;
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-ink);
+}
+.total dt {
+  color: var(--color-ink);
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.total dd {
+  font-weight: 800;
+  font-size: 18px;
+}
+.sumNote {
+  margin: 12px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-ink-2);
+}
+.sumActions {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ---------- Empty ---------- */
+.empty {
+  padding: 48px 16px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+@media (min-width: 900px) {
+  .empty {
+    padding: 24px 24px 0;
+    max-width: 420px;
+  }
+}
+.emptyLead {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.emptySub {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--color-ink-2);
+}
+.emptyBtn {
+  margin-top: 24px;
+  align-self: stretch;
+}

@@ -1,0 +1,30 @@
+.nav {
+  margin: 32px 0 40px;
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+
+.cell {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.num {
+  font-weight: 800;
+  font-size: 13px;
+}
+.num[aria-current='page'],
+.num[aria-current='page']:hover {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.disabled {
+  color: var(--color-ink-3);
+}

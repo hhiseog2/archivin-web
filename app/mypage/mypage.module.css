@@ -1,0 +1,127 @@
+.head {
+  padding: 24px 16px 20px;
+}
+
+.status {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2px;
+}
+.statusTile {
+  padding: 14px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--color-paper-2);
+  color: var(--color-ink);
+  text-decoration: none;
+}
+.statusTile:hover {
+  color: var(--color-ink);
+}
+.statusOn,
+.statusOn:hover {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+.statusCount {
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 1;
+}
+.statusLabel {
+  font-size: 11px;
+  line-height: 1.3;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--color-ink-2);
+}
+.statusOn .statusLabel {
+  color: var(--color-paper);
+}
+
+.recentWrap {
+  padding: 32px 16px 0;
+}
+.recentTitle {
+  margin-bottom: 12px;
+}
+.order {
+  padding: 16px;
+  border: 1px solid var(--color-ink);
+}
+.orderTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.orderNo {
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.6px;
+}
+.orderTag {
+  height: 20px;
+  text-transform: uppercase;
+}
+.orderMeta {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: var(--color-ink-2);
+}
+.orderThumbs {
+  margin-top: 12px;
+  display: flex;
+  gap: 2px;
+}
+.orderThumbs span {
+  width: 56px;
+  aspect-ratio: 4 / 5;
+  background: var(--color-paper-2);
+}
+.orderItems {
+  margin: 12px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.orderFoot {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.orderPrice {
+  font-weight: 800;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+.nav {
+  margin-top: 32px;
+  border-top: 1px solid var(--color-ink);
+}
+.navLink {
+  min-height: 52px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-rule-soft);
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.signOut {
+  padding: 16px;
+}
+.signOut a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-ink-2);
+  font-size: 13px;
+  text-underline-offset: 3px;
+}

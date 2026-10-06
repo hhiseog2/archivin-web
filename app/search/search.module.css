@@ -1,0 +1,165 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40px;
+}
+@media (min-width: 900px) {
+  .main {
+    padding-top: 16px;
+  }
+}
+
+.bar {
+  flex-shrink: 0;
+  padding: 8px 4px 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.box {
+  flex: 1;
+  min-width: 0;
+  height: 48px;
+  display: flex;
+  border: 2px solid var(--color-ink);
+}
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-size: 16px;
+  outline-offset: -4px;
+}
+.submit {
+  width: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  cursor: pointer;
+}
+.cancel {
+  min-height: 44px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.h2 {
+  margin: 0 0 12px;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.h2Tight {
+  margin-bottom: 4px;
+}
+
+.try {
+  padding: 16px 16px 0;
+}
+@media (min-width: 900px) {
+  .try {
+    padding: 24px 24px 0;
+  }
+}
+.suggest {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.suggestBtn {
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--color-ink);
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.cats {
+  padding: 32px 16px 0;
+}
+@media (min-width: 900px) {
+  .cats {
+    padding: 32px 24px 0;
+  }
+}
+.catList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.catList a {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+@media (min-width: 900px) {
+  .catList a {
+    display: inline-flex;
+  }
+}
+
+.count {
+  margin: 0;
+  padding: 16px 16px 12px;
+  font-size: 13px;
+  color: var(--color-ink-2);
+}
+@media (min-width: 900px) {
+  .count {
+    padding: 24px 8px 16px;
+  }
+}
+
+.none {
+  padding: 24px 16px 0;
+}
+@media (min-width: 900px) {
+  .none {
+    padding: 24px 24px 0;
+  }
+}
+.noneLead {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.noneSub {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--color-ink-2);
+}
+.noneAction {
+  padding: 24px 16px 0;
+}
+@media (min-width: 900px) {
+  .noneAction {
+    padding: 24px 24px 0;
+    max-width: 420px;
+  }
+}

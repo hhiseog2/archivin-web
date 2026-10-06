@@ -1,0 +1,41 @@
+{
+  "_todo": "Replace with real reviews. rating: null renders as '[N] / 5'. productId: null links to /shop.",
+  "reviews": [
+    {
+      "id": "r1",
+      "productName": "[PRODUCT]",
+      "productId": null,
+      "rating": 5,
+      "title": "배송",
+      "lang": "ko",
+      "body": "[Review text as the buyer wrote it]",
+      "author": "Y****",
+      "date": "Mar 4, 2021",
+      "photo": false
+    },
+    {
+      "id": "r2",
+      "productName": "80's Iggy Pop",
+      "productId": "80s-iggy-pop",
+      "rating": null,
+      "title": "[Review title]",
+      "lang": "en",
+      "body": "[Review text as the buyer wrote it]",
+      "author": "[A****]",
+      "date": "[DATE]",
+      "photo": true
+    },
+    {
+      "id": "r3",
+      "productName": "00's Justice",
+      "productId": "00s-justice",
+      "rating": null,
+      "title": "[Review title]",
+      "lang": "en",
+      "body": "[Review text as the buyer wrote it]",
+      "author": "[A****]",
+      "date": "[DATE]",
+      "photo": true
+    }
+  ]
+}

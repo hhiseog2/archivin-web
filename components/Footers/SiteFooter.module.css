@@ -1,0 +1,57 @@
+.footer {
+  padding: 40px 16px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 16px;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.nav a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.store {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.storeTitle {
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.storeInfo {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-ink-2);
+}
+
+.legal {
+  margin: 0;
+  font-family: var(--font-kr);
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--color-ink-3);
+}
+
+.copy {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}

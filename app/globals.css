@@ -1,0 +1,87 @@
+@import './tokens.css';
+
+/* Breakpoint: < 900px follows design/mobile, >= 900px follows design/desktop. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-text);
+  font-weight: 500;
+}
+
+a {
+  color: var(--color-ink);
+}
+a:hover {
+  color: var(--color-ink-2);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role='button']:focus-visible,
+summary:focus-visible {
+  outline: var(--stroke-section) solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+legend {
+  padding: 0;
+}
+
+img,
+video {
+  display: block;
+}
+
+/* Responsive visibility helpers (mobile design vs desktop design). */
+@media (min-width: 900px) {
+  .m-only {
+    display: none !important;
+  }
+}
+@media (max-width: 899.98px) {
+  .d-only {
+    display: none !important;
+  }
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Korean copy always in Noto Sans KR. */
+:lang(ko) {
+  font-family: var(--font-kr);
+}
+
+body.menu-open {
+  overflow: hidden;
+}

@@ -1,0 +1,53 @@
+{
+  "_todo": "date: null renders as '[DATE]'. Fill in dates, bank account details, holiday schedule, the [N]-day defect window and the body of the 2021 opening notice.",
+  "notices": [
+    {
+      "id": "shipping-returns",
+      "title": "Shipping & returns",
+      "lang": "en",
+      "pinned": true,
+      "date": null,
+      "body": [
+        { "type": "h", "text": "Shipping" },
+        { "type": "p", "text": "Shipping is ₩ 3,000. Orders arrive 3–7 business days after payment, not counting weekends and holidays. Remote and island areas cost extra." },
+        { "type": "h", "text": "Exchanges and refunds" },
+        { "type": "p", "text": "Pieces can't be exchanged or refunded unless they're defective." },
+        { "type": "p", "text": "Vintage pieces show their age. Every product page lists the condition and shows the flaws. If damage or stains bother you, check those before you buy." },
+        { "type": "h", "text": "If a piece is defective" },
+        { "type": "p", "text": "Send photos to {email} within [N] days of delivery. We reply with the next steps." },
+        { "type": "note-ko", "text": "하자를 제외하고는 교환·환불이 어려워요. 구매 전에 상품 상태와 사진을 꼭 확인해 주세요." }
+      ]
+    },
+    {
+      "id": "store-hours",
+      "title": "Store hours",
+      "lang": "en",
+      "pinned": true,
+      "date": null,
+      "body": [
+        { "type": "dl", "rows": [["Mon–Sat", "2–8 PM"], ["Sunday", "2–7 PM"]] },
+        { "type": "p", "text": "16 Sinheung-ro 3-gil, Yongsan-gu, Seoul (Haebangchon)." },
+        { "type": "p", "muted": true, "text": "[Holiday closures and schedule changes]" }
+      ]
+    },
+    {
+      "id": "bank-transfer",
+      "title": "Paying by bank transfer",
+      "lang": "en",
+      "pinned": false,
+      "date": null,
+      "body": [
+        { "type": "dl", "rows": [["Bank", "[BANK]"], ["Account", "[ACCOUNT NUMBER]"], ["Holder", "[NAME]"]] },
+        { "type": "p", "muted": true, "text": "[Payment deadline and depositor-name rule]" }
+      ]
+    },
+    {
+      "id": "mall-open",
+      "title": "몰 오픈을 축하합니다",
+      "lang": "ko",
+      "pinned": false,
+      "date": "Feb 14, 2021",
+      "body": [{ "type": "p", "muted": true, "text": "[공지 본문]" }]
+    }
+  ]
+}

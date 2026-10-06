@@ -1,0 +1,72 @@
+/* AUTO-GENERATED from tokens/tokens.json by scripts/build-tokens.mjs. Do not edit by hand. */
+:root {
+  --color-paper: #f5f3ef;
+  --color-paper-2: #e8e4dd;
+  --color-ink: #111111;
+  --color-ink-2: #47433f;
+  --color-ink-3: #6b6761;
+  --color-rule-soft: #c9c3b9;
+  --color-film-black: #0b0b0b;
+  --color-film-white: #ebe7e0;
+  --color-film-grey: #9a958d;
+  --color-signal: #a1161b;
+
+  --font-display: futura-pt, "Futura PT", Futura, Jost, "Noto Sans KR", sans-serif;
+  --font-text: futura-pt, "Futura PT", Futura, Jost, "Noto Sans KR", sans-serif;
+  --font-kr: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+  --font-logo: "Josefin Sans", futura-pt, "Futura PT", Futura, sans-serif;
+  --font-script: "Homemade Apple", cursive;
+
+  --type-wordmark-size: 32px;
+  --type-wordmark-line: 1;
+  --type-wordmark-weight: 400;
+  --type-wordmark-tracking: 0.32em;
+  --type-hello-size: 17px;
+  --type-hello-line: 1;
+  --type-hello-weight: 400;
+  --type-display-xl-size: 60px;
+  --type-display-xl-line: 0.92;
+  --type-display-xl-weight: 800;
+  --type-display-xl-tracking: -0.5px;
+  --type-display-l-size: 40px;
+  --type-display-l-line: 0.95;
+  --type-display-l-weight: 800;
+  --type-display-l-tracking: -0.3px;
+  --type-heading-size: 24px;
+  --type-heading-line: 1;
+  --type-heading-weight: 800;
+  --type-index-size: 15px;
+  --type-index-line: 1.2;
+  --type-index-weight: 800;
+  --type-index-tracking: 0.6px;
+  --type-label-size: 12px;
+  --type-label-line: 1.2;
+  --type-label-weight: 800;
+  --type-label-tracking: 0.6px;
+  --type-body-size: 15px;
+  --type-body-line: 1.55;
+  --type-body-weight: 500;
+  --type-price-size: 15px;
+  --type-price-line: 1.2;
+  --type-price-weight: 500;
+  --type-meta-size: 12px;
+  --type-meta-line: 1.5;
+  --type-meta-weight: 500;
+  --type-caption-size: 11px;
+  --type-caption-line: 1.3;
+  --type-caption-weight: 500;
+  --type-caption-tracking: 1px;
+
+  --space-gutter: 2px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+  --space-6: 64px;
+  --radius-0: 0;
+  --radius-1: 2px;
+  --radius-round: 50%;
+  --stroke-hair: 1px;
+  --stroke-section: 2px;
+}

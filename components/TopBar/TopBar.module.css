@@ -1,0 +1,23 @@
+.bar {
+  flex-shrink: 0;
+  height: 52px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-film-black);
+  color: var(--color-film-white);
+}
+
+.svg {
+  display: block;
+  overflow: visible;
+}
+
+.strokes {
+  fill: none;
+  stroke: var(--color-film-white);
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

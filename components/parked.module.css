@@ -1,0 +1,44 @@
+/* Shared layout for the parked screens (checkout, order complete, sign in, my page).
+   Mobile follows design/parked; desktop has no design yet, so the same column is centred. */
+.column {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 900px) {
+  .column {
+    max-width: 560px;
+    margin: 0 auto;
+    padding-top: 24px;
+  }
+}
+
+.section {
+  padding: 32px 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.sectionTitle {
+  margin: 0;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.lead {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-ink-2);
+}
+.lead a {
+  text-underline-offset: 3px;
+}
+
+.rule {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-rule-soft);
+}

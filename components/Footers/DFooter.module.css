@@ -1,0 +1,145 @@
+.footer {
+  padding: 64px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  border-top: 1px solid var(--color-ink);
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.cols {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px 24px;
+}
+
+.brand {
+  flex: 2 1 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+.wordmark {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-logo);
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: 0.32em;
+  text-decoration: none;
+}
+.blurb {
+  margin: 0;
+  max-width: 320px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--color-ink-2);
+}
+
+.col {
+  flex: 1 1 160px;
+}
+.storeCol {
+  flex: 1 1 240px;
+}
+.colTitle {
+  margin: 0 0 8px;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+}
+.links a {
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.addr {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.addrKo {
+  margin: 2px 0 0;
+  font-family: var(--font-kr);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--color-ink-2);
+}
+.hours {
+  margin: 12px 0 0;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.hours div {
+  display: flex;
+  gap: 12px;
+}
+.hours dt {
+  width: 64px;
+  color: var(--color-ink-2);
+}
+.hours dd {
+  margin: 0;
+}
+.directions {
+  margin-top: 8px;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  text-underline-offset: 4px;
+}
+
+.bottom {
+  padding-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 24px;
+  border-top: 1px solid var(--color-rule-soft);
+}
+.legal {
+  margin: 0;
+  font-family: var(--font-kr);
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--color-ink-3);
+}
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.meta a {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-ink-2);
+  text-decoration: none;
+}
+.copy {
+  color: var(--color-ink-3);
+}
