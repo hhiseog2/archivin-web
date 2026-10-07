@@ -6,8 +6,6 @@ import styles from './about.module.css';
 
 export const metadata: Metadata = { title: 'About us' };
 
-const POSTERS_ALT = 'Three black-and-white ARCHIVIN posters: FUCK YOU, DO IT YOURSELF., 1 OF 1';
-
 export default function AboutPage() {
   return (
     <SiteChrome>
@@ -89,14 +87,6 @@ export default function AboutPage() {
             </dl>
           </section>
         </div>
-
-        <section aria-label="Posters" className={styles.posters}>
-          <picture>
-            <source media="(min-width: 900px)" srcSet="/media/posters-row-desktop.jpg" width={2880} height={1327} />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/media/posters-row-mobile.png" alt={POSTERS_ALT} className={styles.postersImg} />
-          </picture>
-        </section>
       </main>
     </SiteChrome>
   );

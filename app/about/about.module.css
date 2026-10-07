@@ -222,24 +222,3 @@
     min-height: 48px;
   }
 }
-
-.posters {
-  margin-top: 48px;
-  background: var(--color-navy);
-}
-@media (min-width: 900px) {
-  .posters {
-    margin-top: 80px;
-  }
-}
-.postersImg {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-@media (min-width: 900px) {
-  .postersImg {
-    height: auto;
-    aspect-ratio: 2880 / 1327;
-  }
-}
