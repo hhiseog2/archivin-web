@@ -29,7 +29,7 @@ export default async function NoticePostPage({ params }: { params: Promise<Param
   const next = notices[idx + 1];
 
   return (
-    <SiteChrome active="notice" mobileFooterGap={40}>
+    <SiteChrome>
       <div className={`m-only ${styles.post}`}>
         <nav aria-label="Breadcrumb" className={styles.back}>
           <Link href="/notice" className={styles.backLink}>

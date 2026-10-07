@@ -3,20 +3,20 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: {
-    default: 'ARCHIVIN — Vintage shop in Haebangchon, Seoul',
+    default: 'ARCHIVIN — selected vintage clothing',
     template: '%s · ARCHIVIN',
   },
-  description: 'Band tees, tour merch and designer pieces from the 1970s to the 2010s. Every piece is one of one.',
+  description: 'Selected vintage clothing from Haebangchon, Seoul. Every piece is one of one.',
 };
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#0b0b0b',
+  themeColor: '#323850',
 };
 
-// Futura PT is an Adobe Fonts face. Set NEXT_PUBLIC_TYPEKIT_ID (e.g. in .env.local) once the web kit exists;
-// until then Jost from Google Fonts stands in via the font stack in tokens.json.
+// Neue Haas Grotesk Text is an Adobe Fonts face. Set NEXT_PUBLIC_TYPEKIT_ID in .env once the web kit exists.
+// TODO: Neue Haas Grotesk web kit (README 11). Until then Helvetica Neue / Arial show via the font stack.
 const TYPEKIT_ID = process.env.NEXT_PUBLIC_TYPEKIT_ID;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -26,10 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&family=Jost:wght@500;800&family=Noto+Sans+KR:wght@400;500;700&display=swap"
-        />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" />
         {TYPEKIT_ID ? <link rel="stylesheet" href={`https://use.typekit.net/${TYPEKIT_ID}.css`} /> : null}
       </head>
       <body>{children}</body>

@@ -1,0 +1,68 @@
+/* Mobile header — A21_Header (390×56). */
+.mobile {
+  height: var(--space-header-height);
+  padding: 0 4px 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.logo {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.logo img {
+  display: block;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+}
+
+/* "menu", "bag", "search": 13px, 44px tap height. */
+.navItem {
+  height: 44px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font-size: var(--type-nav-size);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* Desktop header — A21_DShop: 3-column grid, 20px top, 48px sides, max 1440. */
+.desktop {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px var(--space-gutter-desktop) 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+}
+
+.dLeft {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-left: -12px;
+}
+
+.dRight {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  margin-right: -12px;
+}

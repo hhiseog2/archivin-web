@@ -21,10 +21,8 @@
 }
 .sectionTitle {
   margin: 0;
-  font-weight: 800;
+  font-weight: 400;
   font-size: 12px;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
 }
 
 .lead {
@@ -40,5 +38,5 @@
 .rule {
   margin-top: 32px;
   padding-top: 24px;
-  border-top: 1px solid var(--color-rule-soft);
+  border-top: 1px solid var(--color-fill);
 }

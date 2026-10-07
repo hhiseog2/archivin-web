@@ -4,3 +4,6 @@ out
 next-env.d.ts
 *.tsbuildinfo
 .env*.local
+
+# Design handoff (source files, not part of the site)
+archivin-web-handoff*/

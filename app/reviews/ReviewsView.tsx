@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { StarIcon } from '@/components/Icons';
-import { Pagination } from '@/components/Pagination/Pagination';
 import { useMyReviews } from '@/lib/cart';
 import { reviews as baseReviews, type Review } from '@/lib/catalog';
 import { ReviewForm } from './ReviewForm';
@@ -92,7 +91,6 @@ export function ReviewsView({ initialWriting = false, justPosted = false }: { in
           {list.length === 0 && <p className={styles.none}>No reviews with photos yet.</p>}
         </div>
 
-        <Pagination page={1} pageCount={1} hrefFor={() => '/reviews'} arrows={false} />
       </div>
     </main>
   );

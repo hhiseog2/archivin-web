@@ -1,0 +1,63 @@
+/* TODO(design): menu panel (README 8-5 proposal). */
+.panel {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* "close" sits where "menu" sits in the header. */
+.top {
+  flex-shrink: 0;
+  height: var(--space-header-height);
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+@media (min-width: 900px) {
+  .top {
+    height: auto;
+    padding: 24px 36px 0;
+  }
+}
+
+.close {
+  height: 44px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font-size: var(--type-nav-size);
+  cursor: pointer;
+}
+
+.groups {
+  padding: 24px var(--space-gutter-mobile) 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+@media (min-width: 900px) {
+  .groups {
+    padding: 48px var(--space-gutter-desktop) 64px;
+  }
+}
+
+.group {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--type-intro-list-size);
+  text-decoration: none;
+}

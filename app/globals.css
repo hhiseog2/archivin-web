@@ -18,7 +18,8 @@ body {
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-text);
-  font-weight: 500;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -35,14 +36,21 @@ textarea {
   font: inherit;
 }
 
+h1,
+h2,
+h3 {
+  font-weight: 400;
+}
+
+/* README 10: 2px focus ring, ink on white pages (the intro overrides it with white). */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 [role='button']:focus-visible,
-summary:focus-visible {
-  outline: var(--stroke-section) solid var(--color-ink);
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-ink);
   outline-offset: 2px;
 }
 
@@ -71,10 +79,13 @@ video {
   position: absolute !important;
   width: 1px;
   height: 1px;
+  margin: -1px;
+  padding: 0;
   overflow: hidden;
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
   white-space: nowrap;
+  border: 0;
 }
 
 /* Korean copy always in Noto Sans KR. */
@@ -82,6 +93,7 @@ video {
   font-family: var(--font-kr);
 }
 
-body.menu-open {
+/* Set while the menu panel or the filter sheet is open. */
+body.scroll-locked {
   overflow: hidden;
 }

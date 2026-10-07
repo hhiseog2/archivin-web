@@ -1,73 +1,49 @@
 import type { ReactNode } from 'react';
-import { DHeader, type NavKey } from './DHeader/DHeader';
-import { DFooter } from './Footers/DFooter';
-import { SiteFooter } from './Footers/SiteFooter';
-import { SiteHeader } from './SiteHeader/SiteHeader';
-import { TopBar } from './TopBar/TopBar';
+import { Footer } from './Footer/Footer';
+import { DHeader, Header } from './Header/Header';
 import styles from './SiteChrome.module.css';
 
 type Props = {
   children: ReactNode;
-  /** Desktop nav item to underline. */
-  active?: NavKey;
-  /** Mobile screens that drop the shared chrome (Search, Checkout). Desktop always keeps it. */
-  mobileTopBar?: boolean;
+  /** Product, bag and intro have no footer (README 5). */
+  footer?: boolean;
+  /** Mobile screens that bring their own top bar (search, checkout). Desktop always keeps the header. */
   mobileHeader?: boolean;
-  mobileFooter?: boolean;
-  /** Min space above the mobile footer (px). Desktop always keeps 80px. */
-  mobileFooterGap?: number;
-  desktopSearchOpen?: boolean;
-  desktopQuery?: string;
-  /** Rendered after the footer, e.g. the product page's sticky purchase bar. */
-  after?: ReactNode;
+  /** /shop: the desktop header's category menu shows the current view. */
+  onShop?: boolean;
+  /**
+   * Pages redesigned in v2 (shop, product, bag) set their own 48px desktop gutters.
+   * The kept pages (about, notice, …) still use 24px inside, so they get 24px more here to line up with the header.
+   */
+  fullWidth?: boolean;
 };
 
-/**
- * Page shell for every page except home:
- * TopBar → SiteHeader (mobile) / DHeader (desktop) → page → SiteFooter (mobile) / DFooter (desktop).
- */
-export function SiteChrome({
-  children,
-  active,
-  mobileTopBar = true,
-  mobileHeader = true,
-  mobileFooter = true,
-  mobileFooterGap = 0,
-  desktopSearchOpen = false,
-  desktopQuery,
-  after,
-}: Props) {
+/** Page shell for every page except the intro: Header (mobile) / DHeader (desktop) → page → Footer. */
+export function SiteChrome({ children, footer = true, mobileHeader = true, onShop = false, fullWidth = false }: Props) {
   return (
     <div className={styles.page}>
       <a href="#content" className={styles.skip}>
-        Skip to content
+        skip to content
       </a>
-      <div className={mobileTopBar ? undefined : 'd-only'}>
-        <TopBar />
-      </div>
       {mobileHeader && (
         <div className="m-only">
-          <SiteHeader />
+          <Header />
         </div>
       )}
       <div className="d-only">
-        <DHeader active={active} initialSearchOpen={desktopSearchOpen} initialQuery={desktopQuery} />
+        <DHeader onShop={onShop} />
       </div>
 
-      <div id="content" className={styles.content}>
+      <div id="content" className={`${styles.content} ${fullWidth ? '' : styles.inset}`}>
         {children}
       </div>
 
-      <div className={styles.spacer} style={{ ['--m-gap' as string]: `${mobileFooterGap}px` }} />
-      {mobileFooter && (
-        <div className="m-only">
-          <SiteFooter />
-        </div>
+      {footer && (
+        <>
+          <div className={styles.spacer} />
+          <Footer />
+        </>
       )}
-      <div className="d-only">
-        <DFooter />
-      </div>
-      {after}
     </div>
   );
 }

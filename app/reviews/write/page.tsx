@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: 'Write a review' };
 /** Mobile: the full-page form. Desktop: the reviews page with the form already open. */
 export default function WriteReviewPage() {
   return (
-    <SiteChrome active="reviews" mobileFooter={false}>
+    <SiteChrome>
       <div className="m-only">
         <WriteReviewMobile />
       </div>

@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { ChevronLeft } from '@/components/Icons';
 import { useBag } from '@/lib/cart';
-import { getProduct, site } from '@/lib/catalog';
-import { formatPrice, sizeLabel, sumPrices } from '@/lib/format';
+import { catalog, getProduct, site } from '@/lib/catalog';
+import { formatPrice, sumPrices } from '@/lib/format';
 import ui from '@/components/ui.module.css';
 import parked from '@/components/parked.module.css';
 import styles from './checkout.module.css';
@@ -37,7 +37,7 @@ export function CheckoutView() {
   const items = bag.map(getProduct).filter((p): p is NonNullable<typeof p> => !!p);
   const subtotal = sumPrices(items.map((p) => p.price));
   const empty = ready && items.length === 0;
-  const total = empty ? 0 : subtotal == null ? null : subtotal + site.shippingFee;
+  const total = empty ? 0 : subtotal == null ? null : subtotal + catalog.shippingFee;
 
   const telOk = /^\d{11}$/.test(tel);
   const showTelErr = (telTouched || tried) && !telOk;
@@ -59,8 +59,9 @@ export function CheckoutView() {
           <ChevronLeft />
           Bag
         </Link>
-        <Link href="/" aria-label="ARCHIVIN home" className={styles.wordmark}>
-          ARCHIVIN
+        <Link href="/shop" aria-label="ARCHIVIN, go to Shop" className={styles.wordmark}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo/archivin-stitch-navy.png" alt="" width={138} height={32} />
         </Link>
         <span />
       </header>
@@ -237,7 +238,7 @@ export function CheckoutView() {
                       <span aria-hidden="true" className={styles.itemThumb} />
                       <span className={styles.itemText}>
                         <span className={styles.itemName}>{p.name}</span>
-                        <span className={styles.itemSize}>Size {sizeLabel(p.size)}</span>
+                        <span className={styles.itemSize}>size {p.sizeLabel}</span>
                       </span>
                       <span className={styles.itemPrice}>{formatPrice(p.price)}</span>
                     </li>
@@ -251,7 +252,7 @@ export function CheckoutView() {
                 </div>
                 <div>
                   <dt>Shipping</dt>
-                  <dd>{formatPrice(empty ? 0 : site.shippingFee)}</dd>
+                  <dd>{formatPrice(empty ? 0 : catalog.shippingFee)}</dd>
                 </div>
                 <div className={styles.total}>
                   <dt>Total</dt>

@@ -5,12 +5,11 @@ import { useEffect, useRef, useState } from 'react';
 import { PlusIcon, StarIcon } from '@/components/Icons';
 import { addMyReview } from '@/lib/cart';
 import { getProduct } from '@/lib/catalog';
-import { sizeLabel } from '@/lib/format';
 import ui from '@/components/ui.module.css';
 import styles from './reviews.module.css';
 
 // TODO: once accounts/orders exist, list the signed-in buyer's purchased pieces here.
-const ORDER_PIECES = ['80s-iggy-pop', '80s-pet-shop-boys'];
+const ORDER_PIECES = ['3599', '3593'];
 const MAX_PHOTOS = 5;
 
 /**
@@ -86,7 +85,7 @@ export function ReviewForm({
             const p = getProduct(pid);
             return (
               <option key={pid} value={pid}>
-                {p?.name} · Size {sizeLabel(p?.size)}
+                {p?.name} · size {p?.sizeLabel}
               </option>
             );
           })}

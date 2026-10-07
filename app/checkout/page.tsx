@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: 'Checkout' };
 /** Parked: UI shell only. Payment (PG) and order saving are not connected yet. */
 export default function CheckoutPage() {
   return (
-    <SiteChrome mobileTopBar={false} mobileHeader={false} mobileFooter={false}>
+    <SiteChrome mobileHeader={false} footer={false}>
       <CheckoutView />
     </SiteChrome>
   );

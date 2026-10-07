@@ -31,7 +31,7 @@ export default async function LookbookPage({ params }: { params: Promise<Params>
   const total = lb.looks.length;
 
   return (
-    <SiteChrome active="lookbook" mobileFooterGap={40}>
+    <SiteChrome>
       <main className={styles.main}>
         <div className={styles.head}>
           <p className={styles.kicker}>Lookbook</p>
@@ -93,6 +93,8 @@ export default async function LookbookPage({ params }: { params: Promise<Params>
                   href={p ? `/product/${p.id}` : '/shop'}
                   price={p?.price ?? null}
                   sold={p?.sold ?? piece.sold}
+                  sizeLabel={p?.sizeLabel}
+                  image={p?.images[0]?.src}
                 />
               );
             })}

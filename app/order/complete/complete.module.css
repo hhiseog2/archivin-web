@@ -3,11 +3,9 @@
 }
 .title {
   margin: 0;
-  font-weight: 800;
+  font-weight: 400;
   font-size: 40px;
   line-height: 0.95;
-  letter-spacing: -0.3px;
-  text-transform: uppercase;
 }
 .lead {
   margin: 16px 0 0;
@@ -18,14 +16,12 @@
 .box {
   margin: 32px 16px 0;
   padding: 20px 16px;
-  background: var(--color-paper-2);
+  background: var(--color-fill);
 }
 .boxTitle {
   margin: 0;
-  font-weight: 800;
+  font-weight: 400;
   font-size: 15px;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
 }
 .boxNote {
   margin: 8px 0 0;
@@ -49,10 +45,10 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  border-top: 1px solid var(--color-rule-soft);
+  border-top: 1px solid var(--color-fill);
 }
 .dl > div:last-child {
-  border-bottom: 1px solid var(--color-rule-soft);
+  border-bottom: 1px solid var(--color-fill);
 }
 .dl > .accRow {
   min-height: 48px;
@@ -70,25 +66,24 @@
 }
 .accNo,
 .strong {
-  font-weight: 800;
+  font-weight: 400;
   font-variant-numeric: tabular-nums;
 }
 .copy {
   height: 36px;
   min-width: 72px;
   padding: 0 10px;
-  border: 2px solid var(--color-ink);
-  background: transparent;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-fill);
   color: var(--color-ink);
-  font-weight: 800;
+  font-weight: 400;
   font-size: 11px;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
   cursor: pointer;
 }
 .copied {
-  background: var(--color-ink);
-  color: var(--color-paper);
+  background: var(--color-navy);
+  color: var(--color-on-navy);
 }
 .ko {
   margin: 12px 0 0;
@@ -126,7 +121,7 @@
 .account {
   margin: 32px 16px 0;
   padding-top: 24px;
-  border-top: 1px solid var(--color-rule-soft);
+  border-top: 1px solid var(--color-fill);
   display: flex;
   flex-direction: column;
 }

@@ -12,7 +12,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  background: var(--color-paper-2);
+  background: var(--color-fill);
   color: var(--color-ink);
   text-decoration: none;
 }
@@ -21,23 +21,21 @@
 }
 .statusOn,
 .statusOn:hover {
-  background: var(--color-ink);
-  color: var(--color-paper);
+  background: var(--color-navy);
+  color: var(--color-on-navy);
 }
 .statusCount {
-  font-weight: 800;
+  font-weight: 400;
   font-size: 22px;
   line-height: 1;
 }
 .statusLabel {
   font-size: 11px;
   line-height: 1.3;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
   color: var(--color-ink-2);
 }
 .statusOn .statusLabel {
-  color: var(--color-paper);
+  color: var(--color-on-navy);
 }
 
 .recentWrap {
@@ -48,7 +46,7 @@
 }
 .order {
   padding: 16px;
-  border: 1px solid var(--color-ink);
+  border: 1px solid var(--color-fill);
 }
 .orderTop {
   display: flex;
@@ -57,13 +55,11 @@
   gap: 8px;
 }
 .orderNo {
-  font-weight: 800;
+  font-weight: 400;
   font-size: 13px;
-  letter-spacing: 0.6px;
 }
 .orderTag {
   height: 20px;
-  text-transform: uppercase;
 }
 .orderMeta {
   margin: 6px 0 0;
@@ -78,7 +74,7 @@
 .orderThumbs span {
   width: 56px;
   aspect-ratio: 4 / 5;
-  background: var(--color-paper-2);
+  background: var(--color-fill);
 }
 .orderItems {
   margin: 12px 0 0;
@@ -92,14 +88,14 @@
   justify-content: space-between;
 }
 .orderPrice {
-  font-weight: 800;
+  font-weight: 400;
   font-size: 15px;
   font-variant-numeric: tabular-nums;
 }
 
 .nav {
   margin-top: 32px;
-  border-top: 1px solid var(--color-ink);
+  border-top: 1px solid var(--color-fill);
 }
 .navLink {
   min-height: 52px;
@@ -107,11 +103,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--color-rule-soft);
-  font-weight: 800;
+  border-bottom: 1px solid var(--color-fill);
+  font-weight: 400;
   font-size: 15px;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
   text-decoration: none;
 }
 .signOut {

@@ -31,23 +31,18 @@
 .kicker {
   margin: 0;
   font-size: 11px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
   color: var(--color-ink-2);
 }
 .title {
   margin: 12px 0 0;
-  font-weight: 800;
+  font-weight: 400;
   font-size: 40px;
   line-height: 0.95;
-  letter-spacing: -0.3px;
-  text-transform: uppercase;
 }
 @media (min-width: 900px) {
   .title {
     margin-top: 16px;
     font-size: clamp(40px, 5vw, 72px);
-    letter-spacing: -0.5px;
   }
 }
 .copy {
@@ -113,11 +108,9 @@
 
 .h2 {
   margin: 0 0 12px;
-  font-weight: 800;
+  font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
 }
 .h2Tight {
   margin-bottom: 4px;
@@ -151,10 +144,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid var(--color-rule-soft);
+  border-top: 1px solid var(--color-fill);
 }
 .hours > div:last-child {
-  border-bottom: 1px solid var(--color-rule-soft);
+  border-bottom: 1px solid var(--color-fill);
 }
 .hours dt {
   color: var(--color-ink-2);
@@ -191,12 +184,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--color-ink);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-fill);
   color: var(--color-ink);
-  font-weight: 800;
+  font-weight: 400;
   font-size: 13px;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
   text-decoration: none;
 }
 
@@ -210,7 +203,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  border-bottom: 1px solid var(--color-rule-soft);
+  border-bottom: 1px solid var(--color-fill);
 }
 .contactList > div:last-child {
   border-bottom: 0;
@@ -232,7 +225,7 @@
 
 .posters {
   margin-top: 48px;
-  background: var(--color-ink);
+  background: var(--color-navy);
 }
 @media (min-width: 900px) {
   .posters {

@@ -1,176 +1,412 @@
 {
-  "_todo": "Mock data. price: null renders as '₩ 000,000' (TODO: real prices). size: null renders as '[SIZE]'. Categories other than Iggy Pop are guesses — confirm. Photos are grey placeholders until real images are added (photos[].src).",
+  "_note": "시안용 목업이에요. 이름·사진·사이즈는 archivin.kr 실제 상품, 가격은 자리표시(null → '₩ 000,000'). 배열 순서가 'new in' 순서예요. 상세 정보(사진 5장, 실측, 상태, 디테일)는 3599(80's Iggy Pop)만 있어요.",
+  "totals": {
+    "_note": "화면 표시용 가짜 숫자. 필터 없는 all 보기에서만 씀.",
+    "available": 127,
+    "includingSold": 300
+  },
+  "shippingFee": 3000,
+  "currency": "KRW",
+  "categories": [
+    {
+      "id": "outer",
+      "label": "outer"
+    },
+    {
+      "id": "tops",
+      "label": "tops"
+    },
+    {
+      "id": "bottoms",
+      "label": "bottoms"
+    },
+    {
+      "id": "shoes",
+      "label": "shoes"
+    },
+    {
+      "id": "accessories",
+      "label": "accessories"
+    }
+  ],
+  "brandShortcuts": [
+    {
+      "label": "levi's",
+      "brands": [
+        "Levi's"
+      ]
+    },
+    {
+      "label": "vans & converse",
+      "brands": [
+        "Vans",
+        "Converse"
+      ]
+    }
+  ],
+  "filters": {
+    "sort": [
+      {
+        "id": "new",
+        "label": "new in"
+      },
+      {
+        "id": "price-asc",
+        "label": "price low–high"
+      },
+      {
+        "id": "price-desc",
+        "label": "price high–low"
+      }
+    ],
+    "availability": [
+      {
+        "id": "available",
+        "label": "available"
+      },
+      {
+        "id": "include-sold",
+        "label": "include sold"
+      }
+    ],
+    "brands": [
+      "Levi's",
+      "Converse",
+      "Vans",
+      "Chanel",
+      "John Varvatos",
+      "Chrome Hearts"
+    ],
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL",
+      "One size"
+    ],
+    "eras": [
+      "70s",
+      "80s",
+      "90s",
+      "00s",
+      "10s"
+    ]
+  },
+  "introCategories": [
+    "band",
+    "designer",
+    "rap",
+    "skate",
+    "archive"
+  ],
+  "designSampleBag": {
+    "_note": "디자인 확인용 장바구니 예시 (실제로는 빈 상태로 시작)",
+    "ids": [
+      "3599",
+      "3604",
+      "3597"
+    ]
+  },
   "products": [
     {
-      "id": "80s-iggy-pop",
-      "productNo": "3599",
-      "name": "80's Iggy Pop",
-      "category": "tops",
-      "era": "80s",
-      "eraLabel": "1980s",
-      "size": "L",
-      "price": null,
-      "sold": false,
-      "newIn": 1,
-      "addedAt": "2026-10-01",
-      "measurements": { "shoulder": "56", "chest": "56", "sleeve": "21", "length": "68" },
-      "tagSize": "L",
-      "condition": "Single stitch. The 50/50 fabric has worn very thin.",
-      "construction": "Single stitch",
-      "fabric": "50/50 blend",
-      "photos": ["FRONT", "BACK", "TAG", "DETAIL", "FLAW"]
-    },
-    {
-      "id": "90s-iggy-pop-hyundai-sponsor",
-      "productNo": null,
-      "name": "90's Iggy Pop (Hyundai Sponsor)",
-      "category": "tops",
-      "era": "90s",
-      "eraLabel": "1990s",
-      "size": null,
-      "price": null,
-      "sold": false,
-      "newIn": 2,
-      "addedAt": "2026-09-30",
-      "measurements": null,
-      "tagSize": null,
-      "condition": null,
-      "construction": null,
-      "fabric": null,
-      "photos": ["FRONT", "BACK", "TAG", "DETAIL", "FLAW"]
-    },
-    {
-      "id": "90s-iggy-pop",
-      "productNo": null,
-      "name": "90's Iggy Pop",
-      "category": "tops",
-      "era": "90s",
-      "eraLabel": "1990s",
-      "size": null,
-      "price": null,
-      "sold": true,
-      "newIn": null,
-      "addedAt": "2026-09-29",
-      "measurements": null,
-      "tagSize": null,
-      "condition": null,
-      "construction": null,
-      "fabric": null,
-      "photos": ["FRONT", "BACK", "TAG", "DETAIL", "FLAW"]
-    },
-    {
-      "id": "80s-pet-shop-boys",
-      "productNo": null,
-      "name": "80's Pet Shop Boys",
-      "category": "tops",
-      "era": "80s",
-      "eraLabel": "1980s",
-      "size": null,
-      "price": null,
-      "sold": false,
-      "newIn": 3,
-      "addedAt": "2026-09-28",
-      "measurements": null,
-      "tagSize": null,
-      "condition": null,
-      "construction": null,
-      "fabric": null,
-      "photos": ["FRONT", "BACK", "TAG", "DETAIL", "FLAW"]
-    },
-    {
-      "id": "ghost-in-the-shell-1995",
-      "productNo": null,
-      "name": "Ghost In The Shell (1995)",
-      "category": "tops",
-      "era": "90s",
-      "eraLabel": "1990s",
-      "size": null,
-      "price": null,
-      "sold": false,
-      "newIn": 4,
-      "addedAt": "2026-09-27",
-      "measurements": null,
-      "tagSize": null,
-      "condition": null,
-      "construction": null,
-      "fabric": null,
-      "photos": ["FRONT", "BACK", "TAG", "DETAIL", "FLAW"]
-    },
-    {
-      "id": "00s-justice",
-      "productNo": null,
-      "name": "00's Justice",
-      "category": "tops",
-      "era": "00s",
-      "eraLabel": "2000s",
-      "size": null,
-      "price": null,
-      "sold": false,
-      "newIn": null,
-      "addedAt": "2026-09-26",
-      "measurements": null,
-      "tagSize": null,
-      "condition": null,
-      "construction": null,
-      "fabric": null,
-      "photos": ["FRONT", "BACK", "TAG", "DETAIL", "FLAW"]
-    },
-    {
-      "id": "06ss-john-varvatos",
-      "productNo": null,
-      "name": "06S/S John Varvatos",
+      "id": "3604",
+      "name": "00's Independert Truck",
       "category": "outer",
+      "brand": null,
       "era": "00s",
-      "eraLabel": "2000s",
-      "size": null,
+      "sizeLabel": "L–XL",
+      "sizes": [
+        "L",
+        "XL"
+      ],
       "price": null,
       "sold": false,
-      "newIn": null,
-      "addedAt": "2026-09-25",
-      "measurements": null,
-      "tagSize": null,
-      "condition": null,
-      "construction": null,
-      "fabric": null,
-      "photos": ["FRONT", "BACK", "TAG", "DETAIL", "FLAW"]
+      "images": [
+        {
+          "src": "/products/3604_independert-truck.jpg",
+          "alt": "00's Independert Truck"
+        }
+      ]
     },
     {
-      "id": "00s-chanel-sport",
-      "productNo": null,
+      "id": "3603",
       "name": "00's Chanel Sport",
       "category": "outer",
+      "brand": "Chanel",
       "era": "00s",
-      "eraLabel": "2000s",
-      "size": null,
+      "sizeLabel": "M–L",
+      "sizes": [
+        "M",
+        "L"
+      ],
       "price": null,
       "sold": false,
-      "newIn": null,
-      "addedAt": "2026-09-24",
-      "measurements": null,
-      "tagSize": null,
-      "condition": null,
-      "construction": null,
-      "fabric": null,
-      "photos": ["FRONT", "BACK", "TAG", "DETAIL", "FLAW"]
+      "images": [
+        {
+          "src": "/products/3603_chanel-sport.jpg",
+          "alt": "00's Chanel Sport"
+        }
+      ]
     },
     {
-      "id": "00s-john-varvatos",
-      "productNo": null,
-      "name": "00's John Varvatos",
+      "id": "3602",
+      "name": "06S/S John Varvatos",
       "category": "outer",
+      "brand": "John Varvatos",
       "era": "00s",
-      "eraLabel": "2000s",
-      "size": null,
+      "sizeLabel": "L",
+      "sizes": [
+        "L"
+      ],
+      "price": null,
+      "sold": false,
+      "images": [
+        {
+          "src": "/products/3602_john-varvatos-06ss.jpg",
+          "alt": "06S/S John Varvatos"
+        }
+      ]
+    },
+    {
+      "id": "3599",
+      "name": "80's Iggy Pop",
+      "category": "tops",
+      "brand": null,
+      "era": "80s",
+      "sizeLabel": "L",
+      "sizes": [
+        "L"
+      ],
+      "price": null,
+      "sold": false,
+      "images": [
+        {
+          "src": "/products/3599_iggy-pop-80s.jpg",
+          "alt": "80's Iggy Pop, front"
+        },
+        {
+          "src": "/products/3599_iggy-pop-80s_print.jpg",
+          "alt": "Print close-up"
+        },
+        {
+          "src": "/products/3599_iggy-pop-80s_label.jpg",
+          "alt": "Neck label: Screen Stars Best, size L, 50% cotton 50% polyester"
+        },
+        {
+          "src": "/products/3599_iggy-pop-80s_spot.jpg",
+          "alt": "Small spot below the collar"
+        },
+        {
+          "src": "/products/3599_iggy-pop-80s_folded.jpg",
+          "alt": "Print and fabric, folded"
+        }
+      ],
+      "measurements": {
+        "unit": "cm, laid flat",
+        "shoulder": 56,
+        "chest": 56,
+        "sleeve": 21,
+        "length": 68
+      },
+      "condition": {
+        "en": "Single stitch. The 50/50 fabric has worn very thin. One small spot below the collar (photo 4).",
+        "ko": "싱글스티치. 아주 얇아진 50/50 원단. 목 아래 작은 얼룩.",
+        "photoLink": {
+          "text": "photo 4",
+          "imageIndex": 3
+        }
+      },
+      "details": "1980s · 50% cotton, 50% polyester · Screen Stars Best"
+    },
+    {
+      "id": "3598",
+      "name": "90's Iggy Pop (Hyundai Sponsor)",
+      "category": "tops",
+      "brand": null,
+      "era": "90s",
+      "sizeLabel": "XL",
+      "sizes": [
+        "XL"
+      ],
+      "price": null,
+      "sold": false,
+      "images": [
+        {
+          "src": "/products/3598_iggy-pop-hyundai.jpg",
+          "alt": "90's Iggy Pop (Hyundai Sponsor)"
+        }
+      ]
+    },
+    {
+      "id": "3594",
+      "name": "Ghost In The Shell (1995)",
+      "category": "tops",
+      "brand": null,
+      "era": "90s",
+      "sizeLabel": "M–L",
+      "sizes": [
+        "M",
+        "L"
+      ],
+      "price": null,
+      "sold": false,
+      "images": [
+        {
+          "src": "/products/3594_ghost-in-the-shell.jpg",
+          "alt": "Ghost In The Shell (1995)"
+        }
+      ]
+    },
+    {
+      "id": "3593",
+      "name": "80's Pet Shop Boys",
+      "category": "tops",
+      "brand": null,
+      "era": "80s",
+      "sizeLabel": "M–L",
+      "sizes": [
+        "M",
+        "L"
+      ],
+      "price": null,
+      "sold": false,
+      "images": [
+        {
+          "src": "/products/3593_pet-shop-boys.jpg",
+          "alt": "80's Pet Shop Boys"
+        }
+      ]
+    },
+    {
+      "id": "3586",
+      "name": "90's Pink Floyd",
+      "category": "outer",
+      "brand": null,
+      "era": "90s",
+      "sizeLabel": "L–XL",
+      "sizes": [
+        "L",
+        "XL"
+      ],
+      "price": null,
+      "sold": false,
+      "images": [
+        {
+          "src": "/products/3586_pink-floyd.jpg",
+          "alt": "90's Pink Floyd"
+        }
+      ]
+    },
+    {
+      "id": "3584",
+      "name": "90's House Of Pain (Liquor Store 1993 World Tour)",
+      "category": "outer",
+      "brand": null,
+      "era": "90s",
+      "sizeLabel": "XL",
+      "sizes": [
+        "XL"
+      ],
+      "price": null,
+      "sold": false,
+      "images": [
+        {
+          "src": "/products/3584_house-of-pain.jpg",
+          "alt": "90's House Of Pain (Liquor Store 1993 World Tour)"
+        }
+      ]
+    },
+    {
+      "id": "3574",
+      "name": "90's Converse",
+      "category": "shoes",
+      "brand": "Converse",
+      "era": "90s",
+      "sizeLabel": "US 9 (270)",
+      "sizes": [],
+      "price": null,
+      "sold": false,
+      "images": [
+        {
+          "src": "/products/3574_converse.jpg",
+          "alt": "90's Converse"
+        }
+      ]
+    },
+    {
+      "id": "3542",
+      "name": "90's Levis 517",
+      "category": "bottoms",
+      "brand": "Levi's",
+      "era": "90s",
+      "sizeLabel": "W38 L30",
+      "sizes": [],
+      "price": null,
+      "sold": false,
+      "images": [
+        {
+          "src": "/products/3542_levis-517.jpg",
+          "alt": "90's Levis 517"
+        }
+      ]
+    },
+    {
+      "id": "3491",
+      "name": "90's Chrome Hearts",
+      "category": "accessories",
+      "brand": "Chrome Hearts",
+      "era": "90s",
+      "sizeLabel": "one size",
+      "sizes": [
+        "One size"
+      ],
+      "price": null,
+      "sold": false,
+      "images": [
+        {
+          "src": "/products/3491_chrome-hearts-cap.jpg",
+          "alt": "90's Chrome Hearts"
+        }
+      ]
+    },
+    {
+      "id": "3597",
+      "name": "90's Iggy Pop",
+      "category": "tops",
+      "brand": null,
+      "era": "90s",
+      "sizeLabel": "M–L",
+      "sizes": [
+        "M",
+        "L"
+      ],
       "price": null,
       "sold": true,
-      "newIn": null,
-      "addedAt": "2026-09-23",
-      "measurements": null,
-      "tagSize": null,
-      "condition": null,
-      "construction": null,
-      "fabric": null,
-      "photos": ["FRONT", "BACK", "TAG", "DETAIL", "FLAW"]
+      "images": [
+        {
+          "src": "/products/3597_iggy-pop-90s.jpg",
+          "alt": "90's Iggy Pop"
+        }
+      ]
+    },
+    {
+      "id": "3596",
+      "name": "00's John Varvatos",
+      "category": "shoes",
+      "brand": "John Varvatos",
+      "era": "00s",
+      "sizeLabel": "US 8 (260)",
+      "sizes": [],
+      "price": null,
+      "sold": true,
+      "images": [
+        {
+          "src": "/products/3596_john-varvatos-boots.jpg",
+          "alt": "00's John Varvatos"
+        }
+      ]
     }
   ]
 }

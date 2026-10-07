@@ -1,4 +1,4 @@
-// Generates app/tokens.css (CSS custom properties) from tokens/tokens.json.
+// Generates app/tokens.css (CSS custom properties) from tokens/tokens.json (handoff v2).
 // Runs automatically before `npm run dev` / `npm run build`.
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -8,26 +8,26 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const tokens = JSON.parse(readFileSync(join(root, 'tokens/tokens.json'), 'utf8'));
 
 const lines = [];
-const add = (name, value, comment) => {
-  lines.push(`  --${name}: ${value};${comment ? ` /* ${comment.replace(/\*\//g, '')} */` : ''}`);
-};
+const add = (name, value) => lines.push(`  --${name}: ${value};`);
+// Only plain CSS lengths make it into variables; descriptive values ("2열 · …", "12px–13px") are notes.
+const isLength = (v) => /^-?\d+(\.\d+)?(px|%)?$/.test(String(v).trim());
 
-for (const t of tokens.color.tokens) add(`color-${t.name}`, t.value);
+for (const t of tokens.color.tokens) {
+  if (t.name.startsWith('shadow-')) add(t.name, t.value);
+  else add(`color-${t.name}`, t.value);
+}
 lines.push('');
 for (const [name, value] of Object.entries(tokens.type.families)) add(`font-${name}`, value);
 lines.push('');
 for (const group of tokens.type.groups) {
   for (const s of group.styles) {
-    add(`type-${s.name}-size`, s.fontSize);
-    add(`type-${s.name}-line`, String(s.lineHeight));
-    add(`type-${s.name}-weight`, String(s.fontWeight));
-    if (s.letterSpacing) add(`type-${s.name}-tracking`, s.letterSpacing);
+    if (isLength(s.fontSize)) add(`type-${s.name}-size`, s.fontSize);
+    if (s.lineHeight != null) add(`type-${s.name}-line`, String(s.lineHeight));
   }
 }
 lines.push('');
-for (const t of tokens.spacing.tokens) add(t.name === 'gutter' ? 'space-gutter' : t.name, t.value);
-for (const t of tokens.radius.tokens) add(t.name, t.value);
-for (const t of tokens.stroke.tokens) add(t.name, t.value);
+for (const t of tokens.spacing.tokens) if (isLength(t.value)) add(`space-${t.name}`, t.value);
+for (const t of tokens.radius.tokens) if (isLength(t.value)) add(t.name, t.value);
 
 const css = `/* AUTO-GENERATED from tokens/tokens.json by scripts/build-tokens.mjs. Do not edit by hand. */\n:root {\n${lines.join('\n')}\n}\n`;
 writeFileSync(join(root, 'app/tokens.css'), css);

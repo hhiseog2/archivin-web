@@ -5,7 +5,8 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { SearchIcon } from '@/components/Icons';
 import { ProductCard, ProductGrid } from '@/components/ProductCard/ProductCard';
-import { CATEGORIES, SEARCH_SUGGESTIONS, searchProducts, shopHref } from '@/lib/catalog';
+import { catalog, SEARCH_SUGGESTIONS, searchProducts } from '@/lib/catalog';
+import { shopHref } from '@/lib/shop';
 import ui from '@/components/ui.module.css';
 import styles from './search.module.css';
 
@@ -27,10 +28,9 @@ export function SearchView() {
     <main className={styles.main}>
       <h1 className="visually-hidden">Search</h1>
 
-      {/* Mobile search bar (desktop uses the bar under the header). */}
       <form
         role="search"
-        className={`m-only ${styles.bar}`}
+        className={styles.bar}
         onSubmit={(e) => {
           e.preventDefault();
           go(input);
@@ -45,7 +45,7 @@ export function SearchView() {
             type="search"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Artist, band, brand or era"
+            placeholder="artist, band, brand or era"
             autoComplete="off"
             className={styles.input}
           />
@@ -53,8 +53,8 @@ export function SearchView() {
             <SearchIcon size={20} />
           </button>
         </div>
-        <Link href="/" className={styles.cancel}>
-          Cancel
+        <Link href="/shop" className={`m-only ${styles.cancel}`}>
+          cancel
         </Link>
       </form>
 
@@ -62,7 +62,7 @@ export function SearchView() {
         <>
           <section aria-labelledby="try-h" className={styles.try}>
             <h2 id="try-h" className={styles.h2}>
-              Try
+              try
             </h2>
             <div className={styles.suggest}>
               {SEARCH_SUGGESTIONS.map((s) => (
@@ -74,12 +74,12 @@ export function SearchView() {
           </section>
           <section aria-labelledby="cat-h" className={styles.cats}>
             <h2 id="cat-h" className={`${styles.h2} ${styles.h2Tight}`}>
-              Categories
+              categories
             </h2>
             <ul className={styles.catList}>
-              {CATEGORIES.map((c) => (
-                <li key={c.key}>
-                  <Link href={shopHref(c.key)}>{c.label}</Link>
+              {[{ id: 'all' as const, label: 'all' }, ...catalog.categories].map((c) => (
+                <li key={c.id}>
+                  <Link href={shopHref({ cat: c.id })}>{c.label}</Link>
                 </li>
               ))}
             </ul>
@@ -95,8 +95,8 @@ export function SearchView() {
         )}
         {q && hits.length === 0 && (
           <div className={styles.none}>
-            <p className={styles.noneLead}>No pieces match “{q}”.</p>
-            <p className={styles.noneSub}>Check the spelling, or search by artist, brand or decade, like “80&apos;s”.</p>
+            <p className={styles.noneLead}>no pieces match “{q}”.</p>
+            <p className={styles.noneSub}>check the spelling, or search by artist, brand or decade, like “80&apos;s”.</p>
           </div>
         )}
       </div>
@@ -105,7 +105,15 @@ export function SearchView() {
         <section aria-label="Results">
           <ProductGrid>
             {hits.map((p) => (
-              <ProductCard key={p.id} name={p.name} href={`/product/${p.id}`} price={p.price} sold={p.sold} />
+              <ProductCard
+                key={p.id}
+                name={p.name}
+                href={`/product/${p.id}`}
+                price={p.price}
+                sold={p.sold}
+                sizeLabel={p.sizeLabel}
+                image={p.images[0]?.src}
+              />
             ))}
           </ProductGrid>
         </section>
@@ -113,7 +121,7 @@ export function SearchView() {
       {q && hits.length === 0 && (
         <div className={styles.noneAction}>
           <Link href="/shop" className={ui.btnPrimary}>
-            Browse all pieces
+            browse all pieces
           </Link>
         </div>
       )}

@@ -1,0 +1,71 @@
+/* Mobile — A21_Shop footer. */
+.footer {
+  padding: 0 var(--space-gutter-mobile) 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 16px;
+}
+
+.link {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-size: var(--type-nav-size);
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.legal {
+  font-family: var(--font-kr);
+  font-size: var(--type-kr-legal-size);
+  line-height: var(--type-kr-legal-line);
+  color: var(--color-ink-2);
+}
+.legal p {
+  margin: 0;
+}
+.legal a {
+  color: var(--color-ink-2);
+}
+
+.legalLinks {
+  display: flex;
+  gap: 16px;
+}
+.legalLinks a {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+/* Desktop — A21_DShop footer: links left, business info right-aligned. */
+@media (min-width: 900px) {
+  .footer {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 var(--space-gutter-desktop) 40px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px 48px;
+  }
+  .nav {
+    gap: 0 20px;
+    margin-left: -2px;
+  }
+  .link {
+    min-height: 36px;
+  }
+  .legal {
+    line-height: 1.8;
+    text-align: right;
+  }
+}

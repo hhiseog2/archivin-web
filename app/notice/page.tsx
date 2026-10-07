@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: 'Notice' };
 
 export default function NoticePage() {
   return (
-    <SiteChrome active="notice">
+    <SiteChrome>
       <NoticeList />
     </SiteChrome>
   );

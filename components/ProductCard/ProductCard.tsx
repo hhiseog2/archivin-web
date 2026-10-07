@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { formatPrice } from '@/lib/format';
-import { Placeholder } from '../Placeholder';
 import styles from './ProductCard.module.css';
 
 type Props = {
@@ -9,45 +8,39 @@ type Props = {
   href: string;
   price: number | null;
   sold: boolean;
-  photo?: string | null;
-  /** Extra control layered on the image (Shop: add-to-bag "+"). */
-  action?: ReactNode;
+  /** "L–XL", "US 9 (270)". Optional for lookbook pieces that aren't in the shop yet. */
+  sizeLabel?: string;
+  /** Photo URL. Missing → empty fill well (lookbook placeholders). */
+  image?: string | null;
 };
 
-/** 4:5 image well, name left, price or SOLD OUT (always in words) right. */
-export function ProductCard({ name, href, price, sold, photo, action }: Props) {
-  const priceText = formatPrice(price);
+/**
+ * Card (README 5): 3:4 photo on white, name 14/20 clamped to two lines, then "₩ 000,000 · L–XL" or "sold".
+ * The whole card is one link; its aria-label describes the photo, so the image itself has alt="".
+ */
+export function ProductCard({ name, href, price, sold, sizeLabel, image }: Props) {
+  const priceText = sold ? 'sold' : formatPrice(price);
+  const line2 = sold ? 'sold' : sizeLabel ? `${priceText} · ${sizeLabel}` : priceText;
+  const aria = `${name}, ${priceText}${sizeLabel ? `, size ${sizeLabel}` : ''}`;
   return (
-    <div className={styles.card}>
-      <Link href={href} aria-label={`${name}, ${sold ? 'sold out' : priceText}`} className={styles.link}>
-        <Placeholder src={photo} label="[FRONT 4:5]" ratio="4 / 5" />
-        <div className={styles.info}>
-          <span className={styles.name}>{name}</span>
-          {sold ? <span className={styles.sold}>SOLD OUT</span> : <span className={styles.price}>{priceText}</span>}
-        </div>
-      </Link>
-      {action}
-    </div>
+    <Link href={href} aria-label={aria} className={styles.card}>
+      {image ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={image} alt="" loading="lazy" className={styles.img} />
+      ) : (
+        <span aria-hidden="true" className={`${styles.img} ${styles.empty}`} />
+      )}
+      <span className={styles.name}>{name}</span>
+      <span className={styles.line2}>{line2}</span>
+    </Link>
   );
 }
 
-/** Responsive product grid: 2 columns on mobile, auto-fill on desktop. `mobileLimit` hides extras on mobile. */
-export function ProductGrid({
-  children,
-  label,
-  mobileLimit,
-}: {
-  children: ReactNode;
-  label?: string;
-  mobileLimit?: 2;
-}) {
+/** Product grid: 2 columns (20 / 56) on mobile, auto-fill 240px+ (56 / 80) on desktop. */
+export function ProductGrid({ children, label }: { children: ReactNode; label?: string }) {
   return (
-    <div
-      role={label ? 'region' : undefined}
-      aria-label={label}
-      className={`${styles.grid} ${mobileLimit === 2 ? styles.limit2 : ''}`}
-    >
+    <section aria-label={label} className={styles.grid}>
       {children}
-    </div>
+    </section>
   );
 }

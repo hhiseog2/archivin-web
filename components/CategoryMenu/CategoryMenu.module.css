@@ -1,0 +1,58 @@
+.wrap {
+  position: relative;
+}
+
+.toggle {
+  height: 44px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font-size: var(--type-nav-size);
+  cursor: pointer;
+}
+
+.list {
+  position: absolute;
+  top: 44px;
+  z-index: 6;
+  width: 220px;
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-paper);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--shadow-popover);
+}
+.listMobile {
+  left: 8px; /* 12px from the toolbar edge, as in A21_Shop */
+}
+.listDesktop {
+  left: 0;
+}
+
+.option {
+  height: 44px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font-size: var(--type-body-size);
+  text-align: left;
+  cursor: pointer;
+}
+.option:hover {
+  color: var(--color-ink-2);
+}
+.listDesktop .option {
+  height: 40px;
+}
+.gap {
+  margin-top: 8px;
+}

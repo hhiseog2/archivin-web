@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: 'Shop' };
 
 export default function ShopPage() {
   return (
-    <SiteChrome active="shop">
+    <SiteChrome onShop fullWidth>
       <Suspense>
         <ShopView />
       </Suspense>

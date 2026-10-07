@@ -14,22 +14,17 @@
 .kicker {
   margin: 0;
   font-size: 11px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
   color: var(--color-ink-2);
 }
 .title {
   margin: 12px 0 0;
-  font-weight: 800;
+  font-weight: 400;
   font-size: 40px;
   line-height: 0.95;
-  letter-spacing: -0.3px;
-  text-transform: uppercase;
 }
 @media (min-width: 900px) {
   .title {
     font-size: clamp(40px, 6vw, 88px);
-    letter-spacing: -0.5px;
   }
 }
 .season {
@@ -106,7 +101,7 @@
 .pair {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: var(--space-gutter);
+  column-gap: 2px;
 }
 @media (min-width: 900px) {
   .pair {
@@ -133,14 +128,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid var(--color-ink);
-  border-bottom: 1px solid var(--color-ink);
+  border-top: 1px solid var(--color-fill);
+  border-bottom: 1px solid var(--color-fill);
   color: var(--color-ink);
   text-decoration: none;
 }
 .next:hover {
   color: var(--color-ink);
-  background: var(--color-paper-2);
+  background: var(--color-fill);
 }
 .nextText {
   display: flex;
@@ -149,15 +144,12 @@
 }
 .nextKicker {
   font-size: 11px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
   color: var(--color-ink-2);
 }
 .nextTitle {
-  font-weight: 800;
+  font-weight: 400;
   font-size: 24px;
   line-height: 1;
-  text-transform: uppercase;
 }
 @media (min-width: 900px) {
   .next {

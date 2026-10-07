@@ -13,10 +13,8 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  font-weight: 800;
+  font-weight: 400;
   font-size: 12px;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
   text-decoration: none;
 }
 .wordmark {
@@ -24,10 +22,9 @@
   min-height: 44px;
   display: flex;
   align-items: center;
-  font-family: var(--font-logo);
+  font-family: var(--font-text);
   font-weight: 400;
   font-size: 18px;
-  letter-spacing: 0.32em;
   text-decoration: none;
 }
 
@@ -66,7 +63,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  border: 1px solid var(--color-ink);
+  border: 1px solid var(--color-fill);
   background: var(--color-paper);
   cursor: pointer;
 }
@@ -74,7 +71,7 @@
   margin-top: 0;
 }
 .methodOn {
-  background: var(--color-paper-2);
+  background: var(--color-fill);
 }
 .methodLabel {
   flex: 1;
@@ -89,7 +86,7 @@
 .bankBox {
   margin-top: 16px;
   padding: 16px;
-  background: var(--color-paper-2);
+  background: var(--color-fill);
 }
 .bankNote {
   margin: 8px 0 0;
@@ -102,20 +99,20 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid var(--color-rule-soft);
+  border-top: 1px solid var(--color-fill);
 }
 .items li {
   padding: 8px 0;
   display: flex;
   align-items: center;
   gap: 12px;
-  border-bottom: 1px solid var(--color-rule-soft);
+  border-bottom: 1px solid var(--color-fill);
 }
 .itemThumb {
   width: 48px;
   aspect-ratio: 4 / 5;
   flex-shrink: 0;
-  background: var(--color-paper-2);
+  background: var(--color-fill);
 }
 .itemText {
   flex: 1;
@@ -124,10 +121,8 @@
   flex-direction: column;
 }
 .itemName {
-  font-weight: 800;
+  font-weight: 400;
   font-size: 12px;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
 }
 .itemSize {
   font-size: 12px;
@@ -164,17 +159,15 @@
   height: auto;
   margin-top: 8px;
   padding-top: 12px;
-  border-top: 1px solid var(--color-ink);
+  border-top: 1px solid var(--color-fill);
 }
 .total dt {
   color: var(--color-ink);
-  font-weight: 800;
+  font-weight: 400;
   font-size: 15px;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
 }
 .total dd {
-  font-weight: 800;
+  font-weight: 400;
   font-size: 18px;
 }
 

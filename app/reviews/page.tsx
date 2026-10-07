@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: 'Reviews' };
 export default async function ReviewsPage({ searchParams }: { searchParams: Promise<{ posted?: string }> }) {
   const { posted } = await searchParams;
   return (
-    <SiteChrome active="reviews">
+    <SiteChrome>
       <ReviewsView justPosted={posted === '1'} />
     </SiteChrome>
   );

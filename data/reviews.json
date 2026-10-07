@@ -16,7 +16,7 @@
     {
       "id": "r2",
       "productName": "80's Iggy Pop",
-      "productId": "80s-iggy-pop",
+      "productId": "3599",
       "rating": null,
       "title": "[Review title]",
       "lang": "en",
@@ -28,7 +28,7 @@
     {
       "id": "r3",
       "productName": "00's Justice",
-      "productId": "00s-justice",
+      "productId": null,
       "rating": null,
       "title": "[Review title]",
       "lang": "en",

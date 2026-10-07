@@ -4,28 +4,26 @@ import reviewData from '@/data/reviews.json';
 import lookbookData from '@/data/lookbooks.json';
 import siteData from '@/data/site.json';
 
-export type CategoryKey = 'all' | 'outer' | 'tops' | 'bottoms' | 'acc' | 'levis' | 'vans-converse';
-export type Era = '70s' | '80s' | '90s' | '00s' | '10s';
-export type Size = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL';
+export type CategoryId = 'outer' | 'tops' | 'bottoms' | 'shoes' | 'accessories';
+
+export type ProductImage = { src: string; alt: string };
 
 export type Product = {
   id: string;
-  productNo: string | null;
   name: string;
-  category: Exclude<CategoryKey, 'all'>;
-  era: Era;
-  eraLabel: string;
-  size: string | null;
+  category: CategoryId;
+  brand: string | null;
+  era: string;
+  /** Short size shown on cards and in the bag: "L–XL", "US 9 (270)", "W38 L30". */
+  sizeLabel: string;
+  /** Letter sizes the size filter matches against (empty for shoes and denim). */
+  sizes: string[];
   price: number | null;
   sold: boolean;
-  newIn: number | null;
-  addedAt: string;
-  measurements: { shoulder: string; chest: string; sleeve: string; length: string } | null;
-  tagSize: string | null;
-  condition: string | null;
-  construction: string | null;
-  fabric: string | null;
-  photos: string[];
+  images: ProductImage[];
+  measurements?: { unit: string; shoulder: number; chest: number; sleeve: number; length: number };
+  condition?: { en: string; ko: string; photoLink?: { text: string; imageIndex: number } };
+  details?: string;
 };
 
 export type NoticeBlock =
@@ -65,54 +63,29 @@ export type Lookbook = {
   pieces: { name: string; productId: string | null; sold: boolean }[];
 };
 
-export const CATEGORIES: { key: CategoryKey; label: string }[] = [
-  { key: 'all', label: 'All' },
-  { key: 'outer', label: 'Outer' },
-  { key: 'tops', label: 'Tops' },
-  { key: 'bottoms', label: 'Bottoms' },
-  { key: 'acc', label: 'Acc' },
-  { key: 'levis', label: "Levi's" },
-  { key: 'vans-converse', label: 'Vans & Converse' },
-];
-
-export const SIZES: Size[] = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
-export const ERAS: Era[] = ['70s', '80s', '90s', '00s', '10s'];
-export const SEARCH_SUGGESTIONS = ['Iggy Pop', 'John Varvatos', "Levi's", 'Pet Shop Boys', "80's"];
-
 export const products = productData.products as Product[];
+export const catalog = {
+  categories: productData.categories as { id: CategoryId; label: string }[],
+  brandShortcuts: productData.brandShortcuts,
+  filters: productData.filters,
+  introCategories: productData.introCategories,
+  // TODO: fake display totals (README 11). Replace with real counts from the product API.
+  totals: productData.totals,
+  shippingFee: productData.shippingFee,
+};
 export const notices = noticeData.notices as Notice[];
 export const reviews = reviewData.reviews as Review[];
 export const lookbooks = lookbookData.lookbooks as Lookbook[];
 export const site = siteData;
 
+export const SEARCH_SUGGESTIONS = ['Iggy Pop', 'John Varvatos', "Levi's", 'Pet Shop Boys', "80's"];
+
 export function getProduct(id: string) {
   return products.find((p) => p.id === id);
-}
-
-export function categoryLabel(key: string) {
-  return CATEGORIES.find((c) => c.key === key)?.label ?? 'All';
-}
-
-export function shopHref(cat: CategoryKey) {
-  return cat === 'all' ? '/shop' : `/shop?cat=${cat}`;
-}
-
-export function newInProducts() {
-  return products
-    .filter((p) => p.newIn != null)
-    .sort((a, b) => (a.newIn ?? 0) - (b.newIn ?? 0));
-}
-
-/** Pieces to recommend under a product: same category first, unsold, not itself. */
-export function relatedProducts(id: string, count: number) {
-  const self = getProduct(id);
-  const pool = products.filter((p) => p.id !== id && !p.sold);
-  pool.sort((a, b) => Number(b.category === self?.category) - Number(a.category === self?.category));
-  return pool.slice(0, count);
 }
 
 export function searchProducts(q: string) {
   const needle = q.trim().toLowerCase();
   if (!needle) return [];
-  return products.filter((p) => p.name.toLowerCase().includes(needle));
+  return products.filter((p) => p.name.toLowerCase().includes(needle) || p.brand?.toLowerCase().includes(needle));
 }

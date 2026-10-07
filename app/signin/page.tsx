@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: 'Sign in' };
 /** Parked: UI shell only. Authentication is not connected yet. */
 export default function SignInPage() {
   return (
-    <SiteChrome mobileFooterGap={40}>
+    <SiteChrome>
       <SignInForm />
     </SiteChrome>
   );

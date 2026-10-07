@@ -42,12 +42,12 @@
   padding: 0 14px;
   display: flex;
   align-items: center;
-  border: 2px solid var(--color-ink);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-fill);
   color: var(--color-ink);
-  font-weight: 800;
+  font-weight: 400;
   font-size: 12px;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
   text-decoration: none;
 }
 .tabs {
@@ -66,13 +66,12 @@
   margin-top: 24px;
   height: 48px;
   padding: 0 20px;
-  border: 2px solid var(--color-ink);
-  background: transparent;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-fill);
   color: var(--color-ink);
-  font-weight: 800;
+  font-weight: 400;
   font-size: 13px;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
   cursor: pointer;
 }
 
@@ -102,7 +101,7 @@
 }
 
 .list {
-  border-top: 1px solid var(--color-ink);
+  border-top: 1px solid var(--color-fill);
 }
 .none {
   margin: 0;
@@ -113,7 +112,7 @@
 
 .item {
   padding: 20px 16px;
-  border-bottom: 1px solid var(--color-rule-soft);
+  border-bottom: 1px solid var(--color-fill);
 }
 @media (min-width: 900px) {
   .item {
@@ -136,13 +135,11 @@
   width: 40px;
   aspect-ratio: 4 / 5;
   flex-shrink: 0;
-  background: var(--color-paper-2);
+  background: var(--color-fill);
 }
 .productName {
-  font-weight: 800;
+  font-weight: 400;
   font-size: 12px;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
 }
 .ratingRow {
   margin-top: 14px;
@@ -155,12 +152,12 @@
   gap: 2px;
 }
 .ratingSmall {
-  font-weight: 800;
+  font-weight: 400;
   font-size: 12px;
 }
 .itemTitle {
   margin: 10px 0 0;
-  font-weight: 700;
+  font-weight: 400;
   font-size: 15px;
   line-height: 1.4;
 }
@@ -206,14 +203,13 @@
 }
 .formInline {
   padding: 24px;
-  border: 1px solid var(--color-ink);
+  border: 1px solid var(--color-fill);
 }
 .formTitle {
   margin: 0;
-  font-weight: 800;
+  font-weight: 400;
   font-size: 20px;
   line-height: 1;
-  text-transform: uppercase;
 }
 .formInline .narrow {
   max-width: 480px;
@@ -241,7 +237,7 @@
 }
 .ratingText {
   margin-left: 8px;
-  font-weight: 800;
+  font-weight: 400;
   font-size: 13px;
 }
 .labelTight {
@@ -280,13 +276,11 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  border: 1px solid var(--color-ink);
+  border: 1px solid var(--color-fill);
   background: transparent;
   color: var(--color-ink);
-  font-weight: 800;
+  font-weight: 400;
   font-size: 10px;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
   cursor: pointer;
 }
 .addPhoto:focus-within {
@@ -329,10 +323,8 @@
   align-items: center;
   gap: 4px;
   color: var(--color-ink);
-  font-weight: 800;
+  font-weight: 400;
   font-size: 12px;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
   text-decoration: none;
 }
 .writeMain {

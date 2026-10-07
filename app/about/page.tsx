@@ -10,7 +10,7 @@ const POSTERS_ALT = 'Three black-and-white ARCHIVIN posters: FUCK YOU, DO IT YOU
 
 export default function AboutPage() {
   return (
-    <SiteChrome active="about">
+    <SiteChrome>
       <main className={styles.main}>
         <div className={styles.hero}>
           {/* TODO: store photo */}

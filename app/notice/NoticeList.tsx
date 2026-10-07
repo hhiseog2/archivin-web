@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { notices } from '@/lib/catalog';
-import { Pagination } from '@/components/Pagination/Pagination';
 import { NoticeAccordion } from './NoticeAccordion';
 import { NoticeBody } from './NoticeBody';
 import ui from '@/components/ui.module.css';
@@ -50,7 +49,6 @@ export function NoticeList({ openId, mobile = true }: { openId?: string; mobile?
         }))}
       />
 
-      <Pagination page={1} pageCount={1} hrefFor={() => '/notice'} arrows={false} />
     </main>
   );
 }

@@ -5,11 +5,10 @@ import { SearchView } from './SearchView';
 
 export const metadata: Metadata = { title: 'Search' };
 
-/** Mobile: standalone search screen. Desktop: header search bar open, results below. */
-export default async function SearchPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
-  const { q = '' } = await searchParams;
+/** Mobile: standalone search screen (no header). Desktop: header, then the search bar and results. */
+export default function SearchPage() {
   return (
-    <SiteChrome mobileTopBar={false} mobileHeader={false} mobileFooter={false} desktopSearchOpen desktopQuery={q}>
+    <SiteChrome mobileHeader={false}>
       <Suspense>
         <SearchView />
       </Suspense>
