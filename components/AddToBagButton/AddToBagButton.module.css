@@ -1,5 +1,6 @@
 /* 48px pill, 15px, 20px under the price line. */
 .pill {
+  position: relative;
   margin-top: 20px;
   height: 48px;
   display: flex;
@@ -24,4 +25,57 @@
   background: var(--color-fill);
   color: var(--color-ink-2);
   cursor: not-allowed;
+}
+
+.label {
+  position: relative;
+}
+
+/* Loading stitch: a white dashed loop (same dash as the bag ring) in the middle of the pill, hidden under
+   a navy cover that sweeps off it from the start of the path in 16 steps — one stitch at a time. */
+.stitch {
+  position: absolute;
+  top: calc(50% - 11px); /* loop centre (14, 11) on the pill centre */
+  left: calc(50% - 14px);
+  overflow: visible;
+  pointer-events: none;
+  opacity: 0;
+}
+.thread {
+  fill: none;
+  stroke: var(--color-on-navy);
+  stroke-width: 1.25;
+  stroke-dasharray: 2.4 1.9;
+  stroke-linecap: round;
+}
+.cover {
+  fill: none;
+  stroke: var(--color-navy);
+  stroke-width: 3.5;
+  stroke-dasharray: 100 100;
+  stroke-dashoffset: 0;
+}
+
+@keyframes sewloop {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+.adding {
+  cursor: progress;
+}
+.adding .stitch {
+  opacity: 1;
+}
+.adding .cover {
+  animation: sewloop 0.64s steps(16) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .adding .cover {
+    animation: none;
+  }
 }
