@@ -5,14 +5,19 @@ import { useEffect, useRef, useState } from 'react';
 import { addToBag, useBag } from '@/lib/cart';
 import styles from './AddToBagButton.module.css';
 
-/** Loop centred at (14, 11), r 9: 8 o'clock → clockwise (large arc) → 6 o'clock, then a 26-unit tail to the right. */
-const LOOP = 'M6.21 15.5 A9 9 0 1 1 14 20 L40 20';
-/** Stitch time (0.64s, `sewloop` in the CSS) plus a beat to see the finished loop. */
+/**
+ * Loop centred at (11, 11), r 9: from 8 o'clock clockwise almost all the way round (330°) to 7 o'clock,
+ * where an arrowhead finishes the last stitch (client sketch).
+ */
+const LOOP = 'M3.21 15.5 A9 9 0 1 1 6.5 18.79';
+/** Chevron on the loop's end, pointing along the stitching direction (tip at the end point). */
+const ARROW = 'M8.19 22.42 L6.5 18.79 L10.48 18.44';
+/** Stitch time (0.64s, `sewloop` in the CSS) plus a beat to see the finished loop and its arrow. */
 const SEW_MS = 760;
 
 /**
  * "add to bag" (README 8-3). Tapping it hides the label and sews a small white thread loop in the middle
- * of the pill, one stitch at a time ("adding to bag", aria-busy); then it becomes "it's yours · view bag",
+ * of the pill, one stitch at a time, finishing in an arrowhead ("adding to bag", aria-busy); then it becomes "it's yours · view bag",
  * the header count goes up and the bag ring re-sews. One of one, so it can't be added twice.
  * Reduced motion skips the stitch.
  *
@@ -65,11 +70,11 @@ export function AddToBagButton({ id, sold }: { id: string; sold: boolean }) {
           className={`${styles.pill} ${styles.navy} ${adding ? styles.adding : ''}`}
           onClick={add}
         >
-          {/* Thread loop sewn stitch by stitch: from 8 o'clock, clockwise over the top, round to 6 o'clock,
-              then the thread trails off to the right (client sketch). */}
-          <svg className={styles.stitch} width="44" height="26" viewBox="0 0 44 26" aria-hidden="true">
+          {/* Thread loop sewn stitch by stitch, clockwise from 8 o'clock all the way round; the end becomes an arrow. */}
+          <svg className={styles.stitch} width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
             <path className={styles.thread} d={LOOP} />
             <path className={styles.cover} d={LOOP} pathLength={100} />
+            <path className={styles.arrow} d={ARROW} />
           </svg>
           <span className={styles.label}>{adding ? <span className="visually-hidden">adding to bag</span> : 'add to bag'}</span>
         </button>
