@@ -1,4 +1,4 @@
-// Generates app/tokens.css (CSS custom properties) from tokens/tokens.json (handoff v2).
+// Generates app/tokens.css (CSS custom properties) from tokens/tokens.json (handoff v4).
 // Runs automatically before `npm run dev` / `npm run build`.
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -17,12 +17,16 @@ for (const t of tokens.color.tokens) {
   else add(`color-${t.name}`, t.value);
 }
 lines.push('');
-for (const [name, value] of Object.entries(tokens.type.families)) add(`font-${name}`, value);
+// Adobe Fonts serves Neue Haas Grotesk Text as `neue-haas-grotesk-text`; put that first so the web kit wins once linked.
+const ADOBE_KIT_FAMILY = 'neue-haas-grotesk-text';
+for (const [name, value] of Object.entries(tokens.type.families)) {
+  add(`font-${name}`, name === 'text' && !value.includes(ADOBE_KIT_FAMILY) ? `${ADOBE_KIT_FAMILY}, ${value}` : value);
+}
 lines.push('');
 for (const group of tokens.type.groups) {
   for (const s of group.styles) {
     if (isLength(s.fontSize)) add(`type-${s.name}-size`, s.fontSize);
-    if (s.lineHeight != null) add(`type-${s.name}-line`, String(s.lineHeight));
+    if (s.lineHeight != null && isLength(s.lineHeight)) add(`type-${s.name}-line`, String(s.lineHeight));
   }
 }
 lines.push('');

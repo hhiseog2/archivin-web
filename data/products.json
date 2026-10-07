@@ -1,5 +1,5 @@
 {
-  "_note": "시안용 목업이에요. 이름·사진·사이즈는 archivin.kr 실제 상품, 가격은 자리표시(null → '₩ 000,000'). 배열 순서가 'new in' 순서예요. 상세 정보(사진 5장, 실측, 상태, 디테일)는 3599(80's Iggy Pop)만 있어요.",
+  "_note": "시안용 목업이에요. 이름·사진·사이즈는 archivin.kr 실제 상품, 가격은 자리표시(null → '₩ 000,000'). 배열 순서가 'new in' 순서예요. 상세 정보(사진 5장, 실측, 상태, 디테일)는 3599(80's Iggy Pop)만 있어요. v4에서 목록 사진을 종류별로 크기·중심을 맞춰 다시 잘랐어요(파일 이름은 그대로). hoverImage는 카드에 마우스를 올리면 바뀌는 다른 각도 사진이에요.",
   "totals": {
     "_note": "화면 표시용 가짜 숫자. 필터 없는 all 보기에서만 씀.",
     "available": 127,
@@ -45,6 +45,7 @@
     }
   ],
   "filters": {
+    "_note": "v3 화면에서 쓰는 건 sort 3개와 include sold 하나뿐이에요. brand · size · era 필터 화면은 없앴어요(상품 데이터의 brand · sizes · era 값은 검색과 나중을 위해 그대로 둬요).",
     "sort": [
       {
         "id": "new",
@@ -59,40 +60,10 @@
         "label": "price high–low"
       }
     ],
-    "availability": [
-      {
-        "id": "available",
-        "label": "available"
-      },
-      {
-        "id": "include-sold",
-        "label": "include sold"
-      }
-    ],
-    "brands": [
-      "Levi's",
-      "Converse",
-      "Vans",
-      "Chanel",
-      "John Varvatos",
-      "Chrome Hearts"
-    ],
-    "sizes": [
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "XXL",
-      "One size"
-    ],
-    "eras": [
-      "70s",
-      "80s",
-      "90s",
-      "00s",
-      "10s"
-    ]
+    "includeSold": {
+      "label": "include sold",
+      "default": false
+    }
   },
   "introCategories": [
     "band",
@@ -102,7 +73,7 @@
     "archive"
   ],
   "designSampleBag": {
-    "_note": "디자인 확인용 장바구니 예시 (실제로는 빈 상태로 시작)",
+    "_note": "디자인 확인용 장바구니 예시예요(실제로는 빈 상태로 시작). 장바구니 화면과 bag 미리보기가 이 순서로 보여 주고, shop 카드의 in bag 표시는 이 중 판매 중인 3599 · 3604에 붙어요.",
     "ids": [
       "3599",
       "3604",
@@ -128,7 +99,11 @@
           "src": "/products/3604_independert-truck.jpg",
           "alt": "00's Independert Truck"
         }
-      ]
+      ],
+      "hoverImage": {
+        "src": "/products/3604_independert-truck_alt.jpg",
+        "kind": "back / other angle"
+      }
     },
     {
       "id": "3603",
@@ -148,7 +123,11 @@
           "src": "/products/3603_chanel-sport.jpg",
           "alt": "00's Chanel Sport"
         }
-      ]
+      ],
+      "hoverImage": {
+        "src": "/products/3603_chanel-sport_alt.jpg",
+        "kind": "back / other angle"
+      }
     },
     {
       "id": "3602",
@@ -167,7 +146,11 @@
           "src": "/products/3602_john-varvatos-06ss.jpg",
           "alt": "06S/S John Varvatos"
         }
-      ]
+      ],
+      "hoverImage": {
+        "src": "/products/3602_john-varvatos-06ss_alt.jpg",
+        "kind": "back / other angle"
+      }
     },
     {
       "id": "3599",
@@ -203,6 +186,10 @@
           "alt": "Print and fabric, folded"
         }
       ],
+      "hoverImage": {
+        "src": "/products/3599_iggy-pop-80s_print.jpg",
+        "kind": "print close-up"
+      },
       "measurements": {
         "unit": "cm, laid flat",
         "shoulder": 56,
@@ -237,7 +224,11 @@
           "src": "/products/3598_iggy-pop-hyundai.jpg",
           "alt": "90's Iggy Pop (Hyundai Sponsor)"
         }
-      ]
+      ],
+      "hoverImage": {
+        "src": "/products/3598_iggy-pop-hyundai_alt.jpg",
+        "kind": "back / other angle"
+      }
     },
     {
       "id": "3594",
@@ -257,7 +248,11 @@
           "src": "/products/3594_ghost-in-the-shell.jpg",
           "alt": "Ghost In The Shell (1995)"
         }
-      ]
+      ],
+      "hoverImage": {
+        "src": "/products/3594_ghost-in-the-shell_alt.jpg",
+        "kind": "back / other angle"
+      }
     },
     {
       "id": "3593",
@@ -277,7 +272,11 @@
           "src": "/products/3593_pet-shop-boys.jpg",
           "alt": "80's Pet Shop Boys"
         }
-      ]
+      ],
+      "hoverImage": {
+        "src": "/products/3593_pet-shop-boys_alt.jpg",
+        "kind": "back / other angle"
+      }
     },
     {
       "id": "3586",
@@ -297,7 +296,11 @@
           "src": "/products/3586_pink-floyd.jpg",
           "alt": "90's Pink Floyd"
         }
-      ]
+      ],
+      "hoverImage": {
+        "src": "/products/3586_pink-floyd_alt.jpg",
+        "kind": "back / other angle"
+      }
     },
     {
       "id": "3584",
@@ -316,7 +319,11 @@
           "src": "/products/3584_house-of-pain.jpg",
           "alt": "90's House Of Pain (Liquor Store 1993 World Tour)"
         }
-      ]
+      ],
+      "hoverImage": {
+        "src": "/products/3584_house-of-pain_alt.jpg",
+        "kind": "back / other angle"
+      }
     },
     {
       "id": "3574",
@@ -333,7 +340,11 @@
           "src": "/products/3574_converse.jpg",
           "alt": "90's Converse"
         }
-      ]
+      ],
+      "hoverImage": {
+        "src": "/products/3574_converse_alt.jpg",
+        "kind": "back / other angle"
+      }
     },
     {
       "id": "3542",
@@ -350,7 +361,11 @@
           "src": "/products/3542_levis-517.jpg",
           "alt": "90's Levis 517"
         }
-      ]
+      ],
+      "hoverImage": {
+        "src": "/products/3542_levis-517_alt.jpg",
+        "kind": "back / other angle"
+      }
     },
     {
       "id": "3491",
@@ -369,7 +384,11 @@
           "src": "/products/3491_chrome-hearts-cap.jpg",
           "alt": "90's Chrome Hearts"
         }
-      ]
+      ],
+      "hoverImage": {
+        "src": "/products/3491_chrome-hearts-cap_alt.jpg",
+        "kind": "back / other angle"
+      }
     },
     {
       "id": "3597",
@@ -389,7 +408,11 @@
           "src": "/products/3597_iggy-pop-90s.jpg",
           "alt": "90's Iggy Pop"
         }
-      ]
+      ],
+      "hoverImage": {
+        "src": "/products/3597_iggy-pop-90s_alt.jpg",
+        "kind": "print close-up"
+      }
     },
     {
       "id": "3596",
@@ -406,7 +429,12 @@
           "src": "/products/3596_john-varvatos-boots.jpg",
           "alt": "00's John Varvatos"
         }
-      ]
+      ],
+      "hoverImage": {
+        "src": "/products/3596_john-varvatos-boots_alt.jpg",
+        "kind": "back / other angle"
+      }
     }
-  ]
+  ],
+  "introCategories_note": "인트로 아래 글자 목록이에요. v4에서는 링크가 아니라 그냥 글자예요(취향 소개)."
 }

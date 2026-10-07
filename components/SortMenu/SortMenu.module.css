@@ -1,0 +1,15 @@
+.wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* 212px, lined up with the trigger's right edge (mobile: 12px from the screen edge with the row's 4px). */
+.list {
+  right: 0;
+  width: 212px;
+}
+@media (max-width: 899.98px) {
+  .list {
+    right: 8px;
+  }
+}

@@ -1,49 +1,45 @@
-import Link from 'next/link';
 import { Suspense } from 'react';
 import { CategoryMenu, CategoryMenuFallback } from '../CategoryMenu/CategoryMenu';
-import { BagLink } from './BagLink';
+import { SearchField } from '../SearchField/SearchField';
+import { BagNav } from './BagNav';
+import { Logo } from './Logo';
 import { MenuButton } from './MenuButton';
 import styles from './header.module.css';
 
-function Logo({ width, height }: { width: number; height: number }) {
-  // TODO: swap for the vector logo (SVG) once the client sends it (README 6).
-  return (
-    <Link href="/shop" aria-label="ARCHIVIN, go to Shop" className={styles.logo}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/logo/archivin-stitch-navy.png" alt="" width={width} height={height} />
-    </Link>
-  );
-}
-
-/** Mobile header (A21_Header): 56px, navy stitch logo left, "menu" and "bag" right. */
+/** Mobile header (A21_Header): 56px, logo left, "menu" and "bag ○" right. z-index 10 so the bag preview floats. */
 export function Header() {
   return (
     <header className={styles.mobile}>
-      <Logo width={168} height={39} />
+      <Logo size="mobile" />
       <nav aria-label="Site" className={styles.right}>
         <MenuButton />
-        <BagLink />
+        <BagNav align="mobile" />
       </nav>
     </header>
   );
 }
 
-/** Desktop header (from A21_DShop): category menu + search | logo | menu + bag. */
+/** Desktop header (from A21_DShop): "all ▾" + search | logo | menu + bag. 3-column grid, 20px top, 48px sides. */
 export function DHeader({ onShop = false }: { onShop?: boolean }) {
   return (
     <header className={styles.desktop}>
       <div className={styles.dLeft}>
-        <Suspense fallback={<CategoryMenuFallback label={onShop ? 'all' : 'shop'} />}>
+        <Suspense
+          fallback={
+            <>
+              <CategoryMenuFallback label={onShop ? 'all' : 'shop'} />
+              <span className={styles.searchStandIn}>search</span>
+            </>
+          }
+        >
           <CategoryMenu variant="desktop" />
+          <SearchField variant="desktop" />
         </Suspense>
-        <Link href="/search" className={styles.navItem}>
-          search
-        </Link>
       </div>
-      <Logo width={220} height={51} />
+      <Logo size="desktop" />
       <nav aria-label="Site" className={styles.dRight}>
         <MenuButton />
-        <BagLink />
+        <BagNav align="desktop" />
       </nav>
     </header>
   );

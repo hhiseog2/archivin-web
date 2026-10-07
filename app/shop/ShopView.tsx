@@ -1,64 +1,62 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { CategoryMenu } from '@/components/CategoryMenu/CategoryMenu';
-import { FilterPanel } from '@/components/Filter/FilterPanel';
 import { ProductCard, ProductGrid } from '@/components/ProductCard/ProductCard';
-import { activeFilterCount, displayTotal, filterProducts, LAST_SHOP_KEY, parseShopQuery, shopHref } from '@/lib/shop';
+import { SearchField } from '@/components/SearchField/SearchField';
+import { SortMenu } from '@/components/SortMenu/SortMenu';
+import { useBag } from '@/lib/cart';
+import { displayTotal, filterProducts, goShop, LAST_SHOP_KEY, parseShopQuery, shopHref } from '@/lib/shop';
 import styles from './shop.module.css';
 
 const PAGE = 12;
 
-/** A21_Shop / A21_DShop. All list state (category, filters, sort) lives in the URL. */
-export function ShopView() {
+/**
+ * A21_Shop / A21_DShop. Category, brand, sort, include sold and the search all live in the URL.
+ * `preview` renders it under the intro panel (no side effects, nothing focusable).
+ */
+export function ShopView({ preview = false }: { preview?: boolean }) {
   const params = useSearchParams();
-  const router = useRouter();
-  const query = parseShopQuery(params);
-  const queryKey = shopHref(query);
+  const query = parseShopQuery(preview ? new URLSearchParams() : params);
+  const key = shopHref(query);
+  const bag = useBag();
 
   const [shown, setShown] = useState(PAGE);
-  const [filterOpen, setFilterOpen] = useState(false);
 
-  // New view → back to the first 12. Remember it so a product page's "back" returns here with filters.
+  // New view → back to the first 12. Remember it so a product page's "back" returns here.
   useEffect(() => {
+    if (preview) return;
     setShown(PAGE);
     try {
-      sessionStorage.setItem(LAST_SHOP_KEY, queryKey);
+      sessionStorage.setItem(LAST_SHOP_KEY, key);
     } catch {
       // storage blocked: "back" falls back to /shop
     }
-  }, [queryKey]);
+  }, [key, preview]);
 
   const hits = filterProducts(query);
   const total = displayTotal(query, hits.length);
   const list = hits.slice(0, shown);
-  const nActive = activeFilterCount(query);
-  const filterLabel = nActive ? `filter (${nActive})` : 'filter';
-
-  // Focus returns to whichever filter button opened the panel (useModal).
-  const filterButton = (className: string) => (
-    <button
-      type="button"
-      aria-haspopup="dialog"
-      aria-expanded={filterOpen}
-      className={className}
-      onClick={() => setFilterOpen(true)}
-    >
-      {filterLabel}
-    </button>
-  );
 
   return (
     <>
       <h1 className="visually-hidden">shop</h1>
 
-      {/* Mobile toolbar: "all ▾" left, filter right. Desktop has the category menu in the header. */}
+      {/* Mobile row under the header: "all ▾" + search left, sort right (z-index 6 so the windows float). */}
       <div className={`m-only ${styles.toolbar}`}>
-        <CategoryMenu variant="mobile" />
-        {filterButton(styles.toolBtn)}
+        <div className={styles.toolLeft}>
+          <CategoryMenu variant="mobile" />
+          <SearchField variant="mobile" />
+        </div>
+        <SortMenu />
       </div>
-      <div className={`d-only ${styles.dFilterRow}`}>{filterButton(`${styles.toolBtn} ${styles.dFilterBtn}`)}</div>
+      {/* Desktop: "all ▾" + search are in the header; sort sits 40px under it on the right. */}
+      <div className={`d-only ${styles.dSortRow}`}>
+        <div className={styles.dSort}>
+          <SortMenu />
+        </div>
+      </div>
 
       <main className={styles.main}>
         {list.length > 0 ? (
@@ -72,14 +70,21 @@ export function ShopView() {
                 sold={p.sold}
                 sizeLabel={p.sizeLabel}
                 image={p.images[0]?.src}
+                hoverImage={p.hoverImage?.src}
+                inBag={bag.includes(p.id)}
               />
             ))}
           </ProductGrid>
         ) : (
           <div className={styles.empty}>
             <p className={styles.emptyText}>no pieces match.</p>
-            <button type="button" className={styles.underlined} onClick={() => router.push('/shop', { scroll: false })}>
-              clear filters
+            {/* Back to all, no brand, no search; sort / include sold stay and an open search stays open. */}
+            <button
+              type="button"
+              className={styles.underlined}
+              onClick={() => goShop(shopHref({ ...query, cat: 'all', brands: [], q: '' }), { onShop: true, push: () => {} })}
+            >
+              see all pieces
             </button>
           </div>
         )}
@@ -97,19 +102,10 @@ export function ShopView() {
         )}
       </main>
 
-      <p role="status" className="visually-hidden">
-        {list.length ? `${list.length} of ${total} pieces shown.` : 'No pieces match.'}
-      </p>
-
-      {filterOpen && (
-        <FilterPanel
-          query={query}
-          onClose={() => setFilterOpen(false)}
-          onApply={(next) => {
-            setFilterOpen(false);
-            router.push(shopHref(next), { scroll: false });
-          }}
-        />
+      {!preview && (
+        <p role="status" className="visually-hidden">
+          {list.length ? `${list.length} of ${total} pieces shown.` : 'No pieces match.'}
+        </p>
       )}
     </>
   );

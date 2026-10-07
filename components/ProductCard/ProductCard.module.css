@@ -1,3 +1,4 @@
+/* .pcard / .pimg / .pimg2 / .inbag (A21_Shop, A21_DShop). */
 .card {
   min-width: 0;
   display: flex;
@@ -8,20 +9,44 @@
 .card:hover {
   color: var(--color-ink);
 }
-.card:hover .name {
-  color: var(--color-ink-2);
+
+.frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--color-paper);
 }
 
 .img {
   display: block;
   width: 100%;
-  aspect-ratio: 3 / 4;
+  height: 100%;
   object-fit: cover;
   border-radius: var(--radius-0);
-  background: var(--color-paper);
 }
 .empty {
   background: var(--color-fill);
+}
+
+.img2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+@media (hover: hover) {
+  .card:hover .img2 {
+    opacity: 1;
+  }
+}
+.card:focus-visible .img2 {
+  opacity: 1;
 }
 
 .name {
@@ -39,6 +64,23 @@
   line-height: 20px;
 }
 
+.inbag {
+  margin-top: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--type-note-size);
+  line-height: 18px;
+  color: var(--color-navy);
+}
+.inbag svg {
+  fill: none;
+  stroke: var(--color-navy);
+  stroke-width: 1.1;
+  stroke-dasharray: 1.9 1.5;
+  stroke-linecap: round;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -54,5 +96,11 @@
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     column-gap: 56px;
     row-gap: 80px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .img2 {
+    transition: none;
   }
 }

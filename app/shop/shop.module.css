@@ -1,25 +1,24 @@
-/* Mobile — 48px row under the header: "all ▾" left, "filter" right. */
+/* Mobile — 48px row under the header (4px sides): "all ▾" + search left, sort right. */
 .toolbar {
   position: relative;
+  z-index: 6;
   height: 48px;
   padding: 0 4px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
-.toolBtn {
-  height: 44px;
-  padding: 0 12px;
-  border: 0;
-  background: transparent;
-  color: var(--color-ink);
-  font-size: var(--type-nav-size);
-  cursor: pointer;
+.toolLeft {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
 }
 
-/* Desktop — filter button right-aligned 40px under the header. */
-.dFilterRow {
+/* Desktop — sort right-aligned 40px under the header. */
+.dSortRow {
+  position: relative;
+  z-index: 6;
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
@@ -27,7 +26,7 @@
   display: flex;
   justify-content: flex-end;
 }
-.dFilterBtn {
+.dSort {
   margin-right: -12px;
 }
 

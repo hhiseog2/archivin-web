@@ -1,102 +1,87 @@
 'use client';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
-import { Caret, Check } from '../Icons';
-import { CATEGORY_VIEWS, currentViewLabel, EMPTY_QUERY, isView, parseShopQuery, queryForView, shopHref } from '@/lib/shop';
+import { useCallback, useRef, useState } from 'react';
+import { Caret } from '../Icons';
+import { Check } from '../Popup/Check';
+import { arrowKeys, usePopupBehavior } from '../Popup/usePopupBehavior';
+import popup from '../Popup/Popup.module.css';
+import { setPopup, usePopup } from '@/lib/popups';
+import { CATEGORY_VIEWS, currentViewLabel, goShop, isView, parseShopQuery, shopHref, viewHref } from '@/lib/shop';
 import styles from './CategoryMenu.module.css';
 
 /**
- * "all ▾" category dropdown (README 5, 8-2). On /shop it reflects and changes the current view;
- * on other pages (desktop header) it just opens the shop on the picked view.
+ * "all ▾" (README 8-2). Categories, then 16px gap and the brand shortcuts (all + brand).
+ * Picking applies straight away and closes. On /shop it keeps sort, include sold and the search;
+ * from other pages (desktop header) it just opens the shop on that view.
  */
 export function CategoryMenu({ variant }: { variant: 'mobile' | 'desktop' }) {
   const pathname = usePathname();
   const params = useSearchParams();
   const router = useRouter();
   const onShop = pathname === '/shop';
-  const query = onShop ? parseShopQuery(params) : null;
+  // The intro draws the shop's first screen underneath itself, so "/" shows the plain shop view too.
+  const query = onShop || pathname === '/' ? parseShopQuery(params) : null;
 
-  const [open, setOpen] = useState(false);
+  const open = usePopup() === 'cat';
+  const [fromKeyboard, setFromKeyboard] = useState(false);
   const wrap = useRef<HTMLDivElement>(null);
-  const button = useRef<HTMLButtonElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
   const list = useRef<HTMLDivElement>(null);
+  const close = useCallback(() => setPopup(null), []);
+  usePopupBehavior(open, close, wrap, trigger, list, fromKeyboard);
 
-  useEffect(() => {
-    if (!open) return;
-    (list.current?.querySelector<HTMLElement>('[aria-selected="true"]') ?? list.current?.querySelector<HTMLElement>('button'))?.focus();
-    const onDown = (e: PointerEvent) => {
-      if (!wrap.current?.contains(e.target as Node)) setOpen(false);
-    };
-    const onKey = (e: globalThis.KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setOpen(false);
-        button.current?.focus();
-      }
-    };
-    document.addEventListener('pointerdown', onDown);
-    document.addEventListener('keydown', onKey);
-    return () => {
-      document.removeEventListener('pointerdown', onDown);
-      document.removeEventListener('keydown', onKey);
-    };
-  }, [open]);
-
-  const onListKey = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
-    e.preventDefault();
-    const items = [...(list.current?.querySelectorAll<HTMLElement>('[role="option"]') ?? [])];
-    const i = items.indexOf(document.activeElement as HTMLElement);
-    items[(i + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length]?.focus();
-  };
-
-  // TODO(design): off the shop the desktop header has no design for this label; "shop" with nothing checked.
+  // TODO(design): off the shop the header label has no design; "shop" with nothing checked.
   const label = query ? currentViewLabel(query) : 'shop';
 
   return (
     <div ref={wrap} className={styles.wrap}>
       <button
-        ref={button}
+        ref={trigger}
         type="button"
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={`Category: ${label}`}
-        className={styles.toggle}
-        onClick={() => setOpen((v) => !v)}
+        className={popup.trigger}
+        onClick={(e) => {
+          setFromKeyboard(e.detail === 0);
+          setPopup(open ? null : 'cat');
+        }}
       >
-        {label}
+        <span className={popup.ulbl}>{label}</span>
         <Caret />
       </button>
-      {open && (
-        <div
-          ref={list}
-          role="listbox"
-          aria-label="Category"
-          className={`${styles.list} ${variant === 'desktop' ? styles.listDesktop : styles.listMobile}`}
-          onKeyDown={onListKey}
-        >
-          {CATEGORY_VIEWS.map((v) => {
-            const selected = query ? isView(v, query) : false;
-            return (
-              <button
-                key={v.label}
-                type="button"
-                role="option"
-                aria-selected={selected}
-                className={`${styles.option} ${v.gapBefore ? styles.gap : ''}`}
-                onClick={() => {
-                  setOpen(false);
-                  button.current?.focus();
-                  router.push(shopHref(queryForView(v, query ?? EMPTY_QUERY)), { scroll: !onShop });
-                }}
-              >
-                {v.label}
-                {selected && <Check />}
-              </button>
-            );
-          })}
-        </div>
-      )}
+      <div
+        ref={list}
+        role="listbox"
+        aria-label="Category"
+        aria-hidden={!open}
+        className={`${popup.pop} ${open ? popup.open : ''} ${styles.list} ${variant === 'desktop' ? styles.desktop : styles.mobile}`}
+        onKeyDown={arrowKeys}
+      >
+        {CATEGORY_VIEWS.map((v) => {
+          const selected = query ? isView(v, query) : false;
+          return (
+            <button
+              key={v.label}
+              type="button"
+              role="option"
+              aria-selected={selected}
+              tabIndex={open ? 0 : -1}
+              className={`${popup.item} ${v.gapBefore ? styles.gap : ''}`}
+              onClick={() => {
+                close();
+                trigger.current?.focus({ preventScroll: true });
+                const href = query ? shopHref({ ...query, cat: v.cat, brands: v.brands }) : viewHref(v);
+                goShop(href, { onShop, push: router.push });
+              }}
+            >
+              <span className={popup.ulbl}>{v.label}</span>
+              {selected && <Check />}
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -105,8 +90,8 @@ export function CategoryMenu({ variant }: { variant: 'mobile' | 'desktop' }) {
 export function CategoryMenuFallback({ label }: { label: string }) {
   return (
     <div className={styles.wrap}>
-      <button type="button" aria-haspopup="listbox" aria-expanded={false} aria-label={`Category: ${label}`} className={styles.toggle}>
-        {label}
+      <button type="button" aria-haspopup="listbox" aria-expanded={false} aria-label={`Category: ${label}`} className={popup.trigger}>
+        <span className={popup.ulbl}>{label}</span>
         <Caret />
       </button>
     </div>

@@ -2,22 +2,22 @@
 :root {
   --color-navy: #323850;
   --color-on-navy: #ffffff;
-  --color-on-navy-hover: rgba(255, 255, 255, 0.72);
   --color-paper: #ffffff;
   --color-ink: #1c1d21;
   --color-ink-2: #5e616a;
   --color-fill: #f2f2f4;
   --color-sold: #a1161b;
-  --shadow-popover: 0 6px 24px rgba(28, 29, 33, 0.1);
+  --color-line: #d6d7dc;
+  --color-rule: #e5e6ea;
+  --color-bar-idle: #8b8e97;
+  --shadow-peek: 0 12px 32px rgba(28, 29, 33, 0.1);
   --color-scrim: rgba(28, 29, 33, 0.2);
 
-  --font-text: neue-haas-grotesk-text, 'Neue Haas Grotesk Text Pro', 'Neue Haas Grotesk Text', 'Helvetica Neue', Helvetica, Arial, 'Noto Sans KR', sans-serif;
+  --font-text: neue-haas-grotesk-text, 'Neue Haas Grotesk Text Pro', 'Neue Haas Grotesk Text', 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, 'Noto Sans KR', sans-serif;
   --font-kr: 'Noto Sans KR', sans-serif;
 
   --type-intro-tagline-size: 16px;
   --type-intro-tagline-line: 22px;
-  --type-intro-cta-size: 20px;
-  --type-intro-cta-line: 28px;
   --type-intro-list-size: 18px;
   --type-intro-list-line: 29px;
   --type-nav-size: 13px;
@@ -28,16 +28,22 @@
   --type-title-line: 1.4;
   --type-note-size: 13px;
   --type-note-line: 1.5;
+  --type-menu-link-size: 18px;
+  --type-menu-link-line: 30px;
   --type-kr-note-line: 1.6;
   --type-kr-legal-size: 11px;
-  --type-kr-legal-line: 1.7;
 
   --space-gutter-mobile: 16px;
   --space-gutter-intro-mobile: 30px;
   --space-gutter-desktop: 48px;
   --space-header-height: 56px;
   --space-tap: 44px;
+  --space-tap-small: 28px;
+  --space-info-row: 48px;
   --radius-0: 0;
   --radius-panel: 12px;
   --radius-pill: 999px;
+  --radius-bar: 2px;
+  --radius-check: 3px;
+  --radius-dot-morph: 30%;
 }

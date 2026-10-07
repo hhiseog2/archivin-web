@@ -24,7 +24,7 @@
 .legal {
   font-family: var(--font-kr);
   font-size: var(--type-kr-legal-size);
-  line-height: var(--type-kr-legal-line);
+  line-height: 1.7;
   color: var(--color-ink-2);
 }
 .legal p {

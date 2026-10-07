@@ -1,9 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useRef, useState, type MouseEvent } from 'react';
-import { Accordion } from '@/components/Accordion/Accordion';
-import { addToBag, useBag } from '@/lib/cart';
+import { useEffect, useState, type MouseEvent } from 'react';
+import { AddToBagButton } from '@/components/AddToBagButton/AddToBagButton';
+import { InfoRow } from '@/components/InfoRow/InfoRow';
+import { PhotoBars, PhotoCarousel } from '@/components/PhotoCarousel/PhotoCarousel';
 import type { Product } from '@/lib/catalog';
 import { formatPrice } from '@/lib/format';
 import { LAST_SHOP_KEY } from '@/lib/shop';
@@ -11,15 +12,12 @@ import styles from './product.module.css';
 
 const DESKTOP = '(min-width: 900px)';
 
+/** A21_Product (mobile). Desktop: TODO(design) — no design yet (README 8-6); photos stacked left, info sticky right. */
 export function ProductView({ product: p }: { product: Product }) {
   const [shot, setShot] = useState(0);
-  const [status, setStatus] = useState('');
   const [backHref, setBackHref] = useState('/shop');
-  const inBag = useBag().includes(p.id);
-  const n = p.images.length;
-  const touchX = useRef<number | null>(null);
 
-  // "back" keeps the shop's filters when we came from there (README 8-3).
+  // "back" keeps the shop's view when we came from there (README 8-3).
   useEffect(() => {
     try {
       const last = sessionStorage.getItem(LAST_SHOP_KEY);
@@ -29,16 +27,13 @@ export function ProductView({ product: p }: { product: Product }) {
     }
   }, []);
 
-  const go = (i: number) => setShot((i + n) % n);
-
-  // "photo 4" in the condition text: show that photo and scroll to it.
+  // "photo 4" in the condition text: go to that photo and scroll up to it.
   const showPhoto = (index: number) => (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     setShot(index);
-    const target = window.matchMedia(DESKTOP).matches
-      ? document.getElementById(`photo-${index + 1}`)
-      : document.getElementById('photos');
-    target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const target = window.matchMedia(DESKTOP).matches ? document.getElementById(`photo-${index + 1}`) : document.getElementById('photos');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    target?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
   };
 
   const priceLine = p.sold ? `size ${p.sizeLabel}` : `${formatPrice(p.price)} · size ${p.sizeLabel}`;
@@ -54,117 +49,76 @@ export function ProductView({ product: p }: { product: Product }) {
 
   return (
     <main className={styles.layout}>
-      {/* Mobile: one photo at a time, tap the left/right 96px (or swipe) to move. */}
-      <section
-        id="photos"
-        aria-label="Photos"
-        aria-roledescription="carousel"
-        className={`m-only ${styles.carousel}`}
-        onTouchStart={(e) => {
-          touchX.current = e.touches[0].clientX;
-        }}
-        onTouchEnd={(e) => {
-          if (touchX.current == null) return;
-          const dx = e.changedTouches[0].clientX - touchX.current;
-          touchX.current = null;
-          if (Math.abs(dx) > 40) go(shot + (dx < 0 ? 1 : -1));
-        }}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={p.images[shot].src} alt={p.images[shot].alt} className={styles.photo} />
-        {n > 1 && (
-          <>
-            <button type="button" aria-label="Previous photo" className={`${styles.zone} ${styles.zonePrev}`} onClick={() => go(shot - 1)} />
-            <button type="button" aria-label="Next photo" className={`${styles.zone} ${styles.zoneNext}`} onClick={() => go(shot + 1)} />
-          </>
-        )}
-        <div className={styles.backOnPhoto}>{back}</div>
-        <p aria-live="polite" className="visually-hidden">
-          photo {shot + 1} of {n}
-        </p>
-      </section>
+      <div className="m-only">
+        <PhotoCarousel images={p.images} index={shot} onIndex={setShot}>
+          <div className={styles.backOnPhoto}>{back}</div>
+        </PhotoCarousel>
+        <PhotoBars count={p.images.length} index={shot} onIndex={setShot} />
+      </div>
 
-      {/* TODO(design): desktop product page has no design (README 8-5) — photos stacked left, sticky info right. */}
+      {/* TODO(design): desktop product page (README 8-6) — photos one under another, no bars. */}
       <section aria-label="Photos" className={`d-only ${styles.stack}`}>
         {p.images.map((img, i) => (
           // eslint-disable-next-line @next/next/no-img-element
-          <img key={img.src} id={`photo-${i + 1}`} src={img.src} alt={img.alt} className={styles.photo} />
+          <img key={img.src} id={`photo-${i + 1}`} src={img.src} alt={img.alt} className={styles.stackPhoto} />
         ))}
       </section>
 
       <div className={styles.side}>
         <div className="d-only">{back}</div>
 
-        <section aria-label={p.name} className={styles.info}>
+        <section aria-label={p.name} className={`${styles.info} ${p.images.length > 1 ? '' : styles.infoNoBars}`}>
           <h1 className={styles.name}>{p.name}</h1>
           <p className={styles.price}>{priceLine}</p>
-          {p.sold ? (
-            // TODO(design): sold product page has no design (README 8-5) — disabled "sold" pill.
-            <button type="button" disabled className={`${styles.pill} ${styles.pillOff}`}>
-              sold
-            </button>
-          ) : inBag ? (
-            <Link href="/bag" className={`${styles.pill} ${styles.pillFill}`}>
-              in your bag · view bag
-            </Link>
-          ) : (
-            <button
-              type="button"
-              className={`${styles.pill} ${styles.pillNavy}`}
-              onClick={() => {
-                addToBag(p.id);
-                setStatus('added to bag.');
-              }}
-            >
-              add to bag
-            </button>
-          )}
-          <p role="status" className="visually-hidden">
-            {status}
-          </p>
+          <AddToBagButton id={p.id} sold={p.sold} />
         </section>
 
-        {/* Rows without data are hidden — only 3599 has full details so far (README 11). */}
-        {(p.measurements || cond || p.details) && (
-          <section aria-label="Product information" className={styles.more}>
-            {p.measurements && (
-              <Accordion title="measurements">
-                <p className={styles.unit}>
-                  {p.measurements.unit} · <span lang="ko">단면 기준</span>
-                </p>
-                <dl className={styles.measure}>
-                  {(['shoulder', 'chest', 'sleeve', 'length'] as const).map((k) => (
-                    <div key={k}>
-                      <dt>{k}</dt>
-                      <dd>{p.measurements![k]}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </Accordion>
-            )}
-            {cond && (
-              <Accordion title="condition">
-                <p className={styles.text}>
-                  {before}
-                  {link && (
-                    <a href="#photos" className={styles.photoLink} onClick={showPhoto(link.imageIndex)}>
-                      {link.text}
-                    </a>
-                  )}
-                  {after}
-                </p>
-                <p lang="ko" className={styles.ko}>
-                  {cond.ko}
-                </p>
-              </Accordion>
-            )}
-            {p.details && (
-              <Accordion title="details">
-                <p className={styles.text}>{p.details}</p>
-              </Accordion>
-            )}
-          </section>
-        )}
+        {/* measurements · condition · details hide when there's no data (only 3599 has them so far, README 12). */}
+        <section aria-label="Product information" className={styles.more}>
+          {p.measurements && (
+            <InfoRow title="measurements">
+              <p className={styles.unit}>
+                {p.measurements.unit} · <span lang="ko">단면 기준</span>
+              </p>
+              <dl className={styles.measure}>
+                {(['shoulder', 'chest', 'sleeve', 'length'] as const).map((k) => (
+                  <div key={k}>
+                    <dt>{k}</dt>
+                    <dd>{p.measurements![k]}</dd>
+                  </div>
+                ))}
+              </dl>
+            </InfoRow>
+          )}
+          {cond && (
+            <InfoRow title="condition">
+              <p className={styles.text}>
+                {before}
+                {link && (
+                  <a href="#photos" className={styles.photoLink} onClick={showPhoto(link.imageIndex)}>
+                    {link.text}
+                  </a>
+                )}
+                {after}
+              </p>
+              <p lang="ko" className={styles.ko}>
+                {cond.ko}
+              </p>
+            </InfoRow>
+          )}
+          {p.details && (
+            <InfoRow title="details">
+              <p className={styles.text}>{p.details}</p>
+            </InfoRow>
+          )}
+          {/* Same copy as the bag. TODO: client to confirm the shipping / returns wording (README 12). */}
+          <InfoRow title="shipping & returns">
+            <p className={styles.text}>ships in 2–3 business days · no exchanges or refunds, except defects.</p>
+            <p lang="ko" className={styles.ko}>
+              영업일 2–3일 내 발송 · 하자 외 교환·환불 불가
+            </p>
+          </InfoRow>
+        </section>
       </div>
     </main>
   );

@@ -1,0 +1,132 @@
+/* .qwrap / .qopen / .qfield / .qinput / .qline (A21_Shop, A21_DShop). */
+.wrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+}
+.desktop {
+  max-width: 320px;
+}
+
+.openBtn {
+  height: 44px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font-size: var(--type-nav-size);
+  cursor: pointer;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.14s ease,
+    visibility 0s linear 0s;
+}
+.open .openBtn {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.14s ease,
+    visibility 0s linear 0.14s;
+}
+
+/* The field starts where the word "search" starts (12px in). */
+.field {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 12px;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.2s ease,
+    visibility 0s linear 0.2s;
+}
+.open .field {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.clip {
+  flex: 1;
+  min-width: 0;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.input {
+  flex: none;
+  width: 123.077%;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font-size: 16px;
+  transform: scale(0.8125);
+  transform-origin: 0 50%;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.desktop .input {
+  flex: 1;
+  width: auto;
+  min-width: 0;
+  font-size: var(--type-nav-size);
+  transform: none;
+}
+.input::placeholder {
+  color: var(--color-ink-2);
+  opacity: 1;
+}
+.input::-webkit-search-cancel-button {
+  display: none;
+}
+/* The underline is the focus indicator here, so no outline (README 11). */
+.input:focus-visible {
+  outline: none;
+}
+
+.close {
+  flex-shrink: 0;
+  width: 40px;
+  height: 44px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.line {
+  position: absolute;
+  left: 0;
+  right: 40px;
+  bottom: 10px;
+  height: 1px;
+  background: var(--color-ink-2);
+  pointer-events: none;
+}
+.field:focus-within .line {
+  height: 1.5px;
+  background: var(--color-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .openBtn,
+  .field,
+  .open .openBtn {
+    transition: none;
+  }
+}

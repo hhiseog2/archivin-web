@@ -12,26 +12,44 @@ type Props = {
   sizeLabel?: string;
   /** Photo URL. Missing → empty fill well (lookbook placeholders). */
   image?: string | null;
+  /** Other angle, cross-faded in on hover / keyboard focus (hover devices only). */
+  hoverImage?: string | null;
+  /** Already in the bag → "in bag" under the price line (stitch ②, small). */
+  inBag?: boolean;
 };
 
 /**
- * Card (README 5): 3:4 photo on white, name 14/20 clamped to two lines, then "₩ 000,000 · L–XL" or "sold".
- * The whole card is one link; its aria-label describes the photo, so the image itself has alt="".
+ * Card (README 5): 3:4 photo on white, name 14/20 clamped to two lines, then "₩ 000,000 · L–XL" or "sold",
+ * then "in bag" if it's in the bag. The whole card is one link; its aria-label describes the photo (alt="").
  */
-export function ProductCard({ name, href, price, sold, sizeLabel, image }: Props) {
+export function ProductCard({ name, href, price, sold, sizeLabel, image, hoverImage, inBag }: Props) {
   const priceText = sold ? 'sold' : formatPrice(price);
   const line2 = sold ? 'sold' : sizeLabel ? `${priceText} · ${sizeLabel}` : priceText;
-  const aria = `${name}, ${priceText}${sizeLabel ? `, size ${sizeLabel}` : ''}`;
+  const aria = `${name}, ${priceText}${sizeLabel ? `, size ${sizeLabel}` : ''}${inBag ? ', in bag' : ''}`;
   return (
     <Link href={href} aria-label={aria} className={styles.card}>
-      {image ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={image} alt="" loading="lazy" className={styles.img} />
-      ) : (
-        <span aria-hidden="true" className={`${styles.img} ${styles.empty}`} />
-      )}
+      <span className={styles.frame}>
+        {image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={image} alt="" loading="lazy" className={styles.img} />
+        ) : (
+          <span aria-hidden="true" className={`${styles.img} ${styles.empty}`} />
+        )}
+        {hoverImage && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={hoverImage} alt="" loading="lazy" className={styles.img2} />
+        )}
+      </span>
       <span className={styles.name}>{name}</span>
       <span className={styles.line2}>{line2}</span>
+      {inBag && (
+        <span className={styles.inbag}>
+          <svg width="9" height="9" viewBox="0 0 9 9" aria-hidden="true">
+            <circle cx="4.5" cy="4.5" r="3.9" />
+          </svg>
+          in bag
+        </span>
+      )}
     </Link>
   );
 }

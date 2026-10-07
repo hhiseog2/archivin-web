@@ -1,0 +1,27 @@
+/* 48px pill, 15px, 20px under the price line. */
+.pill {
+  margin-top: 20px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 24px;
+  font-size: var(--type-button-size);
+  text-decoration: none;
+  cursor: pointer;
+}
+.navy {
+  background: var(--color-navy);
+  color: var(--color-on-navy);
+}
+.fill,
+.fill:hover {
+  background: var(--color-fill);
+  color: var(--color-ink);
+}
+.off {
+  background: var(--color-fill);
+  color: var(--color-ink-2);
+  cursor: not-allowed;
+}

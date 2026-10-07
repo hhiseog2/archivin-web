@@ -21,6 +21,8 @@ export type Product = {
   price: number | null;
   sold: boolean;
   images: ProductImage[];
+  /** Second angle shown when a card is hovered or focused. Missing → the card photo doesn't change. */
+  hoverImage?: { src: string; kind: string };
   measurements?: { unit: string; shoulder: number; chest: number; sleeve: number; length: number };
   condition?: { en: string; ko: string; photoLink?: { text: string; imageIndex: number } };
   details?: string;
@@ -67,7 +69,8 @@ export const products = productData.products as Product[];
 export const catalog = {
   categories: productData.categories as { id: CategoryId; label: string }[],
   brandShortcuts: productData.brandShortcuts,
-  filters: productData.filters,
+  sorts: productData.filters.sort as { id: 'new' | 'price-asc' | 'price-desc'; label: string }[],
+  /** Intro list (band · designer · rap · skate · archive). Plain text, not links (README 8-1). */
   introCategories: productData.introCategories,
   // TODO: fake display totals (README 11). Replace with real counts from the product API.
   totals: productData.totals,

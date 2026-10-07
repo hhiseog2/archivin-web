@@ -5,45 +5,6 @@
   flex-direction: column;
 }
 
-.carousel {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  background: var(--color-paper);
-  touch-action: pan-y;
-}
-
-.photo {
-  display: block;
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  background: var(--color-paper);
-}
-
-/* Left / right 96px tap zones. */
-.zone {
-  position: absolute;
-  top: 0;
-  width: 96px;
-  height: 100%;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-}
-.zonePrev {
-  left: 0;
-  cursor: w-resize;
-}
-.zoneNext {
-  right: 0;
-  cursor: e-resize;
-}
-.zone:focus-visible {
-  outline-offset: -4px;
-}
-
 .backOnPhoto {
   position: absolute;
   left: 4px;
@@ -54,6 +15,7 @@
   padding: 0 12px;
   display: flex;
   align-items: center;
+  width: fit-content;
   font-size: var(--type-nav-size);
   color: var(--color-ink);
   text-decoration: none;
@@ -64,10 +26,14 @@
   flex-direction: column;
 }
 
+/* 14px under the bars. */
 .info {
-  padding: 24px var(--space-gutter-mobile) 0;
+  padding: 14px var(--space-gutter-mobile) 0;
   display: flex;
   flex-direction: column;
+}
+.infoNoBars {
+  padding-top: 24px;
 }
 
 .name {
@@ -81,34 +47,6 @@
   margin: 2px 0 0;
   font-size: var(--type-body-size);
   line-height: var(--type-body-line);
-}
-
-/* Pill buttons (48px). */
-.pill {
-  margin-top: 20px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  border-radius: var(--radius-pill);
-  font-size: var(--type-button-size);
-  text-decoration: none;
-  cursor: pointer;
-}
-.pillNavy {
-  background: var(--color-navy);
-  color: var(--color-on-navy);
-}
-.pillFill,
-.pillFill:hover {
-  background: var(--color-fill);
-  color: var(--color-ink);
-}
-.pillOff {
-  background: var(--color-fill);
-  color: var(--color-ink-2);
-  cursor: not-allowed;
 }
 
 .more {
@@ -160,7 +98,7 @@
   color: var(--color-ink-2);
 }
 
-/* TODO(design): desktop — photos stacked on the left, info column (400px) sticky on the right. */
+/* TODO(design): desktop — photos stacked on the left (3:4), info column 400px, sticky, on the right. */
 @media (min-width: 900px) {
   .layout {
     width: 100%;
@@ -177,18 +115,22 @@
     flex-direction: column;
     gap: 24px;
   }
-  .stack .photo {
+  .stackPhoto {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
     scroll-margin-top: 24px;
   }
   .side {
     position: sticky;
     top: 24px;
   }
-  .side .back {
+  .back {
     margin-left: -12px;
-    width: fit-content;
   }
-  .info {
+  .info,
+  .infoNoBars {
     padding: 16px 0 0;
   }
   .more {

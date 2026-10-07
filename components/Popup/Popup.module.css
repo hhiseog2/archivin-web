@@ -1,0 +1,116 @@
+/* Shared by CategoryMenu and SortMenu: .poptrig / .pop / .popitem / .ulbl / .check / .cbox (A21_Shop, A21_DShop). */
+
+.trigger {
+  height: 44px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font-size: var(--type-nav-size);
+  cursor: pointer;
+}
+
+/* 1px underline 4px under the text, transparent → text colour over 0.2s. */
+.ulbl {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s ease;
+}
+@media (hover: hover) {
+  .item:hover .ulbl,
+  .trigger:hover .ulbl {
+    text-decoration-color: currentColor;
+  }
+}
+.item:focus-visible .ulbl,
+.trigger[aria-expanded='true'] .ulbl {
+  text-decoration-color: currentColor;
+}
+
+/* Window: white, 1px line border, 12px radius, no shadow. Fades in 0.2s and drops 6px over 0.26s. */
+.pop {
+  position: absolute;
+  top: 44px;
+  z-index: 6;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-paper);
+  border-radius: var(--radius-panel);
+  border: 1px solid var(--color-line);
+  opacity: 0;
+  transform: translateY(-6px);
+  visibility: hidden;
+  transition:
+    opacity 0.2s ease,
+    transform 0.26s cubic-bezier(0.2, 0.8, 0.2, 1),
+    visibility 0s linear 0.26s;
+}
+.open {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.item {
+  position: relative;
+  height: 44px;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font-size: var(--type-body-size);
+  text-align: left;
+  cursor: pointer;
+}
+@media (min-width: 900px) {
+  .item {
+    height: 40px;
+  }
+}
+
+.check {
+  flex-shrink: 0;
+  fill: none;
+  stroke: var(--color-navy);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.rule {
+  height: 1px;
+  margin: 6px 18px;
+  background: var(--color-rule);
+}
+
+.box {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.box svg {
+  position: absolute;
+}
+.cbox {
+  fill: none;
+  stroke: var(--color-ink);
+  stroke-width: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pop,
+  .ulbl {
+    transition: none;
+  }
+}

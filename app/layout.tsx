@@ -16,7 +16,7 @@ export const viewport: Viewport = {
 };
 
 // Neue Haas Grotesk Text is an Adobe Fonts face. Set NEXT_PUBLIC_TYPEKIT_ID in .env once the web kit exists.
-// TODO: Neue Haas Grotesk web kit (README 11). Until then Helvetica Neue / Arial show via the font stack.
+// TODO: Neue Haas Grotesk web kit (README 12). Until then Inter Tight (Google Fonts) stands in via the font stack.
 const TYPEKIT_ID = process.env.NEXT_PUBLIC_TYPEKIT_ID;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400&family=Noto+Sans+KR:wght@400&display=swap" />
         {TYPEKIT_ID ? <link rel="stylesheet" href={`https://use.typekit.net/${TYPEKIT_ID}.css`} /> : null}
       </head>
       <body>{children}</body>

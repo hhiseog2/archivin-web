@@ -1,54 +1,25 @@
-import Link from 'next/link';
-import { IntroArrow } from '@/components/Icons';
-import { catalog } from '@/lib/catalog';
-import styles from './intro.module.css';
+import { Suspense } from 'react';
+import { SiteChrome } from '@/components/SiteChrome';
+import { ShopView } from './shop/ShopView';
+import { IntroPanel } from './_intro/IntroPanel';
+import styles from './_intro/intro.module.css';
 
 /**
- * Intro (A_Intro / A_DIntro): navy screen, white stitch logo, no header or footer.
- * Logo, "shop →" and the five categories all go to /shop for now.
+ * Intro (A_Intro / A_DIntro). The shop's first screen is drawn underneath (inert, hidden from assistive tech)
+ * so when the navy panel lifts the shop is already there; then the URL moves to /shop (README 8-1).
+ * TODO(design): show the intro on every visit or once per session — every visit for now (README 12).
  */
 export default function IntroPage() {
-  // TODO: band · designer · rap · skate · archive need their own shop views + product tags (README 11).
-  const categories = (
-    <nav aria-label="Categories">
-      <ul className={styles.list}>
-        {catalog.introCategories.map((c) => (
-          <li key={c}>
-            <Link href="/shop">{c}</Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-
   return (
-    <div className={styles.intro}>
-      <div aria-hidden="true" className={`${styles.flex} ${styles.top}`} />
-
-      <h1 className={styles.h1}>
-        <Link href="/shop" className={styles.logoLink}>
-          {/* TODO: swap for the vector logo (SVG) once the client sends it (README 6). */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo/archivin-stitch-white.png" alt="ARCHIVIN" width={1115} height={259} className={styles.logo} />
-        </Link>
-      </h1>
-
-      <div className={styles.row}>
-        <p className={styles.tagline}>selected vintage clothing.</p>
-        <Link href="/shop" className={styles.cta}>
-          shop
-          <IntroArrow />
-        </Link>
+    <div className={styles.stage}>
+      <div className={styles.under} inert aria-hidden="true">
+        <SiteChrome onShop fullWidth>
+          <Suspense>
+            <ShopView preview />
+          </Suspense>
+        </SiteChrome>
       </div>
-
-      <div aria-hidden="true" className={`${styles.flex} ${styles.middle}`} />
-
-      <div className={styles.bottom}>
-        {categories}
-        <p className={styles.love}>love you all.</p>
-      </div>
-
-      <div aria-hidden="true" className={`${styles.flex} ${styles.end}`} />
+      <IntroPanel />
     </div>
   );
 }

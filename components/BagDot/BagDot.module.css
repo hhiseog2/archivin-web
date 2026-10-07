@@ -1,0 +1,85 @@
+/* .bagdot / .bagring from A21_Header (README 5). */
+.dot {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-navy);
+  font-size: 11px;
+  line-height: 1;
+  transition:
+    border-radius 0.22s cubic-bezier(0.3, 0.7, 0.4, 1.5),
+    background-color 0.16s ease,
+    color 0.16s ease,
+    transform 0.1s ease;
+}
+
+.num {
+  position: relative;
+  font-weight: 400;
+}
+
+.ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  overflow: visible;
+  transition: opacity 0.12s ease;
+}
+
+.rs {
+  fill: none;
+  stroke: var(--color-navy);
+  stroke-width: 1.25;
+  stroke-dasharray: 2.4 1.9;
+  stroke-linecap: round;
+}
+
+/* White cover circle: starts fully off (dashoffset -100), then sweeps away from 12 o'clock while sewing. */
+.rc {
+  fill: none;
+  stroke: var(--color-paper);
+  stroke-width: 3.5;
+  stroke-dasharray: 100 100;
+  stroke-dashoffset: -100;
+  transform: rotate(-90deg);
+  transform-origin: 11px 11px;
+}
+
+@keyframes sewring1 {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+@keyframes sewring2 {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+.sew1 .rc {
+  animation: sewring1 0.36s steps(14) both;
+}
+.sew2 .rc {
+  animation: sewring2 0.36s steps(14) both;
+}
+
+/* Hover / focus state (filled rounded square) is set by the bag link in BagNav.module.css via [data-bagdot]. */
+
+@media (prefers-reduced-motion: reduce) {
+  .sew1 .rc,
+  .sew2 .rc {
+    animation: none;
+  }
+}

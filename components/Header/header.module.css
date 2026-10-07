@@ -1,5 +1,7 @@
 /* Mobile header — A21_Header (390×56). */
 .mobile {
+  position: relative;
+  z-index: 10;
   height: var(--space-header-height);
   padding: 0 4px 0 15px;
   display: flex;
@@ -24,7 +26,7 @@
   align-items: center;
 }
 
-/* "menu", "bag", "search": 13px, 44px tap height. */
+/* "menu": 13px, 44px tap height. */
 .navItem {
   height: 44px;
   padding: 0 12px;
@@ -39,10 +41,10 @@
   cursor: pointer;
 }
 
-/* Desktop header — A21_DShop: 3-column grid, 20px top, 48px sides, max 1440. */
+/* Desktop header — A21_DShop: grid minmax(0,1fr) auto minmax(0,1fr), gap 16, 20px top, 48px sides, max 1440. */
 .desktop {
   position: relative;
-  z-index: 5;
+  z-index: 10;
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
@@ -54,8 +56,8 @@
 }
 
 .dLeft {
+  min-width: 0;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   margin-left: -12px;
 }
@@ -65,4 +67,12 @@
   display: flex;
   align-items: center;
   margin-right: -12px;
+}
+
+.searchStandIn {
+  height: 44px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  font-size: var(--type-nav-size);
 }
