@@ -172,16 +172,17 @@ export function ProductView({ product: p }: { product: Product }) {
       )}
     </>
   );
-  // v5.1: returns follow the legal minimum (README 8-3) — no "no refunds except defects".
+  // Owner's answer (2026.10.08): change of mind 3 days, flaws a week. TODO(client): shorter than the legal
+  // minimum (7 days / 3 months · 30 days) — the README 8-3 legal copy is in commit 5c7d138.
   const shipping = (
     <>
       <p className={styles.text}>orders placed by 3 pm ship in 2–3 business days. {formatPrice(catalog.shippingFee)} anywhere in Korea.</p>
       <p className={`${styles.text} ${styles.textNext}`}>
-        returns within 7 days of delivery. trying it on is fine, but worn, washed or altered pieces can&apos;t be returned. return
+        returns within 3 days of delivery. trying it on is fine, but worn, washed or altered pieces can&apos;t be returned. return
         shipping is on you. wear shown in the photos isn&apos;t a defect.
       </p>
       <p lang="ko" className={styles.ko}>
-        오후 3시 전 주문은 영업일 2–3일 안에 보내요 · 전국 3,000원 · 받은 날부터 7일 안에 반품 가능(시착은 괜찮지만 착용·세탁·수선한
+        오후 3시 전 주문은 영업일 2–3일 안에 보내요 · 전국 3,000원 · 받은 날부터 3일 안에 반품 가능(시착은 괜찮지만 착용·세탁·수선한
         상품은 안 돼요, 반품 배송비 고객 부담) · 사진에 보이는 사용감은 하자가 아니에요.
       </p>
       <Link href="/guide" className={styles.textLink}>

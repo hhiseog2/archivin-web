@@ -117,9 +117,9 @@ export function BagView() {
 
           <div className={styles.policy}>
             <p className={styles.policyTitle}>shipping &amp; returns</p>
-            <p>orders placed by 3 pm ship in 2–3 business days · returns within 7 days of delivery.</p>
+            <p>orders placed by 3 pm ship in 2–3 business days · returns within 3 days of delivery.</p>
             <p lang="ko" className={styles.policyKo}>
-              오후 3시 전 주문은 영업일 2–3일 안에 발송 · 받은 날부터 7일 안에 반품 가능
+              오후 3시 전 주문은 영업일 2–3일 안에 발송 · 받은 날부터 3일 안에 반품 가능
             </p>
             <Link href={site.links.guide} className={styles.guide}>
               shipping &amp; returns guide

@@ -1,147 +1,147 @@
 {
-  "_note": "A21_Guide(이용안내) 내용이에요. archivin.kr 이용안내 · 상품 화면 문구를 옮기고, 2026.10.08 사장님 답변과 법정 반품 기한으로 교환 · 반품을 다시 썼어요.",
-  "sections": [
+ "_note": "A21_Guide(이용안내) 내용이에요. archivin.kr 이용안내 · 상품 화면 문구를 옮기고, 2026.10.08 사장님 답변과 법정 반품 기한으로 교환 · 반품을 다시 썼어요.",
+ "sections": [
+  {
+   "id": "shipping",
+   "title": "shipping",
+   "titleKo": "배송",
+   "kind": "kv",
+   "rows": [
     {
-      "id": "shipping",
-      "title": "shipping",
-      "titleKo": "배송",
-      "kind": "kv",
-      "rows": [
-        {
-          "label": "fee",
-          "en": "₩ 3,000 anywhere in Korea, whatever you buy.",
-          "ko": "전국 3,000원, 주문 금액과 상관없이 같아요."
-        },
-        {
-          "label": "ships",
-          "en": "in 2–3 business days for orders placed by 3 pm. nothing ships on weekends or holidays.",
-          "ko": "오후 3시 전 주문 기준, 주말·공휴일을 빼고 영업일 2–3일 안에 보내요."
-        },
-        {
-          "label": "arrives",
-          "en": "usually 3–7 days after payment.",
-          "ko": "결제 확인 후 보통 3–7일 걸려요."
-        },
-        {
-          "label": "remote areas",
-          "en": "islands and mountain areas cost extra.",
-          "ko": "도서·산간 지역은 배송비가 더 들어요."
-        }
-      ]
+     "label": "fee",
+     "en": "₩ 3,000 anywhere in Korea, whatever you buy.",
+     "ko": "전국 3,000원, 주문 금액과 상관없이 같아요."
     },
     {
-      "id": "payment",
-      "title": "payment",
-      "titleKo": "결제",
-      "kind": "kv",
-      "rows": [
-        {
-          "label": "card",
-          "en": "credit or debit card. for a large amount, your card company may call to confirm it.",
-          "ko": "신용·체크카드. 금액이 크면 카드사에서 확인 전화가 갈 수 있어요."
-        },
-        {
-          "label": "bank transfer",
-          "en": "pay within 7 days, under the name you ordered with. orders that aren't paid in 7 days cancel themselves.",
-          "ko": "주문 후 7일 안에 주문자 이름으로 입금해 주세요. 7일이 지나면 주문이 자동으로 취소돼요."
-        },
-        {
-          "label": "checks",
-          "en": "we may hold or cancel an order that looks like card fraud.",
-          "ko": "도용이 의심되는 주문은 보류하거나 취소할 수 있어요."
-        }
-      ]
+     "label": "ships",
+     "en": "in 2–3 business days for orders placed by 3 pm. nothing ships on weekends or holidays.",
+     "ko": "오후 3시 전 주문 기준, 주말·공휴일을 빼고 영업일 2–3일 안에 보내요."
     },
     {
-      "id": "exchanges",
-      "title": "exchanges & returns",
-      "titleKo": "교환·반품",
-      "kind": "kv+p",
-      "paragraphs": [
-        {
-          "en": "every piece is vintage and shows its age. each product page lists the condition and shows the wear in the photos. wear shown there isn't a defect.",
-          "ko": "모든 상품은 빈티지라 사용감이 있어요. 상품 페이지에 적고 사진으로 보여 드린 사용감은 하자가 아니에요. 데미지·오염에 민감하다면 추천하지 않아요."
-        }
-      ],
-      "rows": [
-        {
-          "label": "returns",
-          "en": "within 7 days of delivery. return shipping is on you.",
-          "ko": "받은 날부터 7일 안에 반품할 수 있어요. 반품 배송비는 고객 부담이에요."
-        },
-        {
-          "label": "flaws",
-          "en": "a flaw we didn't mention, or the wrong piece? tell us within 30 days of finding it, and within 3 months of delivery. we pay the shipping.",
-          "ko": "설명에 없던 하자나 잘못 온 상품은 받은 날부터 3개월, 안 날부터 30일 안에 알려 주세요. 배송비는 저희가 내요."
-        },
-        {
-          "label": "no returns",
-          "en": "pieces worn, washed or altered after delivery so they lose value. trying one on for size is fine.",
-          "ko": "받은 뒤 착용·세탁·수선해서 가치가 떨어진 상품은 반품할 수 없어요. 사이즈 확인용 시착은 괜찮아요."
-        },
-        {
-          "label": "exchanges",
-          "en": "every piece is one of one, so we refund instead of swapping.",
-          "ko": "모든 상품이 한 점뿐이라 교환 대신 환불해 드려요."
-        },
-        {
-          "label": "how",
-          "en": "email eatery01@naver.com with your order number first, and photos for a flaw.",
-          "ko": "먼저 주문번호를(하자라면 사진도) 메일로 보내 주세요."
-        },
-        {
-          "label": "send to",
-          "en": "1F, 16 Sinheung-ro 3-gil, Yongsan-gu, Seoul 04338",
-          "ko": "04338 서울 용산구 신흥로3길 16 1층"
-        }
-      ]
+     "label": "arrives",
+     "en": "usually 3–7 days after payment.",
+     "ko": "결제 확인 후 보통 3–7일 걸려요."
     },
     {
-      "id": "refunds",
-      "title": "refunds",
-      "titleKo": "환불",
-      "kind": "kv",
-      "rows": [
-        {
-          "label": "when",
-          "en": "within 3 business days of the return reaching us.",
-          "ko": "반품이 도착한 날부터 3영업일 안에 환불해요."
-        },
-        {
-          "label": "card",
-          "en": "we cancel the payment. if it's already been billed, the refund shows on your next statement.",
-          "ko": "카드 승인을 취소해요. 이미 청구됐다면 다음 달 청구서에서 빠져요."
-        },
-        {
-          "label": "bank transfer",
-          "en": "to the account you tell us.",
-          "ko": "알려 주신 계좌로 보내요."
-        }
-      ]
-    },
-    {
-      "id": "membership",
-      "title": "membership",
-      "titleKo": "회원",
-      "kind": "p",
-      "paragraphs": [
-        {
-          "en": "joining is free. only members can see prices and buy. members also keep their address for checkout and can find past orders.",
-          "ko": "가입은 무료예요. 가격 확인과 구매는 회원만 할 수 있어요."
-        }
-      ]
-    },
-    {
-      "id": "contact",
-      "title": "contact",
-      "titleKo": "문의",
-      "kind": "contact",
-      "contact": [
-        "email",
-        "phone",
-        "instagram"
-      ]
+     "label": "remote areas",
+     "en": "islands and mountain areas cost extra.",
+     "ko": "도서·산간 지역은 배송비가 더 들어요."
     }
-  ],
-  "notIncluded": "적립금은 사장님이 안 쓰기로 했어요(2026.10.08)."
+   ]
+  },
+  {
+   "id": "payment",
+   "title": "payment",
+   "titleKo": "결제",
+   "kind": "kv",
+   "rows": [
+    {
+     "label": "card",
+     "en": "credit or debit card. for a large amount, your card company may call to confirm it.",
+     "ko": "신용·체크카드. 금액이 크면 카드사에서 확인 전화가 갈 수 있어요."
+    },
+    {
+     "label": "bank transfer",
+     "en": "pay within 7 days, under the name you ordered with. orders that aren't paid in 7 days cancel themselves.",
+     "ko": "주문 후 7일 안에 주문자 이름으로 입금해 주세요. 7일이 지나면 주문이 자동으로 취소돼요."
+    },
+    {
+     "label": "checks",
+     "en": "we may hold or cancel an order that looks like card fraud.",
+     "ko": "도용이 의심되는 주문은 보류하거나 취소할 수 있어요."
+    }
+   ]
+  },
+  {
+   "id": "exchanges",
+   "title": "exchanges & returns",
+   "titleKo": "교환·반품",
+   "kind": "kv+p",
+   "paragraphs": [
+    {
+     "en": "every piece is vintage and shows its age. each product page lists the condition and shows the wear in the photos. wear shown there isn't a defect.",
+     "ko": "모든 상품은 빈티지라 사용감이 있어요. 상품 페이지에 적고 사진으로 보여 드린 사용감은 하자가 아니에요. 데미지·오염에 민감하다면 추천하지 않아요."
+    }
+   ],
+   "rows": [
+    {
+     "label": "returns",
+     "en": "within 3 days of delivery. return shipping is on you.",
+     "ko": "받은 날부터 3일 안에 반품할 수 있어요. 반품 배송비는 고객 부담이에요."
+    },
+    {
+     "label": "flaws",
+     "en": "a flaw we didn't mention, or the wrong piece? tell us within a week of delivery. we pay the shipping.",
+     "ko": "설명에 없던 하자나 잘못 온 상품은 받은 날부터 일주일 안에 알려 주세요. 배송비는 저희가 내요."
+    },
+    {
+     "label": "no returns",
+     "en": "pieces worn, washed or altered after delivery so they lose value. trying one on for size is fine.",
+     "ko": "받은 뒤 착용·세탁·수선해서 가치가 떨어진 상품은 반품할 수 없어요. 사이즈 확인용 시착은 괜찮아요."
+    },
+    {
+     "label": "exchanges",
+     "en": "every piece is one of one, so we refund instead of swapping.",
+     "ko": "모든 상품이 한 점뿐이라 교환 대신 환불해 드려요."
+    },
+    {
+     "label": "how",
+     "en": "email eatery01@naver.com with your order number first, and photos for a flaw.",
+     "ko": "먼저 주문번호를(하자라면 사진도) 메일로 보내 주세요."
+    },
+    {
+     "label": "send to",
+     "en": "1F, 16 Sinheung-ro 3-gil, Yongsan-gu, Seoul 04338",
+     "ko": "04338 서울 용산구 신흥로3길 16 1층"
+    }
+   ]
+  },
+  {
+   "id": "refunds",
+   "title": "refunds",
+   "titleKo": "환불",
+   "kind": "kv",
+   "rows": [
+    {
+     "label": "when",
+     "en": "within 3 business days of the return reaching us.",
+     "ko": "반품이 도착한 날부터 3영업일 안에 환불해요."
+    },
+    {
+     "label": "card",
+     "en": "we cancel the payment. if it's already been billed, the refund shows on your next statement.",
+     "ko": "카드 승인을 취소해요. 이미 청구됐다면 다음 달 청구서에서 빠져요."
+    },
+    {
+     "label": "bank transfer",
+     "en": "to the account you tell us.",
+     "ko": "알려 주신 계좌로 보내요."
+    }
+   ]
+  },
+  {
+   "id": "membership",
+   "title": "membership",
+   "titleKo": "회원",
+   "kind": "p",
+   "paragraphs": [
+    {
+     "en": "joining is free. only members can see prices and buy. members also keep their address for checkout and can find past orders.",
+     "ko": "가입은 무료예요. 가격 확인과 구매는 회원만 할 수 있어요."
+    }
+   ]
+  },
+  {
+   "id": "contact",
+   "title": "contact",
+   "titleKo": "문의",
+   "kind": "contact",
+   "contact": [
+    "email",
+    "phone",
+    "instagram"
+   ]
+  }
+ ],
+ "notIncluded": "적립금은 사장님이 안 쓰기로 했어요(2026.10.08)."
 }
