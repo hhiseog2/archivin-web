@@ -12,16 +12,22 @@
 }
 
 .logo {
+  min-width: 0;
   min-height: 44px;
   display: flex;
   align-items: center;
   text-decoration: none;
 }
+/* Full size (168×39 / 220×51) whenever there's room; on very narrow screens (< ~315px) it shrinks so
+   "menu" and the bag ring never get pushed off the edge. */
 .logo img {
   display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 .right {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
 }

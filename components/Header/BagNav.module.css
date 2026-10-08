@@ -26,7 +26,7 @@
   position: absolute;
   top: 100%;
   z-index: 8;
-  width: 320px;
+  width: min(320px, calc(100vw - 32px)); /* stays on screen on the narrowest phones */
   padding-top: 8px;
   visibility: hidden;
   opacity: 0;
@@ -54,7 +54,26 @@
   }
 }
 
-/* Hover only on devices that hover; never opens on tap (README 8-5). */
+/* Opened by a tap on touch screens (BagNav.tsx adds .open) — client request on top of README 8-5. */
+.open [data-bagdot] {
+  border-radius: var(--radius-dot-morph);
+  background: var(--color-navy);
+  color: var(--color-on-navy);
+}
+.open [data-bagring] {
+  opacity: 0;
+}
+.open .peek {
+  visibility: visible;
+  opacity: 1;
+  clip-path: inset(0 -40px -48px -40px);
+  transition-delay: 0s;
+}
+.open .peek [data-peekitem] {
+  animation: drop 0.36s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* Hover only on devices that hover. */
 @media (hover: hover) {
   .wrap:hover [data-bagdot] {
     border-radius: var(--radius-dot-morph);
@@ -100,7 +119,8 @@
     transition: none;
   }
   .wrap:hover .peek [data-peekitem],
-  .link:focus-visible + .peek [data-peekitem] {
+  .link:focus-visible + .peek [data-peekitem],
+  .open .peek [data-peekitem] {
     animation: none;
   }
 }
