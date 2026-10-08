@@ -223,3 +223,8 @@
     transition: none;
   }
 }
+
+/* v5.1 exchanges & returns: the paragraph after the key-value rows. */
+.afterKv {
+  margin-top: 16px;
+}

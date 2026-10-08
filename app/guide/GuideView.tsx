@@ -86,6 +86,17 @@ export function GuideView() {
 }
 
 function SectionBody({ section: s }: { section: GuideSection }) {
+  if (s.kind === 'kv+p') {
+    return (
+      <>
+        <SectionBody section={{ ...s, kind: 'kv' }} />
+        <div className={styles.afterKv}>
+          <SectionBody section={{ ...s, kind: 'p' }} />
+        </div>
+      </>
+    );
+  }
+
   if (s.kind === 'kv') {
     return (
       <dl className={styles.dl}>
@@ -132,8 +143,7 @@ function SectionBody({ section: s }: { section: GuideSection }) {
   const values: Record<string, { href: string; text: string }> = {
     email: { href: `mailto:${site.contact.email}`, text: site.contact.email },
     phone: { href: site.contact.phoneHref, text: site.contact.phone },
-    // TODO(client): Instagram address (archivin.kr has "#" too).
-    instagram: { href: site.links.instagram, text: site.links.instagramHandle.toLowerCase() },
+    instagram: { href: site.links.instagram, text: site.links.instagramHandle },
   };
   return (
     <>
@@ -143,7 +153,11 @@ function SectionBody({ section: s }: { section: GuideSection }) {
             <div key={k} className={styles.kv}>
               <dt className={styles.dt}>{k}</dt>
               <dd className={styles.dd}>
-                <a href={values[k].href} className={styles.valueLink}>
+                <a
+                  href={values[k].href}
+                  className={styles.valueLink}
+                  {...(k === 'instagram' ? { target: '_blank', rel: 'noopener' } : {})}
+                >
                   {values[k].text}
                 </a>
               </dd>

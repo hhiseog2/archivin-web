@@ -1,5 +1,16 @@
 @import './tokens.css';
 
+/* Neue Haas Grotesk Display Pro 55 Roman (Commercial Type) — the only weight the site uses (all 400). */
+@font-face {
+  font-family: 'ARCHIVIN Neue Haas';
+  src:
+    url('/fonts/NeueHaasDisplay-Roman.woff2') format('woff2'),
+    url('/fonts/NeueHaasDisplay-Roman.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Breakpoint: < 900px follows design/mobile, >= 900px follows design/desktop. */
 
 *,

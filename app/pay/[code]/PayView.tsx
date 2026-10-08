@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { signInHref, useSignedIn } from '@/lib/auth';
 import { checkoutConfig, site } from '@/lib/catalog';
 import { formatDate, formatPrice } from '@/lib/format';
 import { useMyOrders } from '@/lib/orders';
@@ -13,8 +14,9 @@ export type PayState = 'open' | 'paid' | 'expired';
 const price = (n: number | null) => formatPrice(n).replace(' ', ' ');
 
 /**
- * Private payment link (A21_Pay · A21_DPay, README 8-16): one line made for one customer. No sign-in needed —
- * `pay` opens the normal checkout with just this line (`/checkout?pay=<code>`).
+ * Private payment link (A21_Pay · A21_DPay, README 8-16): one line made for one customer.
+ * `pay` opens the normal checkout with just this line (`/checkout?pay=<code>`). v5.1: members only —
+ * signed out shows `sign in to pay`, which comes back here after signing in.
  */
 export function PayView({ code, preview }: { code: string; preview?: PayState }) {
   // TODO(backend): private payment links create/lookup — the prototype shows the one sample for any code.
@@ -28,6 +30,8 @@ export function PayView({ code, preview }: { code: string; preview?: PayState })
   const paidOrder = ready ? mine.find((o) => o.privatePay?.code === code) : undefined;
   const state: PayState = preview ?? (paidOrder ? 'paid' : (link.state as PayState));
   const paidOn = paidOrder?.date ?? formatDate(new Date());
+  const signedIn = useSignedIn();
+  const signedOut = checkoutConfig.privatePayment.signedOut;
 
   return (
     <main className={styles.main}>
@@ -55,7 +59,20 @@ export function PayView({ code, preview }: { code: string; preview?: PayState })
         </div>
       </dl>
 
-      {state === 'open' && (
+      {state === 'open' && !signedIn && (
+        <>
+          <Link href={signInHref(`/pay/${encodeURIComponent(code)}`)} className={styles.pay}>
+            {signedOut.button}
+          </Link>
+          <p className={styles.signInNote}>
+            {signedOut.note}
+            <span lang="ko" className={styles.privateKo}>
+              {signedOut.noteKo}
+            </span>
+          </p>
+        </>
+      )}
+      {state === 'open' && signedIn && (
         <>
           <Link href={`/checkout?pay=${encodeURIComponent(code)}`} className={styles.pay}>
             pay {price(amount)}

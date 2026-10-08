@@ -11,6 +11,9 @@ const LINKS = [
 ];
 
 const b = site.business;
+/** "안인영 · eatery01@… · 010-…" → the name only (the footer line, README 5). */
+const OFFICER = b.privacyOfficer.split(' · ')[0];
+// TODO(client): confirm the 통신판매업 number after the address change (site.json business.mailOrderNo_note).
 
 function External() {
   return (
@@ -48,8 +51,7 @@ export function Footer() {
             {l.label}
           </Link>
         ))}
-        {/* TODO(client): Instagram address (site.json links.instagram). */}
-        <a href={site.links.instagram} className={styles.link}>
+        <a href={site.links.instagram} target="_blank" rel="noopener" className={styles.link}>
           instagram
         </a>
       </nav>
@@ -59,12 +61,14 @@ export function Footer() {
           <p>{`통신판매업신고 ${b.mailOrderNo}`}</p>
           <p>{`${b.postcode} ${b.address}`}</p>
           <p>{`${b.phone} · ${b.email}`}</p>
-          {/* TODO(client): hosting company. */}
-          <p>{`호스팅 제공자 ${b.hosting}`}</p>
+          <p>{`개인정보보호책임자 ${OFFICER} · 호스팅 제공자 ${b.hosting}`}</p>
+          {/* TODO(client): the escrow company (site.json business.escrow.provider) and its verify link. */}
+          <p>{b.escrow.footer}</p>
         </div>
         <div className="d-only">
           <p>{`${b.name} · 대표 ${b.ceo} · 사업자등록번호 ${b.regNo} · 통신판매업신고 ${b.mailOrderNo}`}</p>
-          <p>{`${b.postcode} ${b.address} · ${b.phone} · ${b.email} · 호스팅 제공자 ${b.hosting}`}</p>
+          <p>{`${b.postcode} ${b.address} · ${b.phone} · ${b.email}`}</p>
+          <p>{`개인정보보호책임자 ${OFFICER} · 호스팅 제공자 ${b.hosting} · ${b.escrow.footer}`}</p>
         </div>
         {legal}
         <p>{b.copyright}</p>

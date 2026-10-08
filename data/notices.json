@@ -1,5 +1,5 @@
 {
- "_todo": "[N]일(하자 신고 기한), 청약철회 표기, 'Store hours' · 'Paying by bank transfer' 본문, 2021 오픈 공지 본문이 남았어요. 날짜는 2026.10.01 형식이에요.",
+ "_todo": "'Store hours' 공지의 휴무 · 변경 안내이 남았어요. 반품 · 계좌는 2026.10.08 사장님 답변과 법정 반품 기한으로 채웠어요. 날짜는 2026.10.01 형식이에요. 2021 오픈 공지 본문은 archivin.kr 원문이에요.",
  "notices": [
   {
    "id": "shipping-returns",
@@ -18,27 +18,27 @@
     },
     {
      "type": "h",
-     "text": "exchanges and refunds"
+     "text": "returns"
     },
     {
      "type": "p",
-     "text": "Pieces can't be exchanged or refunded unless they're defective."
+     "text": "You can return a piece within 7 days of delivery. Return shipping is on you. Trying it on is fine, but pieces worn, washed or altered after delivery can't be returned. Every piece is one of one, so we refund instead of exchanging."
     },
     {
      "type": "p",
-     "text": "Vintage pieces show their age. Every product page lists the condition and shows the flaws in the photos. If marks or wear bother you, check those before you buy."
+     "text": "Vintage pieces show their age. Every product page lists the condition and shows the wear in the photos. Wear shown there isn't a defect, so check it before you buy."
     },
     {
      "type": "h",
-     "text": "if a piece is defective"
+     "text": "if there's a flaw we didn't mention, or it's the wrong piece"
     },
     {
      "type": "p",
-     "text": "Send photos to {email} within [N] days of delivery. We reply with the next steps."
+     "text": "Email photos to {email} within 30 days of finding it, and within 3 months of delivery. We pay the shipping."
     },
     {
      "type": "note-ko",
-     "text": "하자를 제외하고는 교환·환불이 어려워요. 구매 전에 상품 상태와 사진을 꼭 확인해 주세요."
+     "text": "받은 날부터 7일 안에 반품할 수 있어요(반품 배송비 고객 부담). 시착은 괜찮지만 착용·세탁·수선한 상품은 반품이 안 돼요. 설명에 없던 하자나 잘못 온 상품은 받은 날부터 3개월, 안 날부터 30일 안에 알려 주세요. 배송비는 저희가 내요. 구매 전에 상품 상태와 사진을 꼭 확인해 주세요."
     },
     {
      "type": "link",
@@ -69,7 +69,11 @@
     },
     {
      "type": "p",
-     "text": "16 Sinheung-ro 3-gil, Yongsan-gu, Seoul (Haebangchon)."
+     "text": "1F, 16 Sinheung-ro 3-gil, Yongsan-gu, Seoul (Haebangchon)."
+    },
+    {
+     "type": "p",
+     "text": "Hours can change with the season. Check Instagram (@archivin.kr) before you visit."
     },
     {
      "type": "p",
@@ -90,15 +94,15 @@
      "rows": [
       [
        "bank",
-       "[BANK]"
+       "신한은행"
       ],
       [
        "account",
-       "[ACCOUNT NO.]"
+       "110-419-205120"
       ],
       [
        "holder",
-       "[ACCOUNT HOLDER]"
+       "안인영"
       ]
      ]
     },

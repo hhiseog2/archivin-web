@@ -96,7 +96,8 @@ export type GuideSection = {
   id: string;
   title: string;
   titleKo: string;
-  kind: 'kv' | 'p' | 'contact';
+  /** 'kv+p' (v5.1 exchanges & returns): key-value rows, then paragraphs. */
+  kind: 'kv' | 'p' | 'kv+p' | 'contact';
   rows?: { label?: string; en: string; ko?: string }[];
   /** kind "p": paragraphs, each with its Korean line. */
   paragraphs?: { en: string; ko?: string }[];

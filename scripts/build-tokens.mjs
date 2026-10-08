@@ -17,10 +17,10 @@ for (const t of tokens.color.tokens) {
   else add(`color-${t.name}`, t.value);
 }
 lines.push('');
-// Adobe Fonts serves Neue Haas Grotesk Text as `neue-haas-grotesk-text`; put that first so the web kit wins once linked.
-const ADOBE_KIT_FAMILY = 'neue-haas-grotesk-text';
+// Self-hosted Neue Haas Grotesk Display Pro 55 Roman (public/fonts, @font-face in app/globals.css) comes first.
+const SITE_FAMILY = "'ARCHIVIN Neue Haas'";
 for (const [name, value] of Object.entries(tokens.type.families)) {
-  add(`font-${name}`, name === 'text' && !value.includes(ADOBE_KIT_FAMILY) ? `${ADOBE_KIT_FAMILY}, ${value}` : value);
+  add(`font-${name}`, name === 'text' && !value.includes(SITE_FAMILY) ? `${SITE_FAMILY}, ${value}` : value);
 }
 lines.push('');
 for (const group of tokens.type.groups) {

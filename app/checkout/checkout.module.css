@@ -292,3 +292,15 @@
     background: none;
   }
 }
+
+/* Escrow line under the payment methods (v5.1, README 8-7): 8px below, 12px ink-2, always shown. */
+.escrow {
+  margin: 8px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-ink-2);
+}
+.escrowKo {
+  display: block;
+  font-family: var(--font-kr);
+}

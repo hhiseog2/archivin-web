@@ -114,3 +114,11 @@
     padding: 96px 24px 0;
   }
 }
+
+/* v5.1: members only — note 8px under `sign in to pay`, 13px ink-2 (README 8-16). */
+.signInNote {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-ink-2);
+}

@@ -27,7 +27,7 @@ function splitAddress(address: string) {
 
 /**
  * One-page checkout (A21_Checkout · A21_DCheckout, README 8-7). Prices are for members, so checkout is for
- * signed-in members only (`guestCheckout: false`); a private payment link (`payCode`, 8-16) works signed out.
+ * signed-in members only (`guestCheckout: false`) — private payment links (`payCode`, 8-16) too since v5.1.
  * Nothing is pre-selected: no payment method, agreement unchecked. Pieces aren't held — not even here.
  */
 export function CheckoutView({ payCode }: { payCode?: string }) {
@@ -44,10 +44,10 @@ export function CheckoutView({ payCode }: { payCode?: string }) {
     ? { code: payCode, title: sample.title, amount: sample.amount as number | null, shippingIncluded: sample.shippingIncluded }
     : undefined;
 
-  const mustSignIn = ready && !session && !checkoutConfig.guestCheckout && !privatePay;
+  const mustSignIn = ready && !session && !checkoutConfig.guestCheckout;
   useEffect(() => {
-    if (mustSignIn) router.replace(signInHref('/checkout'));
-  }, [mustSignIn, router]);
+    if (mustSignIn) router.replace(signInHref(payCode ? `/pay/${encodeURIComponent(payCode)}` : '/checkout'));
+  }, [mustSignIn, payCode, router]);
 
   const [name, setName] = useState('');
   const [tel, setTel] = useState('');
@@ -365,6 +365,13 @@ export function CheckoutView({ payCode }: { payCode?: string }) {
                 choose how to pay.
               </p>
             )}
+            {/* v5.1 (README 8-7): cash payments must offer escrow. TODO(client): the escrow company name. */}
+            <p className={styles.escrow}>
+              {checkoutConfig.escrowNote.en}
+              <span lang="ko" className={styles.escrowKo}>
+                {checkoutConfig.escrowNote.ko}
+              </span>
+            </p>
           </section>
         </div>
 

@@ -24,7 +24,6 @@ const ABOUT: MenuLink[] = [
   { label: 'lookbook', href: '/lookbook' },
   { label: 'notice', href: '/notice' },
   { label: 'reviews', href: '/reviews' },
-  // TODO: Instagram URL (README 12) — data/site.json links.instagram.
   { label: 'instagram', href: site.links.instagram, external: true },
 ];
 
@@ -46,7 +45,7 @@ export function Menu({ open, onClose }: { open: boolean; onClose: () => void }) 
       {links.map((l, i) => (
         <li key={l.label} className={`${styles.li} ${l.gapBefore ? styles.gap : ''}`} style={rise(start + i * 0.03)}>
           {l.external ? (
-            <a href={l.href} className={styles.link} onClick={onClose}>
+            <a href={l.href} target="_blank" rel="noopener" className={styles.link} onClick={onClose}>
               {l.label}
             </a>
           ) : (

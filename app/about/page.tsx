@@ -56,7 +56,7 @@ export default function AboutPage() {
               </div>
               <div className={styles.row}>
                 <dt>hours</dt>
-                {/* TODO(client): confirm store hours (site.store.hours_note) */}
+                {/* Hours can change by season (site.store.hoursNote) — keep them easy to edit. */}
                 <dd>
                   {store.hours.map(([days, time], i) => (
                     <span key={days}>
@@ -64,17 +64,21 @@ export default function AboutPage() {
                       {days} {time}
                     </span>
                   ))}
+                  <span className={styles.hoursNote}>{store.hoursNote.en}</span>
+                  <span lang="ko" className={styles.hoursNoteKo}>
+                    {store.hoursNote.ko}
+                  </span>
                 </dd>
               </div>
               <div className={styles.row}>
                 <dt>map</dt>
-                {/* TODO(client): Naver / Kakao map URLs (site.links.naverMap · kakaoMap are '#') */}
+                {/* Address-search links until the store sends its own map links (site.json). */}
                 <dd className={styles.maps}>
-                  <a href={links.naverMap} className={styles.ext}>
+                  <a href={links.naverMap} target="_blank" rel="noopener" className={styles.ext}>
                     naver map
                     <ExtArrow />
                   </a>
-                  <a href={links.kakaoMap} className={styles.ext}>
+                  <a href={links.kakaoMap} target="_blank" rel="noopener" className={styles.ext}>
                     kakao map
                     <ExtArrow />
                   </a>
@@ -106,10 +110,9 @@ export default function AboutPage() {
               </div>
               <div className={styles.row}>
                 <dt>instagram</dt>
-                {/* TODO(client): Instagram handle and URL (site.links.instagram is '#') */}
                 <dd>
-                  <a href={links.instagram} className={styles.ext}>
-                    {links.instagramHandle.toLowerCase()}
+                  <a href={links.instagram} target="_blank" rel="noopener" className={styles.ext}>
+                    {links.instagramHandle}
                     <ExtArrow />
                   </a>
                 </dd>
