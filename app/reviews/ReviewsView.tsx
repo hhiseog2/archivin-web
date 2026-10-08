@@ -1,136 +1,131 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
-import { StarIcon } from '@/components/Icons';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { signInHref, useSignedIn } from '@/lib/auth';
 import { useMyReviews } from '@/lib/cart';
-import { reviews as baseReviews, type Review } from '@/lib/catalog';
-import { ReviewForm } from './ReviewForm';
-import ui from '@/components/ui.module.css';
+import { reviews, type Review } from '@/lib/catalog';
+import { formatDate, maskName } from '@/lib/format';
+import { Star } from './Star';
 import styles from './reviews.module.css';
 
-type Tab = 'All' | 'With photos';
+const TABS = ['all', 'with photos'] as const;
+type Tab = (typeof TABS)[number];
 
-export function ReviewsView({ initialWriting = false, justPosted = false }: { initialWriting?: boolean; justPosted?: boolean }) {
+/**
+ * reviews (README 8-12, A21_Reviews · A21_DReviews). Reviews written on this device come first, then
+ * data/reviews.json (placeholder text until the real board is imported — never invent review text).
+ * TODO(backend): load reviews from the server.
+ */
+export function ReviewsView() {
   const mine = useMyReviews();
-  const [tab, setTab] = useState<Tab>('All');
-  const [writing, setWriting] = useState(initialWriting);
-  const [posted, setPosted] = useState(justPosted);
-  const writeBtn = useRef<HTMLButtonElement>(null);
-  const formWrap = useRef<HTMLDivElement>(null);
+  const signedIn = useSignedIn();
+  const [tab, setTab] = useState<Tab>('all');
+  const [open, setOpen] = useState<string[]>([]);
 
-  useEffect(() => {
-    if (writing && !initialWriting) formWrap.current?.querySelector<HTMLElement>('select')?.focus();
-  }, [writing, initialWriting]);
+  const all = useMemo(() => [...mine, ...reviews.filter((r) => !mine.some((m) => m.id === r.id))], [mine]);
+  const list = tab === 'with photos' ? all.filter((r) => r.photo) : all;
 
-  const all: Review[] = [...mine, ...baseReviews];
-  const list = tab === 'With photos' ? all.filter((r) => r.photo) : all;
+  // Only buyers write reviews (prototype: signed in). TODO(backend): check the member has a delivered order.
+  const writeHref = signedIn ? '/reviews/write' : signInHref('/reviews/write');
 
   return (
     <main className={styles.main}>
-      <div className={styles.side}>
-        <div className={styles.headRow}>
-          <div>
-            <h1 className={ui.pageTitle}>Reviews</h1>
-            <p className={ui.pageIntro}>From people who bought a piece.</p>
-          </div>
-          <Link href="/reviews/write" className={`m-only ${styles.writeLink}`}>
-            Write a review
-          </Link>
+      <div className={styles.top}>
+        <div>
+          <h1 className={styles.title}>reviews</h1>
+          <p className={styles.intro}>from people who bought a piece.</p>
         </div>
-        <div role="group" aria-label="Show" className={styles.tabs}>
-          {(['All', 'With photos'] as Tab[]).map((t) => (
-            <button key={t} type="button" className={ui.chip} aria-pressed={tab === t} onClick={() => setTab(t)}>
-              {t}
-            </button>
-          ))}
-        </div>
-        <button
-          ref={writeBtn}
-          type="button"
-          className={`d-only ${styles.writeBtn}`}
-          aria-expanded={writing}
-          aria-controls="rv-form"
-          onClick={() => {
-            setWriting(!writing);
-            setPosted(false);
-          }}
-        >
-          {writing ? 'Close' : 'Write a review'}
-        </button>
+        <Link href={writeHref} className={styles.write}>
+          write a review
+        </Link>
       </div>
 
-      <div className={styles.content}>
-        <div id="rv-form" ref={formWrap} className="d-only">
-          {writing && (
-            <section aria-labelledby="rvd-h" className={styles.formSection}>
-              <ReviewForm
-                variant="inline"
-                idPrefix="rvd"
-                onPosted={() => {
-                  setWriting(false);
-                  setPosted(true);
-                  setTab('All');
-                  writeBtn.current?.focus();
-                }}
-                onCancel={() => {
-                  setWriting(false);
-                  writeBtn.current?.focus();
-                }}
-              />
-            </section>
-          )}
-        </div>
+      <div role="group" aria-label="Show" className={styles.tabs}>
+        {TABS.map((t) => (
+          <button
+            key={t}
+            type="button"
+            aria-pressed={tab === t}
+            className={`${styles.tab} ${tab === t ? styles.tabOn : ''}`}
+            onClick={() => setTab(t)}
+          >
+            <span className={styles.ulbl}>{t}</span>
+          </button>
+        ))}
+      </div>
 
-        <div role="status">{posted && <p className={`${ui.status} ${styles.posted}`}>Your review is posted.</p>}</div>
-
-        <div className={styles.list}>
-          {list.map((r) => (
-            <ReviewItem key={r.id} r={r} />
-          ))}
-          {list.length === 0 && <p className={styles.none}>No reviews with photos yet.</p>}
-        </div>
-
+      <div className={styles.list}>
+        {list.map((r) => (
+          <ReviewItem
+            key={r.id}
+            review={r}
+            expanded={open.includes(r.id)}
+            onToggle={() => setOpen((o) => (o.includes(r.id) ? o.filter((x) => x !== r.id) : [...o, r.id]))}
+          />
+        ))}
       </div>
     </main>
   );
 }
 
-function ReviewItem({ r }: { r: Review }) {
+function ReviewItem({ review: r, expanded, onToggle }: { review: Review; expanded: boolean; onToggle: () => void }) {
+  const product = r.productSize ? `${r.productName} · ${r.productSize}` : r.productName;
   const rating = r.rating ?? 0;
+
+  // `more` shows when the body is cut at three lines (measured; the design's 90-character rule before mount).
+  const bodyRef = useRef<HTMLParagraphElement>(null);
+  const [cut, setCut] = useState(r.body.length > 90);
+  useEffect(() => {
+    const el = bodyRef.current;
+    if (!el) return;
+    const check = () => {
+      if (el.classList.contains(styles.clamp3)) setCut(el.scrollHeight > el.clientHeight + 1);
+    };
+    check();
+    const ro = new ResizeObserver(check);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
   return (
-    <article className={styles.item}>
-      <Link href={r.productId ? `/product/${r.productId}` : '/shop'} className={styles.product}>
-        <span aria-hidden="true" className={styles.productThumb} />
-        <span className={styles.productName}>{r.productName}</span>
-      </Link>
-      <div className={styles.ratingRow}>
-        <span aria-hidden="true" className={styles.miniStars}>
-          {[0, 1, 2, 3, 4].map((i) => (
-            <StarIcon key={i} filled={i < rating} />
-          ))}
-        </span>
-        <span className={styles.ratingSmall}>
-          <span className="visually-hidden">Rating: </span>
-          {r.rating == null ? '[N] / 5' : `${r.rating} / 5`}
-        </span>
-      </div>
-      {r.title && (
-        <h2 lang={r.lang} className={`${styles.itemTitle} ${r.lang === 'ko' ? styles.ko : ''}`}>
-          {r.title}
-        </h2>
-      )}
-      <p className={styles.itemBody}>
-        {r.body}
-      </p>
-      {r.photo && (
-        <div className={`${ui.well} ${styles.itemPhoto}`}>
-          <span aria-hidden="true">[PHOTO]</span>
+    <article aria-label={`review of ${product}`} className={styles.review}>
+      {r.photo ? (
+        // TODO(backend): buyer photos (up to 5). Grey placeholder until real photos exist (README 12).
+        <div role="img" aria-label="buyer photo" className={styles.photo}>
+          [buyer
+          <br />
+          photo]
         </div>
-      )}
-      <p className={styles.itemMeta}>
-        {r.author} · {r.date}
-      </p>
+      ) : null}
+      <div className={styles.text}>
+        <div className={styles.line}>
+          <span aria-hidden="true" className={styles.stars}>
+            {[1, 2, 3, 4, 5].map((n) => (
+              <Star key={n} size={12} strokeWidth={1.6} stroke="var(--color-ink)" fill={n <= rating ? 'var(--color-ink)' : 'none'} />
+            ))}
+          </span>
+          {r.rating != null ? <span className="visually-hidden">{r.rating} out of 5</span> : null}
+          {r.productId ? (
+            <Link href={`/product/${r.productId}`} className={styles.product}>
+              {product}
+            </Link>
+          ) : (
+            <span className={styles.product}>{product}</span>
+          )}
+        </div>
+        <p ref={bodyRef} lang={r.lang} className={`${styles.body} ${expanded ? '' : styles.clamp3}`}>
+          {r.body}
+        </p>
+        {expanded || cut ? (
+          <button type="button" aria-expanded={expanded} className={styles.more} onClick={onToggle}>
+            {expanded ? 'less' : 'more'}
+          </button>
+        ) : null}
+        <p className={styles.meta}>
+          {maskName(r.author)} · {formatDate(r.date)}
+        </p>
+      </div>
     </article>
   );
 }

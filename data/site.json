@@ -1,10 +1,29 @@
 {
-  "_todo": "instagram.handle / url, naverMap / kakaoMap URLs, terms / privacy URLs are still blank.",
+  "_todo": "instagram 주소, 지도 URL, 매장 사진, 영업시간 확인, 호스팅 업체, 개인정보 보호책임자, 약관 · 개인정보처리방침 확정본이 남았어요. 푸터 주소(사업자 등록 주소, 지번)와 매장 주소(도로명)가 같은 곳인지 확인해 주세요.",
   "store": {
     "addressEn": "16 Sinheung-ro 3-gil, Yongsan-gu, Seoul",
     "addressKo": "서울 용산구 신흥로3길 16 (해방촌)",
-    "hours": [["Mon–Sat", "2–8 PM"], ["Sunday", "2–7 PM"]],
-    "hoursLine": "Mon–Sat 2–8 PM · Sun 2–7 PM"
+    "hours": [
+      [
+        "mon–sat",
+        "2–8 pm"
+      ],
+      [
+        "sun",
+        "2–7 pm"
+      ]
+    ],
+    "hoursLine": "mon–sat 2–8 pm · sun 2–7 pm",
+    "hours_note": "1차 시안에서 옮긴 값이에요. 클라이언트 확인 필요.",
+    "photo": null
+  },
+  "about": {
+    "statement": "archivin against restocks.",
+    "en": [
+      "ARCHIVIN is a vintage shop in Haebangchon, Seoul. We carry band tees, tour merch, film and skate graphics, and designer pieces from the 1970s to the 2010s.",
+      "Every piece is one of one. When it sells, it goes to the archive."
+    ],
+    "ko": "해방촌의 빈티지 숍 아카이빈이에요. 1970년대부터 2010년대까지의 밴드 티셔츠와 디자이너 피스를 한 점씩만 소개해요."
   },
   "contact": {
     "email": "eatery01@naver.com",
@@ -12,19 +31,41 @@
     "phoneHref": "tel:01020704268"
   },
   "business": {
+    "_note": "archivin.kr 푸터에 적힌 그대로(2026.10.08). 전자상거래법 표시 항목이에요.",
     "name": "아카이빈",
     "ceo": "안인영",
     "regNo": "746-39-00917",
     "mailOrderNo": "2021서울강남01322",
-    "address": "서울 용산구 신흥로3길 16"
+    "postcode": "04338",
+    "address": "서울 용산구 용산동2가 44-25 1층",
+    "phone": "010-2070-4268",
+    "email": "eatery01@naver.com",
+    "bizInfoUrl": "https://www.ftc.go.kr/bizCommPop.do?wrkr_no=7463900917",
+    "hosting": "[호스팅 업체]",
+    "privacyOfficer": "[이름] · eatery01@naver.com · 010-2070-4268",
+    "copyright": "© 아카이빈"
   },
   "links": {
     "instagramHandle": "[@HANDLE]",
     "instagram": "#",
+    "facebook": null,
     "naverMap": "#",
     "kakaoMap": "#",
-    "terms": "#",
-    "privacy": "#"
+    "guide": "/guide",
+    "terms": "/terms",
+    "privacy": "/privacy",
+    "_note": "지금 사이트의 #INSTAGRAM · #FACEBOOK은 둘 다 링크가 비어 있어요('#'). facebook은 새 디자인에서 뺐어요."
   },
-  "shippingFee": 3000
+  "shippingFee": 3000,
+  "pricing": {
+    "visibility": "members",
+    "_note": "archivin.kr: 판매가 회원공개(비회원에게 가격만 숨기고 구매는 막지 않아요). 새 디자인은 가격을 모르고 결제하지 않도록 비회원은 담을 수 없게 했어요 — 클라이언트 확인. 'everyone'으로 바꾸면 비회원도 가격을 보고 담을 수 있어요(checkout.json guestCheckout도 함께).",
+    "signedOutNote": "prices are shown to members.",
+    "signedOutButton": "sign in to see the price",
+    "signedOutHelp": "new here? you can join on the next step."
+  },
+  "productQuestions": {
+    "_note": "지금 사이트는 상품마다 Q&A 게시판이 있지만 글이 없어요. 새 디자인은 상품 정보 끝 'ask about this piece' 메일 링크(제목에 상품 이름)로 바꿨어요.",
+    "mailto": "mailto:{email}?subject={productName}"
+  }
 }

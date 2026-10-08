@@ -1,32 +1,112 @@
 {
-  "_note": "시안용 목업이에요. 이름·사진·사이즈는 archivin.kr 실제 상품, 가격은 자리표시(null → '₩ 000,000'). 배열 순서가 'new in' 순서예요. 상세 정보(사진 5장, 실측, 상태, 디테일)는 3599(80's Iggy Pop)만 있어요. v4에서 목록 사진을 종류별로 크기·중심을 맞춰 다시 잘랐어요(파일 이름은 그대로). hoverImage는 카드에 마우스를 올리면 바뀌는 다른 각도 사진이에요.",
+  "_note": "시안용 목업이에요. 이름 · 사이즈 · 실측 · 디테일은 archivin.kr 실제 상품(2026.10.08 기준), 사진은 그 상품 사진이에요. 가격은 비회원에게 보이지 않아서(판매가 회원공개) 자리표시예요(null → '₩ 000,000'). 배열 순서는 시안용이에요(실제 new in은 등록 최신순 = 지금 사이트 상품 번호 큰 순). sizeLabel = 추천 착용 사이즈(카드 · 장바구니 · bag 미리보기에 보이는 값). 거르는 값: 옷은 sizes(S~XXL), 하의는 waist(인치), 신발은 fitMm. tagSize = 옷에 달린 태그 사이즈. 상세 가격 줄에는 fits 다음에, sizeLabel과 다를 때만 '· tag M'으로 붙여요. sub = 하위 카테고리, model = 리바이스 모델(shop 하위 줄). cafe24 = 지금 사이트의 상품 번호 · 카테고리. measurements는 단면 cm(상의: 어깨 · 가슴 · 팔 · 총장, 하의: 허리 · 밑위 · 허벅지 · 밑단 · 총장). detailsKo는 지금 사이트 디테일 줄을 그대로 옮긴 거예요.",
   "totals": {
-    "_note": "화면 표시용 가짜 숫자. 필터 없는 all 보기에서만 씀.",
-    "available": 127,
-    "includingSold": 300
+    "_note": "필터 없는 all 보기의 load more 옆 숫자. archivin.kr 2026.10.08 기준(판매 중 338 중 '개인 결제창' 2개 포함). 실제로는 서버에서 세요.",
+    "available": 338,
+    "includingSold": 2713,
+    "asOf": "2026.10.08"
   },
   "shippingFee": 3000,
   "currency": "KRW",
   "categories": [
     {
       "id": "outer",
-      "label": "outer"
+      "label": "outer",
+      "cafe24": "Outer(29)",
+      "subs": []
     },
     {
       "id": "tops",
-      "label": "tops"
+      "label": "tops",
+      "cafe24": "Tops(25)",
+      "subs": [
+        {
+          "id": "tees",
+          "label": "tees",
+          "cafe24": "Tees>Short(71)"
+        },
+        {
+          "id": "long sleeves",
+          "label": "long sleeves",
+          "cafe24": "Tees>Long(72)"
+        },
+        {
+          "id": "sweatshirts",
+          "label": "sweatshirts",
+          "cafe24": "Sweatshirt(55)"
+        },
+        {
+          "id": "hoodies",
+          "label": "hoodies",
+          "cafe24": "Hoodie(56)"
+        },
+        {
+          "id": "shirts",
+          "label": "shirts",
+          "cafe24": "Shirt(66)"
+        },
+        {
+          "id": "knits",
+          "label": "knits",
+          "cafe24": "Knit(65)"
+        },
+        {
+          "id": "fleece",
+          "label": "fleece",
+          "cafe24": "Fleece(67)"
+        },
+        {
+          "id": "jerseys",
+          "label": "jerseys",
+          "cafe24": "Jersey(74)"
+        }
+      ]
     },
     {
       "id": "bottoms",
-      "label": "bottoms"
+      "label": "bottoms",
+      "cafe24": "Bottoms(27)",
+      "subs": [
+        {
+          "id": "pants",
+          "label": "pants",
+          "cafe24": "Long(34)"
+        },
+        {
+          "id": "shorts",
+          "label": "shorts",
+          "cafe24": "Short(35)"
+        }
+      ]
     },
     {
       "id": "shoes",
-      "label": "shoes"
+      "label": "shoes",
+      "cafe24": "Acc>Shoes(84) + Vans & Converse(81)",
+      "subs": [],
+      "_note": "지금 사이트에는 shoes가 따로 없고 Acc>Shoes와 Vans & Converse에 나뉘어 있어요. 새 사이트는 shoes 하나로 모아요."
     },
     {
       "id": "accessories",
-      "label": "accessories"
+      "label": "accessories",
+      "cafe24": "Acc(31)",
+      "subs": [
+        {
+          "id": "hats",
+          "label": "hats",
+          "cafe24": "Hat(45)"
+        },
+        {
+          "id": "bags",
+          "label": "bags",
+          "cafe24": "Bag(83)"
+        },
+        {
+          "id": "others",
+          "label": "others",
+          "cafe24": "etc..(85)"
+        }
+      ]
     }
   ],
   "brandShortcuts": [
@@ -34,18 +114,34 @@
       "label": "levi's",
       "brands": [
         "Levi's"
-      ]
+      ],
+      "cafe24": "Levis(46)",
+      "subsBy": "model",
+      "subs": [
+        "501",
+        "505",
+        "517",
+        "550",
+        "others"
+      ],
+      "_note": "others = 501 · 505 · 517 · 550이 아닌 모델(509 · 540 · 545 · 663 · SilverTab …)"
     },
     {
       "label": "vans & converse",
       "brands": [
         "Vans",
         "Converse"
+      ],
+      "cafe24": "Vans & Converse(81)",
+      "subsBy": "brand",
+      "subs": [
+        "vans",
+        "converse"
       ]
     }
   ],
   "filters": {
-    "_note": "v3 화면에서 쓰는 건 sort 3개와 include sold 하나뿐이에요. brand · size · era 필터 화면은 없앴어요(상품 데이터의 brand · sizes · era 값은 검색과 나중을 위해 그대로 둬요).",
+    "_note": "v5 shop 위 줄: all ▾ · search · size · sort. sort 3개와 include sold는 v4와 같아요. size는 추천 착용 사이즈(fit) 기준이에요(태그 사이즈 아님).",
     "sort": [
       {
         "id": "new",
@@ -63,46 +159,128 @@
     "includeSold": {
       "label": "include sold",
       "default": false
+    },
+    "size": {
+      "_note": "옷은 글자(products[].sizes), 하의는 허리 인치(products[].waist), 신발은 mm(products[].fitMm). 여러 개를 고를 수 있어요. 한 묶음에서 아무것도 안 골랐으면 그 종류는 걸러지지 않아요(예: l만 고르면 하의 · 신발 · 액세서리는 그대로). 액세서리는 사이즈로 걸러지지 않아요.",
+      "letters": [
+        "s",
+        "m",
+        "l",
+        "xl",
+        "xxl"
+      ],
+      "waistInch": [
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        38
+      ],
+      "waist_note": "archivin.kr 하의 판매분이 28~38인치(상품명 앞 '38)'). 37은 거의 없어서 뺐어요.",
+      "shoesMm": [
+        250,
+        255,
+        260,
+        265,
+        270,
+        275,
+        280,
+        285,
+        290
+      ],
+      "groupsByView": {
+        "all": [
+          "letters",
+          "waistInch",
+          "shoesMm"
+        ],
+        "outer": [
+          "letters"
+        ],
+        "tops": [
+          "letters"
+        ],
+        "bottoms": [
+          "waistInch"
+        ],
+        "shoes": [
+          "shoesMm"
+        ],
+        "accessories": [],
+        "levi's": [
+          "waistInch"
+        ],
+        "vans & converse": [
+          "shoesMm"
+        ]
+      },
+      "query": "?size=l,xl&waist=32,34&shoe=270 (고른 순서와 상관없이 작은 값부터)",
+      "remember": "기기에 기억해요(localStorage 'archivin:size' = {\"size\":[\"l\",\"xl\"],\"waist\":[32],\"shoe\":[270]}). /shop에 쿼리가 없으면 기억한 값을 적용하고 URL에도 붙여요.",
+      "buttonLabel": "아무것도 없으면 size. 고르면 'size · l, w32', 3개부터 'size · l, w32 +1'(지금 보기에 해당하는 값만 셈, 허리는 앞에 w)."
+    },
+    "subcategory": {
+      "_note": "카테고리 · 브랜드 바로가기 아래 한 줄. 첫 칸 all(이 카테고리 전체). 하나만 고를 수 있어요. 카테고리를 바꾸면 all로 돌아가요.",
+      "query": "?cat=tops&sub=tees  ·  ?brand=levis&sub=517  ·  ?brand=vans,converse&sub=vans"
+    },
+    "priceVisibility": {
+      "_note": "archivin.kr은 판매가를 회원에게만 보여 줘요. 비회원: 카드 둘째 줄은 사이즈만, 목록 위 'prices are shown to members. sign in' 한 줄, 정렬 price 두 개는 그대로 둬요(서버가 정렬).",
+      "value": "members"
     }
   },
-  "introCategories": [
-    "band",
-    "designer",
-    "rap",
-    "skate",
-    "archive"
-  ],
   "designSampleBag": {
-    "_note": "디자인 확인용 장바구니 예시예요(실제로는 빈 상태로 시작). 장바구니 화면과 bag 미리보기가 이 순서로 보여 주고, shop 카드의 in bag 표시는 이 중 판매 중인 3599 · 3604에 붙어요.",
+    "_note": "디자인 확인용 장바구니 예시예요(실제로는 빈 상태로 시작, 비회원은 담을 수 없어요). 장바구니 화면과 bag 미리보기가 이 순서로 보여 주고, shop 카드의 in bag 표시는 이 중 판매 중인 3608 · 2886에 붙어요.",
     "ids": [
-      "3599",
-      "3604",
+      "3608",
+      "2886",
       "3597"
     ]
   },
   "products": [
     {
-      "id": "3604",
-      "name": "00's Independert Truck",
+      "id": "2886",
+      "name": "00's Independent Truck",
       "category": "outer",
       "brand": null,
       "era": "00s",
-      "sizeLabel": "L–XL",
+      "sizeLabel": "L",
       "sizes": [
-        "L",
-        "XL"
+        "L"
       ],
+      "tagSize": null,
       "price": null,
       "sold": false,
       "images": [
         {
-          "src": "/products/3604_independert-truck.jpg",
-          "alt": "00's Independert Truck"
+          "src": "/products/2886_independent-truck.jpg",
+          "alt": "00's Independent Truck"
         }
       ],
       "hoverImage": {
-        "src": "/products/3604_independert-truck_alt.jpg",
+        "src": "/products/2886_independent-truck_alt.jpg",
         "kind": "back / other angle"
+      },
+      "sub": null,
+      "measurements": {
+        "unit": "cm, laid flat",
+        "shoulder": 54,
+        "chest": 60,
+        "sleeve": 64,
+        "length": 70
+      },
+      "detailsKo": [
+        "90년대 OG 제품을 2000년대 초에 리프로덕트한 제품."
+      ],
+      "cafe24": {
+        "productNo": "2886",
+        "category": "Outer",
+        "sizeLine": "L",
+        "listName": "00's Independent Truck",
+        "was": "3604 '00's Independert Truck' (같은 상품, 지금은 2886)"
       }
     },
     {
@@ -116,6 +294,7 @@
         "M",
         "L"
       ],
+      "tagSize": null,
       "price": null,
       "sold": false,
       "images": [
@@ -127,6 +306,24 @@
       "hoverImage": {
         "src": "/products/3603_chanel-sport_alt.jpg",
         "kind": "back / other angle"
+      },
+      "sub": null,
+      "measurements": {
+        "unit": "cm, laid flat",
+        "shoulder": 42,
+        "chest": 50,
+        "sleeve": 66,
+        "length": 57
+      },
+      "detailsKo": [
+        "실사이즈 M 정도 되며 슬림 L까지 착용 가능.",
+        "안감은 솜 필링, 소매는 울, 샤넬 로고는 양가죽."
+      ],
+      "cafe24": {
+        "productNo": "3603",
+        "category": "Outer",
+        "sizeLine": "M-L",
+        "listName": "00's Chanel Sport"
       }
     },
     {
@@ -139,6 +336,7 @@
       "sizes": [
         "L"
       ],
+      "tagSize": null,
       "price": null,
       "sold": false,
       "images": [
@@ -150,11 +348,30 @@
       "hoverImage": {
         "src": "/products/3602_john-varvatos-06ss_alt.jpg",
         "kind": "back / other angle"
+      },
+      "sub": null,
+      "measurements": {
+        "unit": "cm, laid flat",
+        "shoulder": 47,
+        "chest": 53,
+        "sleeve": 67,
+        "length": 69
+      },
+      "detailsKo": [
+        "45개 중 24번째 제품.",
+        "카라, 소매 부분이 린넨 코튼 소재로 되어있습니다.",
+        "양가죽(스웨이드) 위로 베이지 글렌체크 패턴이 들어가 있습니다."
+      ],
+      "cafe24": {
+        "productNo": "3602",
+        "category": "Outer",
+        "sizeLine": "L",
+        "listName": "06S/S John Varvatos"
       }
     },
     {
-      "id": "3599",
-      "name": "80's Iggy Pop",
+      "id": "3608",
+      "name": "80's Iggy Pop (Lust For Life)",
       "category": "tops",
       "brand": null,
       "era": "80s",
@@ -162,32 +379,33 @@
       "sizes": [
         "L"
       ],
+      "tagSize": "L",
       "price": null,
       "sold": false,
       "images": [
         {
-          "src": "/products/3599_iggy-pop-80s.jpg",
-          "alt": "80's Iggy Pop, front"
+          "src": "/products/3608_iggy-pop-lust-for-life.jpg",
+          "alt": "80's Iggy Pop (Lust For Life), front"
         },
         {
-          "src": "/products/3599_iggy-pop-80s_print.jpg",
+          "src": "/products/3608_iggy-pop-lust-for-life_print.jpg",
           "alt": "Print close-up"
         },
         {
-          "src": "/products/3599_iggy-pop-80s_label.jpg",
+          "src": "/products/3608_iggy-pop-lust-for-life_label.jpg",
           "alt": "Neck label: Screen Stars Best, size L, 50% cotton 50% polyester"
         },
         {
-          "src": "/products/3599_iggy-pop-80s_spot.jpg",
+          "src": "/products/3608_iggy-pop-lust-for-life_spot.jpg",
           "alt": "Small spot below the collar"
         },
         {
-          "src": "/products/3599_iggy-pop-80s_folded.jpg",
+          "src": "/products/3608_iggy-pop-lust-for-life_folded.jpg",
           "alt": "Print and fabric, folded"
         }
       ],
       "hoverImage": {
-        "src": "/products/3599_iggy-pop-80s_print.jpg",
+        "src": "/products/3608_iggy-pop-lust-for-life_print.jpg",
         "kind": "print close-up"
       },
       "measurements": {
@@ -205,7 +423,19 @@
           "imageIndex": 3
         }
       },
-      "details": "1980s · 50% cotton, 50% polyester · Screen Stars Best"
+      "details": "1980s · 50% cotton, 50% polyester · Screen Stars Best",
+      "sub": "tees",
+      "detailsKo": [
+        "싱글스티치.",
+        "아주 얇아진 50/50 원단."
+      ],
+      "cafe24": {
+        "productNo": "3608",
+        "category": "Tops>Tees>Short",
+        "sizeLine": "L",
+        "listName": "80's Iggy Pop (Lust For Life)",
+        "was": "3599 (같은 상품을 다시 올림)"
+      }
     },
     {
       "id": "3598",
@@ -217,6 +447,7 @@
       "sizes": [
         "XL"
       ],
+      "tagSize": null,
       "price": null,
       "sold": false,
       "images": [
@@ -228,6 +459,24 @@
       "hoverImage": {
         "src": "/products/3598_iggy-pop-hyundai_alt.jpg",
         "kind": "back / other angle"
+      },
+      "sub": "tees",
+      "measurements": {
+        "unit": "cm, laid flat",
+        "shoulder": 57,
+        "chest": 58,
+        "sleeve": 20,
+        "length": 72
+      },
+      "detailsKo": [
+        "싱글스티치.",
+        "투어 스태프 전용 티셔츠."
+      ],
+      "cafe24": {
+        "productNo": "3598",
+        "category": "Tops>Tees>Short",
+        "sizeLine": "XL",
+        "listName": "90's Iggy Pop (Hyundai Sponsor)"
       }
     },
     {
@@ -241,6 +490,7 @@
         "M",
         "L"
       ],
+      "tagSize": "M",
       "price": null,
       "sold": false,
       "images": [
@@ -252,6 +502,24 @@
       "hoverImage": {
         "src": "/products/3594_ghost-in-the-shell_alt.jpg",
         "kind": "back / other angle"
+      },
+      "sub": "sweatshirts",
+      "measurements": {
+        "unit": "cm, laid flat",
+        "shoulder": 55,
+        "chest": 56,
+        "sleeve": 58,
+        "length": 60
+      },
+      "detailsKo": [
+        "화이트 멜란지 컬러.",
+        "표기사이즈 M이지만 L까지 착용 가능."
+      ],
+      "cafe24": {
+        "productNo": "3594",
+        "category": "Tops>Sweatshirt",
+        "sizeLine": "M-L",
+        "listName": "Ghost In The Shell (1995)"
       }
     },
     {
@@ -265,6 +533,7 @@
         "M",
         "L"
       ],
+      "tagSize": null,
       "price": null,
       "sold": false,
       "images": [
@@ -276,6 +545,25 @@
       "hoverImage": {
         "src": "/products/3593_pet-shop-boys_alt.jpg",
         "kind": "back / other angle"
+      },
+      "sub": "tees",
+      "measurements": {
+        "unit": "cm, laid flat",
+        "shoulder": 48,
+        "chest": 50,
+        "sleeve": 22,
+        "length": 71
+      },
+      "detailsKo": [
+        "튜블러 x.",
+        "싱글스티치.",
+        "1989 투어 머천."
+      ],
+      "cafe24": {
+        "productNo": "3593",
+        "category": "Tops>Tees>Short",
+        "sizeLine": "M-L",
+        "listName": "80's Pet Shop Boys"
       }
     },
     {
@@ -289,6 +577,7 @@
         "L",
         "XL"
       ],
+      "tagSize": null,
       "price": null,
       "sold": false,
       "images": [
@@ -300,6 +589,25 @@
       "hoverImage": {
         "src": "/products/3586_pink-floyd_alt.jpg",
         "kind": "back / other angle"
+      },
+      "sub": null,
+      "measurements": {
+        "unit": "cm, laid flat",
+        "shoulder": 57,
+        "chest": 67,
+        "sleeve": 64,
+        "length": 68
+      },
+      "detailsKo": [
+        "'The Wall' 앨범 커버 아트워크 패치.",
+        "자켓류 투어 머천으로 알려진 'Rock Embassy' 베이스.",
+        "안감이 솜 필링으로 가을, 초겨울까지 착용 가능한 두께감."
+      ],
+      "cafe24": {
+        "productNo": "3586",
+        "category": "Outer",
+        "sizeLine": "L-XL",
+        "listName": "90's Pink Floyd"
       }
     },
     {
@@ -312,6 +620,7 @@
       "sizes": [
         "XL"
       ],
+      "tagSize": null,
       "price": null,
       "sold": false,
       "images": [
@@ -323,6 +632,25 @@
       "hoverImage": {
         "src": "/products/3584_house-of-pain_alt.jpg",
         "kind": "back / other angle"
+      },
+      "sub": null,
+      "measurements": {
+        "unit": "cm, laid flat",
+        "shoulder": 53,
+        "chest": 65,
+        "sleeve": 64,
+        "length": 64
+      },
+      "detailsKo": [
+        "1993년 'Liquor Store World Tour' 봄버.",
+        "자켓류 투어 머천으로 알려진 'Rock Embassy' 베이스.",
+        "안감이 솜 필링으로 가을, 초겨울까지도 착용 가능한 두께감."
+      ],
+      "cafe24": {
+        "productNo": "3584",
+        "category": "Outer",
+        "sizeLine": "XL",
+        "listName": "90's House Of Pain (Liquor Store 1993 World Tour)"
       }
     },
     {
@@ -333,6 +661,8 @@
       "era": "90s",
       "sizeLabel": "US 9 (270)",
       "sizes": [],
+      "fitMm": 270,
+      "tagSize": null,
       "price": null,
       "sold": false,
       "images": [
@@ -344,6 +674,19 @@
       "hoverImage": {
         "src": "/products/3574_converse_alt.jpg",
         "kind": "back / other angle"
+      },
+      "sub": null,
+      "detailsKo": [
+        "보라색.",
+        "90's Made In USA.",
+        "아웃솔 갈림 없이 컨디션 좋습니다.",
+        "오른발 변색 및 앞코 조금의 갈라짐."
+      ],
+      "cafe24": {
+        "productNo": "3574",
+        "category": "Vans & Converse>Converse",
+        "sizeLine": "9(270)",
+        "listName": "270)90's Converse"
       }
     },
     {
@@ -354,6 +697,7 @@
       "era": "90s",
       "sizeLabel": "W38 L30",
       "sizes": [],
+      "tagSize": null,
       "price": null,
       "sold": false,
       "images": [
@@ -365,6 +709,28 @@
       "hoverImage": {
         "src": "/products/3542_levis-517_alt.jpg",
         "kind": "back / other angle"
+      },
+      "waist": 38,
+      "model": "517",
+      "sub": "pants",
+      "measurements": {
+        "unit": "cm, laid flat",
+        "waist": 48,
+        "rise": 33,
+        "thigh": 32,
+        "hem": 25,
+        "length": 102
+      },
+      "detailsKo": [
+        "오렌지탭.",
+        "90's Made In USA.",
+        "밑단 컷팅 되어있습니다."
+      ],
+      "cafe24": {
+        "productNo": "3542",
+        "category": "Levis>517",
+        "sizeLine": "38x30",
+        "listName": "38)90's Levis 517"
       }
     },
     {
@@ -374,9 +740,8 @@
       "brand": "Chrome Hearts",
       "era": "90s",
       "sizeLabel": "one size",
-      "sizes": [
-        "One size"
-      ],
+      "sizes": [],
+      "tagSize": null,
       "price": null,
       "sold": false,
       "images": [
@@ -388,6 +753,17 @@
       "hoverImage": {
         "src": "/products/3491_chrome-hearts-cap_alt.jpg",
         "kind": "back / other angle"
+      },
+      "sub": "hats",
+      "detailsKo": [
+        "데님 소재의 5패널 캡.",
+        "스냅 끝 부분에 데미지. (사진 참조)"
+      ],
+      "cafe24": {
+        "productNo": "3491",
+        "category": "Acc>Hat",
+        "sizeLine": "OS",
+        "listName": "90's Chrome Hearts"
       }
     },
     {
@@ -401,6 +777,7 @@
         "M",
         "L"
       ],
+      "tagSize": "XL",
       "price": null,
       "sold": true,
       "images": [
@@ -412,6 +789,24 @@
       "hoverImage": {
         "src": "/products/3597_iggy-pop-90s_alt.jpg",
         "kind": "print close-up"
+      },
+      "sub": "tees",
+      "measurements": {
+        "unit": "cm, laid flat",
+        "shoulder": 48,
+        "chest": 51,
+        "sleeve": 18,
+        "length": 72
+      },
+      "detailsKo": [
+        "스투지스 시절 이기팝 프린팅.",
+        "표기사이즈 XL, 실사이즈 M-L. (허리 옆선 수선)"
+      ],
+      "cafe24": {
+        "productNo": "3597",
+        "category": "Tops>Tees>Short",
+        "sizeLine": "M-L",
+        "listName": "90's Iggy Pop"
       }
     },
     {
@@ -422,6 +817,8 @@
       "era": "00s",
       "sizeLabel": "US 8 (260)",
       "sizes": [],
+      "fitMm": 260,
+      "tagSize": null,
       "price": null,
       "sold": true,
       "images": [
@@ -433,8 +830,30 @@
       "hoverImage": {
         "src": "/products/3596_john-varvatos-boots_alt.jpg",
         "kind": "back / other angle"
+      },
+      "sub": null,
+      "detailsKo": [
+        "비브람 솔."
+      ],
+      "cafe24": {
+        "productNo": "3596",
+        "category": "Acc>Shoes",
+        "sizeLine": "8(260)",
+        "listName": "260)00's John Varvatos"
       }
     }
   ],
-  "introCategories_note": "인트로 아래 글자 목록이에요. v4에서는 링크가 아니라 그냥 글자예요(취향 소개)."
+  "moreLikeThis": {
+    "_note": "상품 상세 아래 more like this 4개. 판매 중인 것만. 같은 카테고리 먼저, 그 안에서 연대가 가까운 순 → 같으면 new in 순. 4개가 안 되면 다른 카테고리에서 같은 규칙으로 채워요. 시안(3608, tops · 80s): 3593(80s) · 3598 · 3594(90s) → 다른 카테고리 90s 중 new in 첫 번째 3586.",
+    "count": 4,
+    "designSample": {
+      "3608": [
+        "3593",
+        "3598",
+        "3594",
+        "3586"
+      ]
+    }
+  },
+  "tagRule": "상세 가격 줄: '₩ 000,000 · fits {sizeLabel}' + tagSize가 있고 sizeLabel과 다르면 ' · tag {tagSize}'. 예) 3594 fits M–L · tag M, 3597 fits M–L · tag XL, 3608 fits L(태그도 L이라 생략)."
 }

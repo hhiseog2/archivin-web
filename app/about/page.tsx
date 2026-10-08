@@ -1,87 +1,117 @@
 import type { Metadata } from 'next';
-import { Placeholder } from '@/components/Placeholder';
 import { SiteChrome } from '@/components/SiteChrome';
 import { site } from '@/lib/catalog';
 import styles from './about.module.css';
 
-export const metadata: Metadata = { title: 'About us' };
+export const metadata: Metadata = { title: 'about' };
 
-export default function AboutPage() {
+/** ↗ after external links (A21_About). */
+function ExtArrow() {
   return (
-    <SiteChrome>
+    <svg width="9" height="9" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" aria-hidden="true">
+      <path d="M2 8l6-6M3.5 2H8v4.5" />
+    </svg>
+  );
+}
+
+/**
+ * A21_About · A21_DAbout (README 8-10). Mobile: store photo full width, then the text.
+ * Desktop: `.abgrid` — photo left, text right (max 480px).
+ */
+export default function AboutPage() {
+  const { store, about, contact, links } = site;
+  return (
+    <SiteChrome fullWidth>
       <main className={styles.main}>
-        <div className={styles.hero}>
-          {/* TODO: store photo */}
-          <Placeholder label="[STORE PHOTO 4:5]" ratio="4 / 5" className={styles.heroPhoto} />
-          <section className={styles.intro}>
-            <p className={styles.kicker}>About us</p>
-            <h1 className={styles.title}>Archivin against restocks.</h1>
-            <div className={styles.copy}>
-              <p>
-                ARCHIVIN is a vintage shop in Haebangchon, Seoul. We carry band tees, tour merch, film and skate graphics,
-                and designer pieces from the 1970s to the 2010s.
-              </p>
-              <p>Every piece is one of one. When it sells, it goes to the archive.</p>
-              <p lang="ko" className={styles.ko}>
-                해방촌의 빈티지 숍 아카이빈이에요. 1970년대부터 2010년대까지의 밴드 티셔츠와 디자이너 피스를 한 점씩만
-                소개해요.
-              </p>
-            </div>
-          </section>
+        {/* TODO(client): store photo (site.store.photo) */}
+        <div role="img" aria-label="store photo · 4:5" className={styles.photo}>
+          [store photo · 4:5]
         </div>
 
-        <div className={styles.info}>
-          <section aria-labelledby="visit" className={styles.visit}>
-            <h2 id="visit" className={styles.h2}>
-              Visit the store
-            </h2>
-            <p className={styles.addr}>{site.store.addressEn}</p>
-            <p lang="ko" className={styles.addrKo}>
-              {site.store.addressKo}
+        <div className={styles.text}>
+          <p className={styles.kicker}>about</p>
+          <h1 className={styles.statement}>{about.statement}</h1>
+          {about.en.map((p, i) => (
+            <p key={i} className={styles.copy}>
+              {p}
             </p>
-            <dl className={styles.hours}>
-              {site.store.hours.map(([d, h]) => (
-                <div key={d}>
-                  <dt>{d}</dt>
-                  <dd>{h}</dd>
-                </div>
-              ))}
+          ))}
+          <p lang="ko" className={styles.ko}>
+            {about.ko}
+          </p>
+
+          <section aria-labelledby="ab-visit" className={styles.visit}>
+            <h2 id="ab-visit" className={styles.h2}>
+              visit
+            </h2>
+            <dl className={styles.dl}>
+              <div className={styles.row}>
+                <dt>address</dt>
+                <dd>
+                  {store.addressEn}
+                  <span lang="ko" className={styles.addrKo}>
+                    {store.addressKo}
+                  </span>
+                </dd>
+              </div>
+              <div className={styles.row}>
+                <dt>hours</dt>
+                {/* TODO(client): confirm store hours (site.store.hours_note) */}
+                <dd>
+                  {store.hours.map(([days, time], i) => (
+                    <span key={days}>
+                      {i > 0 && <br />}
+                      {days} {time}
+                    </span>
+                  ))}
+                </dd>
+              </div>
+              <div className={styles.row}>
+                <dt>map</dt>
+                {/* TODO(client): Naver / Kakao map URLs (site.links.naverMap · kakaoMap are '#') */}
+                <dd className={styles.maps}>
+                  <a href={links.naverMap} className={styles.ext}>
+                    naver map
+                    <ExtArrow />
+                  </a>
+                  <a href={links.kakaoMap} className={styles.ext}>
+                    kakao map
+                    <ExtArrow />
+                  </a>
+                </dd>
+              </div>
             </dl>
-            {/* TODO: map embed or image */}
-            <Placeholder label="[MAP]" className={styles.map} />
-            <div className={styles.mapLinks}>
-              {/* TODO: Naver / Kakao map URLs (data/site.json) */}
-              <a href={site.links.naverMap} className={styles.mapBtn}>
-                Naver Map
-              </a>
-              <a href={site.links.kakaoMap} className={styles.mapBtn}>
-                Kakao Map
-              </a>
-            </div>
           </section>
 
-          <section aria-labelledby="contact" className={styles.contact}>
-            <h2 id="contact" className={`${styles.h2} ${styles.h2Tight}`}>
-              Contact
+          <section aria-labelledby="ab-contact" className={styles.contact}>
+            <h2 id="ab-contact" className={styles.h2}>
+              contact
             </h2>
-            <dl className={styles.contactList}>
-              <div>
-                <dt>Email</dt>
+            <dl className={styles.dl}>
+              <div className={styles.row}>
+                <dt>email</dt>
                 <dd>
-                  <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
+                  <a href={`mailto:${contact.email}`} className={styles.link}>
+                    {contact.email}
+                  </a>
                 </dd>
               </div>
-              <div>
-                <dt>Phone</dt>
+              <div className={styles.row}>
+                <dt>phone</dt>
                 <dd>
-                  <a href={site.contact.phoneHref}>{site.contact.phone}</a>
+                  <a href={contact.phoneHref} className={styles.link}>
+                    {contact.phone}
+                  </a>
                 </dd>
               </div>
-              <div>
-                <dt>Instagram</dt>
+              <div className={styles.row}>
+                <dt>instagram</dt>
+                {/* TODO(client): Instagram handle and URL (site.links.instagram is '#') */}
                 <dd>
-                  {/* TODO: Instagram handle */}
-                  <a href={site.links.instagram}>{site.links.instagramHandle}</a>
+                  <a href={links.instagram} className={styles.ext}>
+                    {links.instagramHandle.toLowerCase()}
+                    <ExtArrow />
+                  </a>
                 </dd>
               </div>
             </dl>

@@ -18,3 +18,14 @@
 .gap {
   margin-top: 16px;
 }
+
+.navList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+.navList a {
+  text-decoration: none;
+}

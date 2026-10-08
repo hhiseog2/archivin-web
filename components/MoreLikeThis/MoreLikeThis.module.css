@@ -1,0 +1,44 @@
+/* #mmore (A21_Product) / #more .pmore (A21_DProduct). */
+.more {
+  margin-top: 56px;
+  padding: 0 var(--space-gutter-mobile);
+}
+
+.title {
+  margin: 0 0 16px;
+  font-weight: 400;
+  font-size: var(--type-body-size);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 20px;
+  row-gap: 56px;
+}
+
+@media (min-width: 900px) {
+  .more {
+    width: 100%;
+    max-width: 1440px;
+    margin: 160px auto 0;
+    padding: 0 var(--space-gutter-desktop);
+  }
+  .title {
+    margin-bottom: 24px;
+  }
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 56px;
+    row-gap: 80px;
+  }
+}
+
+/* A21_DProduct `.pmore` at 719px and under (README 8-3): 2 columns, same as mobile. */
+@media (max-width: 719px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 20px;
+    row-gap: 56px;
+  }
+}

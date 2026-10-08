@@ -1,21 +1,50 @@
 {
-  "_todo": "date: null renders as '[DATE]'. Fill in dates, bank account details, holiday schedule, the [N]-day defect window and the body of the 2021 opening notice.",
+  "_todo": "[N]일(하자 신고 기한), 청약철회 표기, 'Store hours' · 'Paying by bank transfer' 본문, 2021 오픈 공지 본문이 남았어요. 날짜는 2026.10.01 형식이에요.",
   "notices": [
     {
       "id": "shipping-returns",
       "title": "Shipping & returns",
       "lang": "en",
       "pinned": true,
-      "date": null,
+      "date": "2026.10.01",
       "body": [
-        { "type": "h", "text": "Shipping" },
-        { "type": "p", "text": "Shipping is ₩ 3,000. Orders arrive 3–7 business days after payment, not counting weekends and holidays. Remote and island areas cost extra." },
-        { "type": "h", "text": "Exchanges and refunds" },
-        { "type": "p", "text": "Pieces can't be exchanged or refunded unless they're defective." },
-        { "type": "p", "text": "Vintage pieces show their age. Every product page lists the condition and shows the flaws. If damage or stains bother you, check those before you buy." },
-        { "type": "h", "text": "If a piece is defective" },
-        { "type": "p", "text": "Send photos to {email} within [N] days of delivery. We reply with the next steps." },
-        { "type": "note-ko", "text": "하자를 제외하고는 교환·환불이 어려워요. 구매 전에 상품 상태와 사진을 꼭 확인해 주세요." }
+        {
+          "type": "h",
+          "text": "shipping"
+        },
+        {
+          "type": "p",
+          "text": "Shipping is ₩ 3,000 anywhere in Korea. Orders placed by 3 pm ship in 2–3 business days, not counting weekends and holidays. Remote and island areas cost extra."
+        },
+        {
+          "type": "h",
+          "text": "exchanges and refunds"
+        },
+        {
+          "type": "p",
+          "text": "Pieces can't be exchanged or refunded unless they're defective."
+        },
+        {
+          "type": "p",
+          "text": "Vintage pieces show their age. Every product page lists the condition and shows the flaws in the photos. If marks or wear bother you, check those before you buy."
+        },
+        {
+          "type": "h",
+          "text": "if a piece is defective"
+        },
+        {
+          "type": "p",
+          "text": "Send photos to {email} within [N] days of delivery. We reply with the next steps."
+        },
+        {
+          "type": "note-ko",
+          "text": "하자를 제외하고는 교환·환불이 어려워요. 구매 전에 상품 상태와 사진을 꼭 확인해 주세요."
+        },
+        {
+          "type": "link",
+          "text": "read the full guide",
+          "href": "/guide"
+        }
       ]
     },
     {
@@ -23,11 +52,30 @@
       "title": "Store hours",
       "lang": "en",
       "pinned": true,
-      "date": null,
+      "date": "2026.09.20",
       "body": [
-        { "type": "dl", "rows": [["Mon–Sat", "2–8 PM"], ["Sunday", "2–7 PM"]] },
-        { "type": "p", "text": "16 Sinheung-ro 3-gil, Yongsan-gu, Seoul (Haebangchon)." },
-        { "type": "p", "muted": true, "text": "[Holiday closures and schedule changes]" }
+        {
+          "type": "dl",
+          "rows": [
+            [
+              "mon–sat",
+              "2–8 pm"
+            ],
+            [
+              "sun",
+              "2–7 pm"
+            ]
+          ]
+        },
+        {
+          "type": "p",
+          "text": "16 Sinheung-ro 3-gil, Yongsan-gu, Seoul (Haebangchon)."
+        },
+        {
+          "type": "p",
+          "muted": true,
+          "text": "[Holiday closures and schedule changes]"
+        }
       ]
     },
     {
@@ -35,19 +83,44 @@
       "title": "Paying by bank transfer",
       "lang": "en",
       "pinned": false,
-      "date": null,
+      "date": "2026.09.02",
       "body": [
-        { "type": "dl", "rows": [["Bank", "[BANK]"], ["Account", "[ACCOUNT NUMBER]"], ["Holder", "[NAME]"]] },
-        { "type": "p", "muted": true, "text": "[Payment deadline and depositor-name rule]" }
+        {
+          "type": "dl",
+          "rows": [
+            [
+              "bank",
+              "[BANK]"
+            ],
+            [
+              "account",
+              "[ACCOUNT NO.]"
+            ],
+            [
+              "holder",
+              "[ACCOUNT HOLDER]"
+            ]
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Pay within 7 days of ordering, under the name you ordered with. Unpaid orders are cancelled."
+        }
       ]
     },
     {
       "id": "mall-open",
-      "title": "몰 오픈을 축하합니다",
+      "title": "몰 오픈을 축하합니다.",
       "lang": "ko",
       "pinned": false,
-      "date": "Feb 14, 2021",
-      "body": [{ "type": "p", "muted": true, "text": "[공지 본문]" }]
+      "date": "2021.02.14",
+      "body": [
+        {
+          "type": "p",
+          "muted": true,
+          "text": "[공지 본문]"
+        }
+      ]
     }
   ]
 }

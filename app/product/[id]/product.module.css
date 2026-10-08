@@ -1,17 +1,11 @@
-/* Mobile — A21_Product. */
-.layout {
-  padding-bottom: 64px;
+/* A21_Product (mobile) · A21_DProduct (desktop). README 8-3. */
+.page {
   display: flex;
   flex-direction: column;
 }
 
-.backOnPhoto {
-  position: absolute;
-  left: 4px;
-  top: 0;
-}
 .back {
-  height: 44px;
+  height: var(--space-tap);
   padding: 0 12px;
   display: flex;
   align-items: center;
@@ -21,18 +15,21 @@
   text-decoration: none;
 }
 
-.side {
-  display: flex;
-  flex-direction: column;
+/* ---------- mobile ---------- */
+
+.backOnPhoto {
+  position: absolute;
+  left: 4px;
+  top: 0;
 }
 
-/* 14px under the bars. */
-.info {
+/* Name · price line · add to bag, 14px under the bars. */
+.buy {
   padding: 14px var(--space-gutter-mobile) 0;
   display: flex;
   flex-direction: column;
 }
-.infoNoBars {
+.buyNoBars {
   padding-top: 24px;
 }
 
@@ -49,12 +46,15 @@
   line-height: var(--type-body-line);
 }
 
-.more {
+/* The four info rows, 28px under the buy block. */
+.info {
   margin-top: 28px;
   padding: 0 var(--space-gutter-mobile);
   display: flex;
   flex-direction: column;
 }
+
+/* ---------- info content (both layouts) ---------- */
 
 .unit {
   margin: 0;
@@ -87,6 +87,9 @@
   font-size: var(--type-body-size);
   line-height: 1.6;
 }
+.textNext {
+  margin-top: 8px;
+}
 .photoLink {
   color: var(--color-ink);
   text-underline-offset: 3px;
@@ -97,43 +100,147 @@
   line-height: var(--type-kr-note-line);
   color: var(--color-ink-2);
 }
+.koFirst {
+  margin-top: 0;
+}
 
-/* TODO(design): desktop — photos stacked on the left (3:4), info column 400px, sticky, on the right. */
-@media (min-width: 900px) {
-  .layout {
-    width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 40px var(--space-gutter-desktop) 96px;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 400px;
-    align-items: start;
-    gap: 56px;
+/* "shipping & returns guide" · "ask about this piece": 13px underlined, 44px tall. */
+.textLink {
+  align-self: flex-start;
+  width: max-content;
+  height: var(--space-tap);
+  margin-top: 4px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  color: var(--color-ink);
+  font-size: var(--type-note-size);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.ask {
+  margin-top: 8px;
+}
+
+/* ---------- desktop ---------- */
+
+.backRow {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px var(--space-gutter-desktop) 0;
+  display: flex;
+}
+.backRow .back {
+  margin-left: -12px;
+}
+
+/* Three columns: about this piece | bars + photos | buy. Both side columns stick while the photos scroll. */
+.pdp {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 16px var(--space-gutter-desktop) 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--space-pdp-rail) minmax(0, var(--space-pdp-photo)) var(--space-pdp-rail) minmax(0, 1fr);
+  grid-template-areas: 'info bars photos . buy';
+  align-items: start;
+}
+
+.pinfo {
+  grid-area: info;
+  position: sticky;
+  top: var(--space-sticky-top);
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+/* 12px under the last group. */
+.pinfo .ask {
+  margin-top: -20px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+}
+.groupHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.groupTitle {
+  margin: 0;
+  font-weight: 400;
+  font-size: var(--type-section-label-size);
+  line-height: var(--type-section-label-line);
+  color: var(--color-ink-2);
+}
+.groupBody {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+}
+.groupBody > .measure {
+  margin-top: 0;
+}
+
+.pbars {
+  grid-area: bars;
+  align-self: stretch;
+}
+
+.pphotos {
+  grid-area: photos;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pbuy {
+  grid-area: buy;
+  position: sticky;
+  top: var(--space-sticky-top);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Narrow desktop: photos | one 320px column (buy, then info). No bars, nothing sticks. */
+@media (max-width: 1199px) {
+  .pdp {
+    grid-template-columns: minmax(0, 1fr) 320px;
+    grid-template-areas:
+      'photos buy'
+      'photos info';
+    grid-template-rows: auto 1fr;
+    column-gap: 48px;
   }
-  .stack {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+  .pbars {
+    display: none;
   }
-  .stackPhoto {
-    display: block;
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    scroll-margin-top: 24px;
+  .pbuy,
+  .pinfo {
+    position: static;
   }
-  .side {
-    position: sticky;
-    top: 24px;
+  .pinfo {
+    margin-top: 48px;
   }
-  .back {
-    margin-left: -12px;
+}
+
+/* Desktop layout at 719px and under (README 8-3): one column, photos → buy → info. */
+@media (max-width: 719px) {
+  .pdp {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'photos'
+      'buy'
+      'info';
+    grid-template-rows: auto;
+    row-gap: 24px;
   }
-  .info,
-  .infoNoBars {
-    padding: 16px 0 0;
-  }
-  .more {
-    padding: 0;
+  .pinfo {
+    margin-top: 0;
   }
 }

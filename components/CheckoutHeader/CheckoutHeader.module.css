@@ -1,0 +1,39 @@
+/* Mobile — A21_Checkout header (390×56). */
+.mobile {
+  height: var(--space-header-height);
+  padding: 0 4px 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-paper);
+}
+
+/* "back to bag": 13px, 44px tap height. */
+.back {
+  height: 44px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  font-size: var(--type-nav-size);
+  color: var(--color-ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Desktop — A21_DCheckout: same grid as DHeader (20px top, 48px sides, max 1440). */
+.desktop {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px var(--space-gutter-desktop) 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+}
+.dLeft {
+  display: flex;
+}
+.dLeft .back {
+  margin-left: -12px;
+}

@@ -2,15 +2,33 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState, type MouseEvent } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, type MouseEvent } from 'react';
 import { ExitDoorIcon } from '@/components/ExitDoorIcon/ExitDoorIcon';
 import styles from './intro.module.css';
 
 // Arrow 0–0.42s, figure 0.04–0.66s, door 0.547–0.807s, panel lifts 0.847–1.167s, then /shop (README 8-1, 9).
 const GO_AT_MS = 1187;
 
+/** sessionStorage key: the intro shows once per browser-tab session (README 8-1). */
+export const INTRO_SEEN_KEY = 'archivin:intro-seen';
+
 /**
- * Intro panel — white with a black logo and copy (client request; the v4 design was navy). Logo + line + icon are one link ("ARCHIVIN, enter the shop"). Hover / focus only
+ * Runs before the panel is painted on a full page load (page.tsx inlines it): a second visit in the same
+ * session hides the panel straight away, so it never flashes before the move to /shop.
+ */
+export const INTRO_SEEN_SCRIPT = `try{if(sessionStorage.getItem('${INTRO_SEEN_KEY}')==='1')document.documentElement.setAttribute('data-intro-seen','')}catch(e){}`;
+
+function seenBefore() {
+  try {
+    return window.sessionStorage.getItem(INTRO_SEEN_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Intro panel (A_IntroNavy / A_DIntroNavy, v5): white with the navy logo, line, icon and "love you all.".
+ * Logo + line + icon are one link ("ARCHIVIN, enter the shop"). Hover / focus only
  * nudges the arrow 2px — it never navigates. Click / tap / Enter adds `is-go` and the CSS plays the run-in;
  * reduced motion goes straight to /shop.
  */
@@ -18,6 +36,26 @@ export function IntroPanel() {
   const router = useRouter();
   const [go, setGo] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  const [skip, setSkip] = useState(false);
+  // This panel already counted itself as shown (Strict Mode re-runs effects on the same instance).
+  const shown = useRef(false);
+
+  // Once per session: shown → remember; seen already → straight to /shop without drawing the panel.
+  useLayoutEffect(() => {
+    if (shown.current) return;
+    if (seenBefore()) {
+      setSkip(true);
+      router.replace('/shop');
+      return;
+    }
+    shown.current = true;
+    try {
+      window.sessionStorage.setItem(INTRO_SEEN_KEY, '1');
+    } catch {
+      // storage blocked: the intro just shows every time
+    }
+  }, [router]);
 
   useEffect(() => {
     router.prefetch('/shop');
@@ -36,7 +74,9 @@ export function IntroPanel() {
     timer.current = setTimeout(() => router.push('/shop'), GO_AT_MS);
   };
 
-  // Client request: the band · designer · rap · skate · archive list is gone; "love you all." stays.
+  if (skip) return null;
+
+  // The band · designer · rap · skate · archive list is gone; "love you all." stays (v5).
   const love = (
     <div className={styles.bottom}>
       <p className={styles.love}>love you all.</p>
@@ -45,13 +85,12 @@ export function IntroPanel() {
 
   return (
     <div className={`ipanel ${go ? 'is-go' : ''} ${styles.panel}`}>
-      {/* Mobile: logo, then the line with the icon at its right end, centred; "love you all." at the bottom right. */}
+      {/* Mobile: logo, then the line with the icon at its right end, centred; "love you all." at the bottom right (client request: lower than the v5 board's 92px). */}
       <div className={`m-only ${styles.mobile}`}>
         <h1 className={styles.h1}>
           <Link href="/shop" className={`ienter ${styles.enter} ${styles.enterMobile}`} aria-label="ARCHIVIN, enter the shop" onClick={enter}>
-            {/* Client request: white page with a black logo — archivin-stitch-black.png (scripts/make-intro-logo.mjs). TODO: vector logo. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo/archivin-stitch-black.png" alt="" width={330} height={77} className={styles.logoMobile} />
+            <img src="/logo/archivin-stitch-navy-intro.png" alt="" width={330} height={77} className={styles.logoMobile} />
             <span className={styles.lineMobile}>
               <span className={styles.tagline}>selected vintage clothing.</span>
               <ExitDoorIcon size="mobile" />
@@ -68,7 +107,7 @@ export function IntroPanel() {
           <Link href="/shop" className={`ienter ${styles.enter} ${styles.enterDesktop}`} aria-label="ARCHIVIN, enter the shop" onClick={enter}>
             <span className={styles.logoRow}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo/archivin-stitch-black.png" alt="" width={800} height={186} className={styles.logoDesktop} />
+              <img src="/logo/archivin-stitch-navy-intro.png" alt="" width={800} height={186} className={styles.logoDesktop} />
               <ExitDoorIcon size="desktop" />
             </span>
             <span className={styles.taglineDesktop}>selected vintage clothing.</span>

@@ -1,0 +1,116 @@
+/* Private payment — A21_Pay · A21_DPay (README 8-16). Same frame as sign in: mobile 32px top · 16px sides. */
+.main {
+  padding: 32px var(--space-gutter-mobile) 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.kicker {
+  margin: 0;
+  font-size: var(--type-note-size);
+  line-height: 1.5;
+  color: var(--color-ink-2);
+}
+.kickerKo {
+  margin-left: 6px;
+  font-family: var(--font-kr);
+}
+.title {
+  margin: 8px 0 0;
+  font-weight: 400;
+  font-size: var(--type-title-size);
+  line-height: var(--type-title-line);
+}
+.amount {
+  margin: 4px 0 0;
+  font-size: 18px;
+  line-height: 1.4;
+}
+.note {
+  margin: 20px 0 0;
+  padding: 14px 16px;
+  border-radius: var(--radius-panel);
+  background: var(--color-fill);
+  font-size: var(--type-body-size);
+  line-height: 1.65;
+}
+
+.kv {
+  margin: 20px 0 0;
+}
+.kv > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 6px 0;
+  font-size: var(--type-body-size);
+  line-height: 1.5;
+}
+.kv dt {
+  color: var(--color-ink-2);
+}
+.kv dd {
+  margin: 0;
+}
+
+.pay,
+.paid {
+  margin-top: 24px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--radius-pill);
+  font-size: var(--type-button-size);
+  text-decoration: none;
+}
+.pay,
+.pay:hover {
+  background: var(--color-navy);
+  color: var(--color-on-navy);
+}
+.paid {
+  background: var(--color-fill);
+  color: var(--color-ink-2);
+  cursor: default;
+}
+
+.private {
+  margin: 12px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-ink-2);
+}
+.privateKo {
+  display: block;
+  font-family: var(--font-kr);
+}
+
+.expired {
+  margin: 24px 0 0;
+  font-size: var(--type-body-size);
+  line-height: 1.6;
+}
+
+.textLink {
+  align-self: flex-start;
+  height: 44px;
+  margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-ink);
+  font-size: var(--type-note-size);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Desktop — centred 400px (max 448 with 24px sides), 96px top. */
+@media (min-width: 900px) {
+  .main {
+    width: 100%;
+    max-width: 448px;
+    margin: 0 auto;
+    padding: 96px 24px 0;
+  }
+}

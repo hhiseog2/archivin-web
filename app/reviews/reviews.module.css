@@ -1,332 +1,191 @@
+/* A21_Reviews · A21_DReviews (README 8-12). Desktop list 960px, two columns. */
+
 .main {
+  padding: 32px var(--space-gutter-mobile) 0;
   display: flex;
   flex-direction: column;
 }
 @media (min-width: 900px) {
   .main {
-    padding: 0 24px;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    column-gap: 48px;
+    width: 100%;
+    max-width: 1008px;
+    margin: 0 auto;
+    padding: 56px 24px 0;
   }
 }
 
-/* ---------- Left column / mobile head ---------- */
-.side {
+.top {
   display: flex;
-  flex-direction: column;
-}
-@media (min-width: 900px) {
-  .side {
-    flex: 1 1 280px;
-    padding-top: 40px;
-    align-items: flex-start;
-  }
-}
-.headRow {
-  padding: 24px 16px 16px;
-  display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
+  gap: 16px;
 }
-@media (min-width: 900px) {
-  .headRow {
-    padding: 0;
-  }
-}
-.writeLink {
-  flex-shrink: 0;
-  height: 44px;
-  padding: 0 14px;
-  display: flex;
-  align-items: center;
-  border: 0;
-  border-radius: var(--radius-pill);
-  background: var(--color-fill);
-  color: var(--color-ink);
-  font-weight: 400;
-  font-size: 12px;
-  text-decoration: none;
-}
-.tabs {
-  padding: 0 16px 16px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-@media (min-width: 900px) {
-  .tabs {
-    margin-top: 24px;
-    padding: 0;
-  }
-}
-.writeBtn {
-  margin-top: 24px;
-  height: 48px;
-  padding: 0 20px;
-  border: 0;
-  border-radius: var(--radius-pill);
-  background: var(--color-fill);
-  color: var(--color-ink);
-  font-weight: 400;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-/* ---------- Right column ---------- */
-.content {
-  display: flex;
-  flex-direction: column;
-}
-@media (min-width: 900px) {
-  .content {
-    flex: 999 1 560px;
-    min-width: 0;
-    max-width: 880px;
-    padding-top: 40px;
-  }
-}
-.formSection {
-  margin-bottom: 32px;
-}
-.posted {
-  margin: 0 16px 16px;
-}
-@media (min-width: 900px) {
-  .posted {
-    margin: 0 0 24px;
-  }
-}
-
-.list {
-  border-top: 1px solid var(--color-fill);
-}
-.none {
+.title {
   margin: 0;
-  padding: 24px 16px;
-  font-size: 14px;
-  color: var(--color-ink-2);
-}
-
-.item {
-  padding: 20px 16px;
-  border-bottom: 1px solid var(--color-fill);
-}
-@media (min-width: 900px) {
-  .item {
-    padding: 24px 0;
-  }
-}
-.product {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--color-ink);
-  text-decoration: none;
-}
-@media (min-width: 900px) {
-  .product {
-    gap: 12px;
-  }
-}
-.productThumb {
-  width: 40px;
-  aspect-ratio: 4 / 5;
-  flex-shrink: 0;
-  background: var(--color-fill);
-}
-.productName {
   font-weight: 400;
-  font-size: 12px;
+  font-size: var(--type-title-size);
+  line-height: var(--type-title-line);
 }
-.ratingRow {
-  margin-top: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.miniStars {
-  display: flex;
-  gap: 2px;
-}
-.ratingSmall {
-  font-weight: 400;
-  font-size: 12px;
-}
-.itemTitle {
-  margin: 10px 0 0;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 1.4;
-}
-.ko {
-  font-family: var(--font-kr);
-}
-.itemBody {
+.intro {
   margin: 6px 0 0;
-  font-size: 14px;
+  font-size: var(--type-note-size);
   line-height: 1.55;
   color: var(--color-ink-2);
 }
-.itemPhoto {
-  margin-top: 12px;
-  width: 96px;
-  aspect-ratio: 4 / 5;
-  font-size: 10px;
+.write {
+  flex-shrink: 0;
+  height: var(--space-tap);
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  border-radius: 22px;
+  background: var(--color-fill);
+  color: var(--color-ink);
+  font-size: var(--type-nav-size);
+  text-decoration: none;
 }
-.itemMeta {
-  margin: 12px 0 0;
-  font-size: 12px;
+
+/* all · with photos (.poptrig) */
+.tabs {
+  margin: 20px 0 0 -12px;
+  display: flex;
+}
+.tab {
+  height: var(--space-tap);
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
   color: var(--color-ink-2);
+  font-size: var(--type-nav-size);
+  cursor: pointer;
+}
+.tabOn {
+  color: var(--color-ink);
+}
+.ulbl {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s ease;
+}
+@media (hover: hover) {
+  .tab:hover .ulbl {
+    text-decoration-color: currentColor;
+  }
+}
+.tab[aria-pressed='true'] .ulbl {
+  text-decoration-color: currentColor;
+}
+
+.list {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
 }
 @media (min-width: 900px) {
-  .itemTitle {
-    font-size: 16px;
+  .list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 56px;
+    row-gap: 48px;
+    align-items: start;
   }
-  .itemBody {
-    max-width: 720px;
-    font-size: 15px;
-  }
-  .itemPhoto {
+}
+
+.review {
+  min-width: 0;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.photo {
+  flex-shrink: 0;
+  width: 96px;
+  aspect-ratio: 3 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-fill);
+  color: var(--color-ink-2);
+  font-size: 11px;
+  line-height: 1.4;
+  text-align: center;
+}
+@media (min-width: 900px) {
+  .photo {
     width: 120px;
   }
 }
 
-/* ---------- Form ---------- */
-.formPage,
-.formInline {
+.text {
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 24px;
 }
-.formInline {
-  padding: 24px;
-  border: 1px solid var(--color-fill);
-}
-.formTitle {
-  margin: 0;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 1;
-}
-.formInline .narrow {
-  max-width: 480px;
-}
-.fieldset {
-  margin: 0;
-  padding: 0;
-  border: 0;
+.line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 .stars {
+  flex-shrink: 0;
   display: flex;
-  align-items: center;
   gap: 2px;
 }
-.starBtn {
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.product {
+  min-width: 0;
+  font-size: var(--type-note-size);
+  line-height: 1.5;
+  color: var(--color-ink-2);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+a.product:hover {
+  color: var(--color-ink-2);
+}
+
+.body {
+  margin: 8px 0 0;
+  font-size: var(--type-body-size);
+  line-height: 1.65;
+}
+.clamp3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* more / less: 32px tall (README 11 exception). */
+.more {
+  align-self: flex-start;
+  height: 32px;
   padding: 0;
+  display: inline-flex;
+  align-items: center;
   border: 0;
   background: transparent;
+  color: var(--color-ink);
+  font-size: var(--type-nav-size);
+  text-decoration: underline;
+  text-underline-offset: 4px;
   cursor: pointer;
 }
-.ratingText {
-  margin-left: 8px;
-  font-weight: 400;
-  font-size: 13px;
-}
-.labelTight {
-  margin-bottom: 4px;
-}
-.bodyHint {
-  margin: 0 0 8px;
-  font-size: 13px;
+
+.meta {
+  margin: 6px 0 0;
+  font-size: var(--type-note-size);
   line-height: 1.5;
   color: var(--color-ink-2);
 }
-.count {
-  margin: 6px 0 0;
-  text-align: right;
-  font-size: 12px;
-  color: var(--color-ink-2);
-}
-.photoRow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2px;
-}
-.photoM {
-  width: 76px;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-}
-.photoD {
-  width: 88px;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-}
-.addPhoto {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  border: 1px solid var(--color-fill);
-  background: transparent;
-  color: var(--color-ink);
-  font-weight: 400;
-  font-size: 10px;
-  cursor: pointer;
-}
-.addPhoto:focus-within {
-  outline: 2px solid var(--color-ink);
-  outline-offset: 2px;
-}
 
-.actionsPage {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.actionsInline {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 16px;
-}
-.actionsInline .postBtn {
-  padding: 0 32px;
-}
-.need {
-  margin: 0;
-  font-size: 12px;
-  line-height: 1.4;
-  color: var(--color-ink-2);
-}
-.actionsInline .need {
-  flex-basis: 100%;
-}
-
-/* ---------- Mobile write page ---------- */
-.back {
-  padding: 0 4px;
-}
-.backLink {
-  min-height: 44px;
-  padding: 0 12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  color: var(--color-ink);
-  font-weight: 400;
-  font-size: 12px;
-  text-decoration: none;
-}
-.writeMain {
-  padding: 12px 16px 40px;
+@media (prefers-reduced-motion: reduce) {
+  .ulbl {
+    transition: none;
+  }
 }

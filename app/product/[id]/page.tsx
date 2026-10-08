@@ -15,13 +15,13 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return { title: getProduct(id)?.name ?? 'Not found' };
 }
 
-/** A21_Product. No footer (README 5). */
+/** A21_Product · A21_DProduct. v5 adds the footer (README 5, 8-3). Unknown ids → 404. */
 export default async function ProductPage({ params }: { params: Promise<Params> }) {
   const { id } = await params;
   const product = getProduct(id);
   if (!product) notFound();
   return (
-    <SiteChrome footer={false} fullWidth>
+    <SiteChrome fullWidth>
       <ProductView product={product} />
     </SiteChrome>
   );

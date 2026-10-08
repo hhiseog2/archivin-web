@@ -1,39 +1,115 @@
 {
-  "_todo": "Lookbook photos, [SEASON], [PIECE] names and the intro copy are still blank. pieces[].productId links a piece to its product page (null → /shop).",
+  "_todo": "사진(표지 4:5, 룩 3:4)은 비워 뒀어요(photo: null → 자리표시). 시즌 · 소개 글 · 룩 구성은 클라이언트에게 받아야 해요. 아래 값은 시안용 예시예요.",
   "lookbooks": [
     {
       "n": 1,
-      "title": "Lookbook 01",
-      "season": "[SEASON]",
-      "intro": "[One or two lines about the lookbook: where it was shot, who is in it, what ties the pieces together.]",
+      "title": "lookbook 01",
+      "season": "summer 2026",
+      "lookCount": 6,
+      "cover": null,
+      "intro": "[one or two lines about the shoot — where, who, what ties the pieces together.]",
       "looks": [
-        { "label": "Look 01", "photo": null, "caption": "[PIECE] tee · [PIECE] trousers · [PIECE] boots" },
-        { "label": "Look 02", "photo": null, "caption": "[PIECE] cap · [PIECE] hoodie" },
-        { "label": "Look 03", "photo": null, "caption": "[PIECE] trousers" }
+        {
+          "label": "look 01",
+          "photo": null,
+          "pieces": [
+            {
+              "name": "80's Iggy Pop (Lust For Life)",
+              "productId": "3608",
+              "sold": false
+            },
+            {
+              "name": "90's Levis 517",
+              "productId": "3542",
+              "sold": false
+            }
+          ]
+        },
+        {
+          "label": "look 02",
+          "photo": null,
+          "pieces": [
+            {
+              "name": "90's Chrome Hearts",
+              "productId": "3491",
+              "sold": false
+            },
+            {
+              "name": "90's Iggy Pop",
+              "productId": "3597",
+              "sold": true
+            }
+          ]
+        },
+        {
+          "label": "look 03",
+          "photo": null,
+          "pieces": [
+            {
+              "name": "00's Independent Truck",
+              "productId": "2886",
+              "sold": false
+            },
+            {
+              "name": "90's Converse",
+              "productId": "3574",
+              "sold": false
+            }
+          ]
+        }
       ],
       "pieces": [
-        { "name": "[Piece name] tee", "productId": null, "sold": false },
-        { "name": "[Piece name] cap", "productId": null, "sold": false },
-        { "name": "[Piece name] hoodie", "productId": null, "sold": true },
-        { "name": "[Piece name] trousers", "productId": null, "sold": false }
+        {
+          "name": "80's Iggy Pop (Lust For Life)",
+          "productId": "3608",
+          "sold": false
+        },
+        {
+          "name": "90's Levis 517",
+          "productId": "3542",
+          "sold": false
+        },
+        {
+          "name": "90's Chrome Hearts",
+          "productId": "3491",
+          "sold": false
+        },
+        {
+          "name": "90's Iggy Pop",
+          "productId": "3597",
+          "sold": true
+        },
+        {
+          "name": "00's Independent Truck",
+          "productId": "2886",
+          "sold": false
+        },
+        {
+          "name": "90's Converse",
+          "productId": "3574",
+          "sold": false
+        }
       ]
     },
     {
       "n": 2,
-      "title": "Lookbook 02",
-      "season": "[SEASON]",
-      "intro": "[One or two lines about the lookbook: where it was shot, who is in it, what ties the pieces together.]",
-      "looks": [
-        { "label": "Look 01", "photo": null, "caption": "[PIECE] · [PIECE]" },
-        { "label": "Look 02", "photo": null, "caption": "[PIECE] · [PIECE]" },
-        { "label": "Look 03", "photo": null, "caption": "[PIECE]" }
-      ],
-      "pieces": [
-        { "name": "[Piece name]", "productId": null, "sold": false },
-        { "name": "[Piece name]", "productId": null, "sold": false },
-        { "name": "[Piece name]", "productId": null, "sold": false },
-        { "name": "[Piece name]", "productId": null, "sold": false }
-      ]
+      "title": "lookbook 02",
+      "season": "spring 2026",
+      "lookCount": 5,
+      "cover": null,
+      "intro": "[intro]",
+      "looks": [],
+      "pieces": []
+    },
+    {
+      "n": 3,
+      "title": "lookbook 03",
+      "season": "winter 2025",
+      "lookCount": 6,
+      "cover": null,
+      "intro": "[intro]",
+      "looks": [],
+      "pieces": []
     }
   ]
 }

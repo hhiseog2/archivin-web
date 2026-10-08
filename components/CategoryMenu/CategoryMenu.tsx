@@ -1,13 +1,14 @@
 'use client';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useCallback, useRef, useState } from 'react';
+import Link from 'next/link';
+import { useCallback, useId, useRef, useState } from 'react';
 import { Caret } from '../Icons';
 import { Check } from '../Popup/Check';
 import { arrowKeys, usePopupBehavior } from '../Popup/usePopupBehavior';
 import popup from '../Popup/Popup.module.css';
 import { setPopup, usePopup } from '@/lib/popups';
-import { CATEGORY_VIEWS, currentViewLabel, goShop, isView, parseShopQuery, shopHref, viewHref } from '@/lib/shop';
+import { CATEGORY_VIEWS, currentViewLabel, goShop, isView, parseShopQuery, viewHref } from '@/lib/shop';
 import styles from './CategoryMenu.module.css';
 
 /**
@@ -16,6 +17,13 @@ import styles from './CategoryMenu.module.css';
  * from other pages (desktop header) it just opens the shop on that view.
  */
 export function CategoryMenu({ variant }: { variant: 'mobile' | 'desktop' }) {
+  const pathname = usePathname();
+  // Off the shop the desktop header shows "shop ▾" with plain links instead (A21_DHeader, v5).
+  if (variant === 'desktop' && pathname !== '/shop' && pathname !== '/') return <ShopNavMenu />;
+  return <ShopCategoryMenu variant={variant} />;
+}
+
+function ShopCategoryMenu({ variant }: { variant: 'mobile' | 'desktop' }) {
   const pathname = usePathname();
   const params = useSearchParams();
   const router = useRouter();
@@ -31,8 +39,7 @@ export function CategoryMenu({ variant }: { variant: 'mobile' | 'desktop' }) {
   const close = useCallback(() => setPopup(null), []);
   usePopupBehavior(open, close, wrap, trigger, list, fromKeyboard);
 
-  // TODO(design): off the shop the header label has no design; "shop" with nothing checked.
-  const label = query ? currentViewLabel(query) : 'shop';
+  const label = query ? currentViewLabel(query) : 'all';
 
   return (
     <div ref={wrap} className={styles.wrap}>
@@ -72,7 +79,7 @@ export function CategoryMenu({ variant }: { variant: 'mobile' | 'desktop' }) {
               onClick={() => {
                 close();
                 trigger.current?.focus({ preventScroll: true });
-                const href = query ? shopHref({ ...query, cat: v.cat, brands: v.brands }) : viewHref(v);
+                const href = query ? viewHref(v, query) : viewHref(v);
                 goShop(href, { onShop, push: router.push });
               }}
             >
@@ -82,6 +89,58 @@ export function CategoryMenu({ variant }: { variant: 'mobile' | 'desktop' }) {
           );
         })}
       </div>
+    </div>
+  );
+}
+
+/**
+ * "shop ▾" on desktop pages other than the shop (README 5 DHeader): same window as "all ▾" (220px, 40px rows),
+ * but a <nav> of links to /shop?… — no listbox, no check marks.
+ */
+function ShopNavMenu() {
+  const open = usePopup() === 'shopnav';
+  const [fromKeyboard, setFromKeyboard] = useState(false);
+  const wrap = useRef<HTMLDivElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const list = useRef<HTMLElement>(null);
+  const close = useCallback(() => setPopup(null), []);
+  usePopupBehavior(open, close, wrap, trigger, list, fromKeyboard);
+  const navId = useId();
+
+  return (
+    <div ref={wrap} className={styles.wrap}>
+      <button
+        ref={trigger}
+        type="button"
+        aria-expanded={open}
+        aria-controls={navId}
+        className={popup.trigger}
+        onClick={(e) => {
+          setFromKeyboard(e.detail === 0);
+          setPopup(open ? null : 'shopnav');
+        }}
+      >
+        <span className={popup.ulbl}>shop</span>
+        <Caret />
+      </button>
+      <nav
+        ref={list}
+        id={navId}
+        aria-label="Shop categories"
+        aria-hidden={!open}
+        className={`${popup.pop} ${open ? popup.open : ''} ${styles.list} ${styles.desktop}`}
+        onKeyDown={arrowKeys}
+      >
+        <ul className={styles.navList}>
+          {CATEGORY_VIEWS.map((v) => (
+            <li key={v.label} className={v.gapBefore ? styles.gap : undefined}>
+              <Link href={viewHref(v)} tabIndex={open ? 0 : -1} className={popup.item} onClick={close}>
+                <span className={popup.ulbl}>{v.label}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </div>
   );
 }

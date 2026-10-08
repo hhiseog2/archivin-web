@@ -1,0 +1,169 @@
+/* Form elements (README 5, v5: .fl .fi .fhelp .ferr .cbx .rdo). Used by sign in, checkout, review write, pay. */
+
+.label {
+  display: block;
+  margin: 0 0 6px;
+  font-size: var(--type-field-label-size, 13px);
+  line-height: 1.5;
+  color: var(--color-ink-2);
+}
+
+.input {
+  display: block;
+  width: 100%;
+  height: var(--space-field-height, 48px);
+  margin: 0;
+  padding: 0 14px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-field, 12px);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  /* 16px on every screen so iOS doesn't zoom on focus. */
+  font-size: 16px;
+  line-height: 1.2;
+  transition:
+    border-color 0.16s ease,
+    box-shadow 0.16s ease;
+}
+.input::placeholder {
+  color: var(--color-field-placeholder, #8b8e97);
+  opacity: 1;
+}
+.input:focus,
+.input:focus-visible {
+  outline: none;
+  border-color: var(--color-ink);
+  box-shadow: 0 0 0 1px var(--color-ink);
+}
+.input[aria-invalid='true'] {
+  border-color: var(--color-error, #a1161b);
+  box-shadow: 0 0 0 1px var(--color-error, #a1161b);
+}
+.input[readonly] {
+  background: var(--color-fill);
+  border-color: var(--color-fill);
+}
+.input[readonly]:focus {
+  border-color: var(--color-ink);
+}
+textarea.input {
+  height: auto;
+  min-height: 160px;
+  padding: 12px 14px;
+  line-height: 1.55;
+  resize: vertical;
+}
+select.input {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.selectWrap {
+  position: relative;
+}
+.chev {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  margin-top: -5.5px;
+  pointer-events: none;
+}
+
+.error {
+  margin: 6px 0 0;
+  font-size: var(--type-field-error-size, 13px);
+  line-height: 1.5;
+  color: var(--color-error, #a1161b);
+}
+
+.help {
+  margin: 6px 0 0;
+  font-size: var(--type-field-help-size, 12px);
+  line-height: 1.5;
+  color: var(--color-ink-2);
+}
+
+.checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+  border: 1px solid var(--color-ink);
+  border-radius: var(--radius-checkbox, 4px);
+  background: var(--color-paper);
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+.checkbox::after {
+  content: '';
+  width: 5px;
+  height: 9px;
+  margin-top: -3px;
+  border: solid transparent;
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+}
+.checkbox:checked::after {
+  border-color: var(--color-navy);
+}
+.checkbox[aria-invalid='true'] {
+  border-color: var(--color-error, #a1161b);
+}
+
+.radio {
+  -webkit-appearance: none;
+  appearance: none;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border: 1px solid var(--color-ink);
+  border-radius: 50%;
+  background: var(--color-paper);
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+.radio::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.radio:checked {
+  border-color: var(--color-navy);
+}
+.radio:checked::after {
+  background: var(--color-navy);
+}
+
+/* Simple label + control row (checkbox / radio). Screens can lay out their own rows with the classes above. */
+.choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+.choice .radio {
+  margin-top: 2px;
+}
+
+.group {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .input {
+    transition: none;
+  }
+}

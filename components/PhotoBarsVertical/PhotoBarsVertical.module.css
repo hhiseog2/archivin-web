@@ -1,0 +1,51 @@
+/* .pbars group / .pdotv / .pthumbv (A21_DProduct). */
+.group {
+  position: sticky;
+  top: var(--space-sticky-top);
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+}
+
+.column {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  width: var(--space-tap-small);
+  height: var(--space-tap-small);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.bar {
+  display: block;
+  width: 4px;
+  height: 16px;
+  border-radius: var(--radius-bar);
+  background: var(--color-bar-idle);
+}
+
+.thumb {
+  position: absolute;
+  left: 12px;
+  width: 4px;
+  height: 16px;
+  border-radius: var(--radius-bar);
+  background: var(--color-navy);
+  pointer-events: none;
+  transition: top 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thumb {
+    transition: none !important;
+  }
+}

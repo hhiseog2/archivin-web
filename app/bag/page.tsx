@@ -4,7 +4,7 @@ import { BagView } from './BagView';
 
 export const metadata: Metadata = { title: 'Bag' };
 
-/** A21_Bag. No footer (README 5). */
+/** A21_Bag · A21_DBag (README 8-4). No footer (README 5). */
 export default function BagPage() {
   return (
     <SiteChrome footer={false} fullWidth>

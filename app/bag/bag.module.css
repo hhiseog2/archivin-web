@@ -1,25 +1,4 @@
-/* Mobile — A21_Bag. */
-.proto {
-  margin: 4px var(--space-gutter-mobile) 0;
-  padding: 0 0 0 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  border-radius: var(--radius-panel);
-  background: var(--color-fill);
-  font-size: var(--type-note-size);
-}
-.protoClose {
-  height: 44px;
-  padding: 0 14px;
-  border: 0;
-  background: transparent;
-  color: var(--color-ink);
-  font-size: var(--type-note-size);
-  cursor: pointer;
-}
-
+/* Mobile — A21_Bag (README 8-4). */
 .main {
   padding: 0 var(--space-gutter-mobile) 40px;
   display: flex;
@@ -145,24 +124,41 @@
   color: var(--color-ink);
 }
 .policy .policyKo {
+  font-family: var(--font-kr);
   font-size: 12px;
   line-height: var(--type-kr-note-line);
+}
+/* "shipping & returns guide": 13px ink underline, 44px tall. */
+.guide {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-ink);
+  text-underline-offset: 3px;
 }
 
 .checkout {
   margin-top: 24px;
   height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 0;
   border-radius: var(--radius-pill);
   background: var(--color-navy);
   color: var(--color-on-navy);
   font-size: var(--type-button-size);
+  text-decoration: none;
   cursor: pointer;
 }
-.checkoutOff {
+.checkout:hover {
+  color: var(--color-on-navy);
+}
+.checkoutOff,
+.checkoutOff:hover {
   background: var(--color-fill);
   color: var(--color-ink-2);
-  cursor: not-allowed;
+  cursor: default;
 }
 
 .note {
@@ -174,6 +170,7 @@
 }
 .noteKo {
   margin: 0;
+  font-family: var(--font-kr);
   font-size: 12px;
   line-height: var(--type-kr-note-line);
   color: var(--color-ink-2);
@@ -200,17 +197,22 @@
   text-underline-offset: 4px;
 }
 
-/* TODO(design): desktop — same column, 560px wide, centred under the header. */
+/* Desktop — A21_DBag: one centred column, max 608px (560 + 24 each side), 56px top · 96px bottom, photos 84×112. */
 @media (min-width: 900px) {
-  .proto {
-    width: calc(100% - 2 * var(--space-gutter-desktop));
-    max-width: 560px;
-    margin: 24px auto 0;
-  }
   .main {
     width: 100%;
-    max-width: calc(560px + 2 * var(--space-gutter-desktop));
+    max-width: 608px;
     margin: 0 auto;
-    padding: 40px var(--space-gutter-desktop) 96px;
+    padding: 56px 24px 96px;
+  }
+  .head {
+    padding-top: 0;
+  }
+  .row {
+    gap: 16px;
+  }
+  .thumb {
+    width: 84px;
+    height: 112px;
   }
 }

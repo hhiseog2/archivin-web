@@ -68,8 +68,7 @@ export function BagPreview({ ids }: { ids: string[] }) {
             <Link href="/bag" className={`${styles.btn} ${styles.btnFill}`}>
               view bag
             </Link>
-            {/* TODO: send to /checkout once payment is connected (README 8-5). */}
-            <Link href="/bag" className={`${styles.btn} ${styles.btnNavy}`}>
+            <Link href="/checkout" className={`${styles.btn} ${styles.btnNavy}`}>
               checkout
             </Link>
           </div>

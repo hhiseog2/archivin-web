@@ -1,239 +1,248 @@
-.main {
+/* A21_Notice · A21_DNotice · A21_NoticePost · A21_DNoticePost (README 8-11). */
+
+/* ---------- list ---------- */
+.listMain {
+  padding: 32px var(--space-gutter-mobile) 0;
   display: flex;
   flex-direction: column;
 }
-@media (min-width: 900px) {
-  .main {
-    width: 100%;
-    max-width: 1128px;
-    padding: 0 24px;
-  }
-}
 
-.head {
-  padding: 24px 16px 16px;
-}
-@media (min-width: 900px) {
-  .head {
-    padding: 40px 0 24px;
-  }
-}
-
-.list {
+.title {
   margin: 0;
+  font-weight: 400;
+  font-size: var(--type-title-size);
+  line-height: var(--type-title-line);
+}
+
+.intro {
+  margin: 6px 0 0;
+  font-size: var(--type-note-size);
+  line-height: 1.55;
+  color: var(--color-ink-2);
+}
+
+/* `.nlist`: no rules, rows split by space only (20px mobile, 12px desktop). */
+.nlist {
+  margin: 28px 0 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid var(--color-fill);
-}
-.item {
-  border-bottom: 1px solid var(--color-fill);
-}
-
-.ko {
-  font-family: var(--font-kr);
-  font-weight: 400;
-}
-.bold {
-  font-weight: 400;
-}
-.date {
-  flex-shrink: 0;
-  font-weight: 400;
-  font-size: 12px;
-  color: var(--color-ink-2);
-}
-
-/* ---------- Mobile rows ---------- */
-.mLink {
-  min-height: 76px;
-  padding: 14px 16px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 6px;
-  color: var(--color-ink);
-  text-decoration: none;
-}
-.mTitleRow {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.mTitle {
-  font-size: 15px;
-  line-height: 1.3;
+  gap: 20px;
 }
 
-/* ---------- Desktop accordion ---------- */
-.accH {
-  margin: 0;
-}
-.accBtn {
-  width: 100%;
-  min-height: 72px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  border: 0;
-  background: transparent;
-  color: var(--color-ink);
-  text-align: left;
-  cursor: pointer;
-}
-.accTitle {
-  flex: 1;
-  min-width: 0;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.3;
-}
-.accTitle.bold {
-  font-weight: 400;
-}
-.accIcon {
-  flex-shrink: 0;
-  width: 24px;
-  display: flex;
-  justify-content: center;
-}
-.accPanel {
-  max-width: 720px;
-  padding: 4px 0 32px;
-}
-
-/* ---------- Body blocks (shared) ---------- */
-.bodyH {
-  margin: 24px 0 8px;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
-}
-.accPanel > .bodyH:first-child {
-  margin-top: 0;
-}
-.bodyP {
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.55;
-}
-.bodyP + .bodyP {
-  margin-top: 12px;
-}
-.bodyDl + .bodyP {
-  margin-top: 16px;
-}
-.bodyP.muted {
-  color: var(--color-ink-2);
-}
-.bodyP a {
-  text-underline-offset: 3px;
-}
-.bodyP:lang(ko) {
-  line-height: 1.7;
-}
-.noteKo {
-  margin: 24px 0 0;
-  padding: 12px 14px;
-  background: var(--color-fill);
-  font-family: var(--font-kr);
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 1.6;
-  color: var(--color-ink);
-}
-.bodyDl {
-  margin: 0;
-  max-width: 420px;
-  font-size: 15px;
-}
-.bodyDl > div {
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid var(--color-fill);
-}
-.bodyDl > div:last-child {
-  border-bottom: 1px solid var(--color-fill);
-}
-.bodyDl dt {
-  color: var(--color-ink-2);
-}
-.bodyDl dd {
-  margin: 0;
-}
-
-/* ---------- Mobile post ---------- */
-.post {
-  display: flex;
-  flex-direction: column;
-}
-.back {
-  padding: 0 4px;
-}
-.backLink {
-  min-height: 44px;
-  padding: 0 12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  color: var(--color-ink);
-  font-weight: 400;
-  font-size: 12px;
-  text-decoration: none;
-}
-.article {
-  padding: 12px 16px 0;
-}
-.articleHead {
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--color-fill);
-}
-.articleTitle {
-  margin-top: 12px;
-}
-.articleTitle.ko {
-  font-weight: 400;
-}
-.byline {
-  margin: 8px 0 0;
-  font-size: 12px;
-  line-height: 1.5;
-  color: var(--color-ink-2);
-}
-.article .bodyDl {
-  margin-top: 24px;
-}
-.article > .bodyP:nth-child(2) {
-  margin-top: 24px;
-}
-
-.more {
-  margin-top: 32px;
-  border-top: 1px solid var(--color-fill);
-}
-.nextLink {
-  min-height: 56px;
-  padding: 0 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  border-bottom: 1px solid var(--color-fill);
-  color: var(--color-ink);
-  text-decoration: none;
-}
-.nextText {
+.row {
+  min-height: var(--space-tap);
   display: flex;
   flex-direction: column;
   gap: 2px;
-  font-size: 14px;
+  color: var(--color-ink);
+  text-decoration: none;
+  font-size: var(--type-body-size);
+  line-height: 1.5;
 }
-.nextKicker {
-  font-size: 11px;
+.row:hover {
+  color: var(--color-ink);
+}
+
+.pinned {
   color: var(--color-ink-2);
 }
-.allWrap {
-  padding: 24px 16px 0;
+
+/* `.nt`: hover underlines the title only, not "pinned ·". */
+.nt {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s ease;
+}
+@media (hover: hover) {
+  .row:hover .nt {
+    text-decoration-color: currentColor;
+  }
+}
+
+.date {
+  flex-shrink: 0;
+  font-size: var(--type-note-size);
+  color: var(--color-ink-2);
+}
+
+/* ---------- post ---------- */
+.postMain {
+  padding: 16px var(--space-gutter-mobile) 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.back {
+  height: var(--space-tap);
+  margin-left: -12px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  font-size: var(--type-nav-size);
+  color: var(--color-ink);
+  text-decoration: none;
+}
+.back:hover {
+  color: var(--color-ink);
+}
+
+.article {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.meta {
+  margin: 0;
+  font-size: var(--type-note-size);
+  line-height: 1.5;
+  color: var(--color-ink-2);
+}
+
+.postTitle {
+  margin: 4px 0 0;
+  font-weight: 400;
+  font-size: var(--type-title-size);
+  line-height: var(--type-title-line);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sub-heading 13px ink-2: 28px above (32px for the first), 6px below. */
+.h {
+  margin: 28px 0 6px;
+  font-weight: 400;
+  font-size: var(--type-note-size);
+  line-height: 1.5;
+  color: var(--color-ink-2);
+}
+.h:first-child {
+  margin-top: 32px;
+}
+
+/* Paragraphs 14 / 1.75, 10px apart; none after a sub-heading. */
+.p,
+.dl {
+  margin: 10px 0 0;
+  font-size: var(--type-body-size);
+  line-height: 1.75;
+}
+.h + .p,
+.h + .dl {
+  margin-top: 0;
+}
+.p:first-child,
+.dl:first-child {
+  margin-top: 32px;
+}
+.muted {
+  color: var(--color-ink-2);
+}
+
+/* `dl` block (store hours, bank account): no design — same key-value row as about (TODO(design)). */
+.dlRow {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  column-gap: 16px;
+  padding: 6px 0;
+  line-height: 1.55;
+}
+.dlRow dt {
+  color: var(--color-ink-2);
+}
+.dlRow dd {
+  margin: 0;
+}
+
+/* Korean note box: fill, 12px radius, 14px 16px inside. */
+.noteKo {
+  margin: 28px 0 0;
+  padding: 14px 16px;
+  border-radius: var(--radius-panel);
+  background: var(--color-fill);
+  font-family: var(--font-kr);
+  font-size: var(--type-note-size);
+  line-height: 1.7;
+}
+
+/* 13px underlined text link, 44px tall ("read the full guide", "all notices"). */
+.textLink {
+  align-self: flex-start;
+  height: var(--space-tap);
+  display: inline-flex;
+  align-items: center;
+  margin-top: 12px;
+  color: var(--color-ink);
+  font-size: var(--type-note-size);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.textLink:hover {
+  color: var(--color-ink);
+}
+
+.more {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+.next {
+  min-height: 52px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  color: var(--color-ink);
+  text-decoration: none;
+  font-size: var(--type-body-size);
+  line-height: 1.5;
+}
+.next:hover {
+  color: var(--color-ink);
+}
+.nextLabel {
+  font-size: var(--type-note-size);
+  color: var(--color-ink-2);
+}
+
+@media (min-width: 900px) {
+  /* List: centred 640px (max 688 with 24px sides), 56px under the header; title left, date right. */
+  .listMain {
+    width: 100%;
+    max-width: 688px;
+    margin: 0 auto;
+    padding: 56px 24px 0;
+  }
+  .nlist {
+    gap: 12px;
+  }
+  .row {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  /* Post: centred 560px column. */
+  .postMain {
+    width: 100%;
+    max-width: 608px;
+    margin: 0 auto;
+    padding: 56px 24px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nt {
+    transition: none;
+  }
 }

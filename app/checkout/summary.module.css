@@ -1,0 +1,79 @@
+/* `your order` — A21_Checkout · A21_OrderDone · A21_OrderPaid (README 8-7, 8-8). */
+.summary {
+  display: flex;
+  flex-direction: column;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.title {
+  margin: 0;
+  font-weight: 400;
+  font-size: var(--type-body-size);
+  line-height: 1.5;
+}
+.count {
+  margin: 0;
+  font-size: var(--type-note-size);
+  color: var(--color-ink-2);
+}
+
+.list {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.thumb,
+.thumbBlank {
+  flex-shrink: 0;
+  width: 56px;
+  height: 75px;
+  object-fit: cover;
+}
+.thumbBlank {
+  background: var(--color-fill);
+}
+.text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  font-size: var(--type-body-size);
+  line-height: 1.5;
+}
+.size {
+  font-size: var(--type-note-size);
+  color: var(--color-ink-2);
+}
+.price {
+  flex-shrink: 0;
+  font-size: var(--type-body-size);
+  line-height: 1.5;
+}
+
+.sums {
+  margin: 24px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: var(--type-body-size);
+  line-height: 1.5;
+}
+.sums > div {
+  display: flex;
+  justify-content: space-between;
+}
+.sums dd {
+  margin: 0;
+}

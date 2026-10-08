@@ -1,20 +1,15 @@
 import type { Metadata } from 'next';
 import { SiteChrome } from '@/components/SiteChrome';
-import { ReviewsView } from '../ReviewsView';
-import { WriteReviewMobile } from './WriteReviewMobile';
+import { ReviewWrite } from './ReviewWrite';
 
 export const metadata: Metadata = { title: 'Write a review' };
 
-/** Mobile: the full-page form. Desktop: the reviews page with the form already open. */
-export default function WriteReviewPage() {
+/** `?piece=<product id>` preselects the piece (e.g. from a delivered order on my page). */
+export default async function WriteReviewPage({ searchParams }: { searchParams: Promise<{ piece?: string }> }) {
+  const { piece } = await searchParams;
   return (
-    <SiteChrome>
-      <div className="m-only">
-        <WriteReviewMobile />
-      </div>
-      <div className="d-only">
-        <ReviewsView initialWriting />
-      </div>
+    <SiteChrome fullWidth>
+      <ReviewWrite initialPiece={typeof piece === 'string' ? piece : undefined} />
     </SiteChrome>
   );
 }

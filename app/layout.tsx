@@ -21,7 +21,8 @@ const TYPEKIT_ID = process.env.NEXT_PUBLIC_TYPEKIT_ID;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    // suppressHydrationWarning: the intro's inline script may mark <html data-intro-seen> before hydration.
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />

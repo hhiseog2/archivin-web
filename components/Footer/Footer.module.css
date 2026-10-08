@@ -1,9 +1,10 @@
-/* Mobile — A21_Shop footer. */
+/* Mobile — design/shared/A21_Footer (240px tall at 390). */
 .footer {
   padding: 0 var(--space-gutter-mobile) 32px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  background: var(--color-paper);
 }
 
 .nav {
@@ -16,35 +17,50 @@
   min-height: 44px;
   display: flex;
   align-items: center;
-  font-size: var(--type-nav-size);
+  font-size: 13px;
   color: var(--color-ink);
   text-decoration: none;
 }
+.link:hover {
+  color: var(--color-ink-2);
+}
 
-.legal {
+.info {
   font-family: var(--font-kr);
-  font-size: var(--type-kr-legal-size);
+  font-size: 11px;
   line-height: 1.7;
   color: var(--color-ink-2);
 }
-.legal p {
+.info p {
   margin: 0;
-}
-.legal a {
-  color: var(--color-ink-2);
 }
 
 .legalLinks {
   display: flex;
-  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 16px;
 }
 .legalLinks a {
   min-height: 44px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  text-underline-offset: 3px;
+}
+.legalLinks a:hover {
+  color: var(--color-ink);
+}
+.terms {
+  color: var(--color-ink-2);
+}
+.privacy {
+  color: var(--color-ink);
+}
+.ext {
+  margin-left: 3px;
 }
 
-/* Desktop — A21_DShop footer: links left, business info right-aligned. */
+/* Desktop — design/shared/A21_DFooter (127px at 1440): links left, business info right. */
 @media (min-width: 900px) {
   .footer {
     width: 100%;
@@ -64,8 +80,14 @@
   .link {
     min-height: 36px;
   }
-  .legal {
+  .info {
     line-height: 1.8;
     text-align: right;
+  }
+  .legalLinks {
+    justify-content: flex-end;
+  }
+  .legalLinks a {
+    min-height: 28px;
   }
 }

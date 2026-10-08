@@ -1,212 +1,294 @@
-.header {
-  flex-shrink: 0;
-  height: 56px;
-  padding: 0 4px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  align-items: center;
-}
-.back {
-  justify-self: start;
-  min-height: 44px;
-  padding: 0 12px;
+/* Checkout — A21_Checkout (mobile) · A21_DCheckout (desktop, .cogrid / .cosum), README 8-7. */
+
+.page {
+  min-height: 100vh;
   display: flex;
-  align-items: center;
-  gap: 4px;
+  flex-direction: column;
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+.shell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Mobile: one column, 24px top · 16px sides; the pay bar sticks to the bottom (margin-top: auto when short). */
+.form {
+  flex: 1;
+  padding: 24px var(--space-gutter-mobile) 0;
+  display: flex;
+  flex-direction: column;
+}
+.main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin: 0;
   font-weight: 400;
+  font-size: var(--type-title-size);
+  line-height: var(--type-title-line);
+}
+.guest {
+  margin: 6px 0 0;
+  font-size: var(--type-note-size);
+  line-height: 1.55;
+  color: var(--color-ink-2);
+}
+.guest a {
+  color: var(--color-ink);
+  text-underline-offset: 3px;
+}
+
+/* Sold right before payment (role="alert"). */
+.soldNotice {
+  margin-top: 20px;
+  padding: 14px 16px;
+  border-radius: var(--radius-panel);
+  background: var(--color-fill);
+  font-size: var(--type-note-size);
+  line-height: 1.55;
+}
+.soldNotice p {
+  margin: 0;
+}
+.soldNotice .soldLine {
+  color: var(--color-sold);
+}
+.soldNotice .soldBody {
+  margin-top: 2px;
+  color: var(--color-ink);
+}
+.soldNotice .soldKo {
+  margin-top: 2px;
+  font-family: var(--font-kr);
   font-size: 12px;
-  text-decoration: none;
+  line-height: var(--type-kr-note-line);
+  color: var(--color-ink-2);
 }
-.wordmark {
-  justify-self: center;
-  min-height: 44px;
+
+.section {
+  margin-top: 40px;
   display: flex;
-  align-items: center;
-  font-family: var(--font-text);
+  flex-direction: column;
+  gap: 16px;
+}
+.section.first {
+  margin-top: 32px;
+}
+.h2 {
+  margin: 0;
   font-weight: 400;
-  font-size: 18px;
-  text-decoration: none;
+  font-size: var(--type-body-size);
+  line-height: 1.5;
 }
 
-.head {
-  padding: 24px 16px 8px;
-}
-.first {
-  padding-top: 24px;
-}
-
+/* Address: postcode (read-only) + "find address", then the street line 8px below. */
 .postRow {
   display: flex;
   gap: 8px;
 }
-.postInput {
+.post {
   flex: 1;
   min-width: 0;
 }
-.findBtn {
+.find {
   flex-shrink: 0;
-  padding: 0 16px;
-  font-size: 13px;
+  height: var(--space-field-height);
+  padding: 0 20px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-fill);
+  color: var(--color-ink);
+  font-size: var(--type-body-size);
+  cursor: pointer;
 }
 .street {
   margin-top: 8px;
 }
 
+/* Payment: the section has no gap — the title sits 16px above the group. */
+.section.paySection {
+  gap: 0;
+}
+.payTitle {
+  margin-bottom: 16px;
+}
 .methods {
-  display: flex;
-  flex-direction: column;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-panel);
+}
+.methodsBad {
+  border-color: var(--color-error);
 }
 .method {
-  min-height: 52px;
-  margin-top: -1px;
+  min-height: 56px;
   padding: 0 16px;
   display: flex;
   align-items: center;
   gap: 12px;
-  border: 1px solid var(--color-fill);
-  background: var(--color-paper);
   cursor: pointer;
 }
-.method:first-child {
-  margin-top: 0;
-}
-.methodOn {
-  background: var(--color-fill);
-}
-.methodLabel {
+.methodName {
   flex: 1;
-  font-size: 15px;
+  font-size: var(--type-body-size);
 }
 .methodKo {
   font-family: var(--font-kr);
-  font-weight: 400;
-  font-size: 13px;
+  font-size: var(--type-note-size);
   color: var(--color-ink-2);
 }
-.bankBox {
-  margin-top: 16px;
-  padding: 16px;
-  background: var(--color-fill);
+.methodRule {
+  height: 1px;
+  margin: 0 16px;
+  background: var(--color-rule);
 }
-.bankNote {
+.dep {
+  padding: 4px 16px 18px;
+}
+.dep .depKo {
+  margin-top: 2px;
+  font-family: var(--font-kr);
+}
+
+/* Mobile: the summary column flows straight on in the form (so the pay bar can stick to the viewport). */
+.side {
+  display: contents;
+}
+.sumWrap {
+  margin-top: 40px;
+}
+.agreeWrap {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+}
+.agreeRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.agreeLabel {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--type-body-size);
+  line-height: 1.55;
+  cursor: pointer;
+}
+.required {
+  font-size: var(--type-note-size);
+  color: var(--color-ink-2);
+}
+.agreeKo {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-kr);
+  font-size: 12px;
+  line-height: var(--type-kr-note-line);
+  color: var(--color-ink-2);
+}
+.terms {
+  margin-left: 30px;
+  align-self: flex-start;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-ink);
+  font-size: var(--type-note-size);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.agreeErr {
+  margin: 0 0 0 30px;
+}
+
+.spacer {
+  flex-shrink: 0;
+  height: 24px;
+}
+.payBar {
+  position: sticky;
+  bottom: 0;
+  z-index: 4;
+  margin: auto calc(-1 * var(--space-gutter-mobile)) 0;
+  padding: 12px var(--space-gutter-mobile) 16px;
+  background: var(--color-paper);
+  border-top: 1px solid var(--color-rule);
+}
+.payBtn {
+  width: 100%;
+  height: 52px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-navy);
+  color: var(--color-on-navy);
+  font-size: var(--type-button-size);
+  cursor: pointer;
+}
+.payNote {
   margin: 8px 0 0;
   font-size: 12px;
   line-height: 1.5;
   color: var(--color-ink-2);
+  text-align: center;
 }
 
-.items {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  border-top: 1px solid var(--color-fill);
-}
-.items li {
-  padding: 8px 0;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border-bottom: 1px solid var(--color-fill);
-}
-.itemThumb {
-  width: 48px;
-  aspect-ratio: 4 / 5;
-  flex-shrink: 0;
-  background: var(--color-fill);
-}
-.itemText {
-  flex: 1;
-  min-width: 0;
+/* Nothing buyable (no design — the bag's empty state). */
+.empty {
+  padding: 160px 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+  font-size: var(--type-body-size);
 }
-.itemName {
-  font-weight: 400;
-  font-size: 12px;
-}
-.itemSize {
-  font-size: 12px;
-  color: var(--color-ink-2);
-}
-.itemPrice {
-  font-size: 14px;
-  font-variant-numeric: tabular-nums;
-}
-.emptyNote {
+.empty p {
   margin: 0;
-  font-size: 14px;
-  color: var(--color-ink-2);
 }
-
-.sum {
-  margin: 12px 0 0;
-  font-size: 14px;
-}
-.sum > div {
-  height: 32px;
+.emptyLink {
+  min-height: 44px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-.sum dt {
-  color: var(--color-ink-2);
-}
-.sum dd {
-  margin: 0;
-  font-variant-numeric: tabular-nums;
-}
-.sum > .total {
-  height: auto;
-  margin-top: 8px;
-  padding-top: 12px;
-  border-top: 1px solid var(--color-fill);
-}
-.total dt {
   color: var(--color-ink);
-  font-weight: 400;
-  font-size: 15px;
-}
-.total dd {
-  font-weight: 400;
-  font-size: 18px;
+  text-underline-offset: 4px;
 }
 
-.agreeSection {
-  padding: 32px 16px 0;
-}
-.agree {
-  min-height: 44px;
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  font-size: 14px;
-  line-height: 1.5;
-  cursor: pointer;
-}
-.agreeBox {
-  margin-top: 2px;
-}
-.terms {
-  margin-left: 32px;
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  font-size: 13px;
-  text-underline-offset: 3px;
-}
-.agreeErr {
-  margin: 0 0 0 32px;
-}
-
-.paySection {
-  padding: 24px 16px 48px;
-}
-.payBtn {
-  width: 100%;
-}
-.payNote {
-  margin: 12px 0 0;
-  font-size: 12px;
-  line-height: 1.5;
-  color: var(--color-ink-2);
+/* Desktop — form | summary 360px, gap 96, max 1088 (1040 + 24 each side), 56px top · 120px bottom. */
+@media (min-width: 900px) {
+  .form {
+    flex: none;
+    width: 100%;
+    max-width: 1088px;
+    margin: 0 auto;
+    padding: 56px 24px 120px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--space-checkout-summary);
+    column-gap: 96px;
+    align-items: start;
+  }
+  .side {
+    position: sticky;
+    top: var(--space-sticky-top);
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .sumWrap,
+  .agreeWrap {
+    margin-top: 0;
+  }
+  .spacer {
+    display: none;
+  }
+  .payBar {
+    position: static;
+    margin: 0;
+    padding: 0;
+    border-top: 0;
+    background: none;
+  }
 }

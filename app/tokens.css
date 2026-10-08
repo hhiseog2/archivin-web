@@ -7,6 +7,8 @@
   --color-ink-2: #5e616a;
   --color-fill: #f2f2f4;
   --color-sold: #a1161b;
+  --color-error: #a1161b;
+  --color-field-placeholder: #8b8e97;
   --color-line: #d6d7dc;
   --color-rule: #e5e6ea;
   --color-bar-idle: #8b8e97;
@@ -30,8 +32,23 @@
   --type-note-line: 1.5;
   --type-menu-link-size: 18px;
   --type-menu-link-line: 30px;
+  --type-statement-size: 18px;
+  --type-statement-line: 1.4;
+  --type-reading-size: 14px;
+  --type-reading-line: 1.7;
+  --type-section-label-size: 13px;
+  --type-section-label-line: 1.5;
   --type-kr-note-line: 1.6;
   --type-kr-legal-size: 11px;
+  --type-field-size: 16px;
+  --type-field-line: 1.2;
+  --type-field-label-size: 13px;
+  --type-field-label-line: 1.5;
+  --type-field-help-size: 12px;
+  --type-field-help-line: 1.5;
+  --type-field-error-size: 13px;
+  --type-field-error-line: 1.5;
+  --type-chip-size: 14px;
 
   --space-gutter-mobile: 16px;
   --space-gutter-intro-mobile: 30px;
@@ -40,10 +57,22 @@
   --space-tap: 44px;
   --space-tap-small: 28px;
   --space-info-row: 48px;
+  --space-field-height: 48px;
+  --space-chip-mobile: 44px;
+  --space-chip-desktop: 40px;
+  --space-sticky-top: 32px;
+  --space-pdp-photo: 600px;
+  --space-pdp-rail: 92px;
+  --space-reading-width: 560px;
+  --space-list-width: 640px;
+  --space-form-width: 400px;
+  --space-checkout-summary: 360px;
   --radius-0: 0;
   --radius-panel: 12px;
   --radius-pill: 999px;
   --radius-bar: 2px;
   --radius-check: 3px;
   --radius-dot-morph: 30%;
+  --radius-field: 12px;
+  --radius-checkbox: 4px;
 }

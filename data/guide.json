@@ -1,0 +1,123 @@
+{
+  "_note": "A21_Guide(이용안내) 내용이에요. archivin.kr 이용안내와 상품 화면 문구를 옮겼어요. [N]일은 클라이언트 확인이 필요해요.",
+  "sections": [
+    {
+      "id": "shipping",
+      "title": "shipping",
+      "titleKo": "배송",
+      "kind": "kv",
+      "rows": [
+        {
+          "label": "fee",
+          "en": "₩ 3,000 anywhere in Korea, whatever you buy.",
+          "ko": "전국 3,000원, 주문 금액과 상관없이 같아요."
+        },
+        {
+          "label": "ships",
+          "en": "in 2–3 business days for orders placed by 3 pm. nothing ships on weekends or holidays.",
+          "ko": "오후 3시 전 주문 기준, 주말·공휴일을 빼고 영업일 2–3일 안에 보내요."
+        },
+        {
+          "label": "arrives",
+          "en": "usually 3–7 days after payment.",
+          "ko": "결제 확인 후 보통 3–7일 걸려요."
+        },
+        {
+          "label": "remote areas",
+          "en": "islands and mountain areas cost extra.",
+          "ko": "도서·산간 지역은 배송비가 더 들어요."
+        }
+      ]
+    },
+    {
+      "id": "payment",
+      "title": "payment",
+      "titleKo": "결제",
+      "kind": "kv",
+      "rows": [
+        {
+          "label": "card",
+          "en": "credit or debit card. for a large amount, your card company may call to confirm it.",
+          "ko": "신용·체크카드. 금액이 크면 카드사에서 확인 전화가 갈 수 있어요."
+        },
+        {
+          "label": "bank transfer",
+          "en": "pay within 7 days, under the name you ordered with. orders that aren't paid in 7 days cancel themselves.",
+          "ko": "주문 후 7일 안에 주문자 이름으로 입금해 주세요. 7일이 지나면 주문이 자동으로 취소돼요."
+        },
+        {
+          "label": "checks",
+          "en": "we may hold or cancel an order that looks like card fraud.",
+          "ko": "도용이 의심되는 주문은 보류하거나 취소할 수 있어요."
+        }
+      ]
+    },
+    {
+      "id": "exchanges",
+      "title": "exchanges & returns",
+      "titleKo": "교환·반품",
+      "kind": "p",
+      "paragraphs": [
+        {
+          "en": "pieces can't be exchanged or refunded unless they're defective.",
+          "ko": "하자가 아니면 교환·환불이 어려워요."
+        },
+        {
+          "en": "every piece is vintage and shows its age. each product page lists the condition and shows the flaws in the photos. if marks or stains bother you, check those before you buy.",
+          "ko": "데미지·오염에 민감하다면 추천하지 않아요. 빈티지를 이해하는 분께 추천해요."
+        },
+        {
+          "en": "if a piece is defective, email photos to eatery01@naver.com within [N] days of delivery. we reply with the next steps.",
+          "ko": "하자가 있으면 받은 날부터 [N]일 안에 사진과 함께 메일로 알려 주세요."
+        }
+      ]
+    },
+    {
+      "id": "refunds",
+      "title": "refunds",
+      "titleKo": "환불",
+      "kind": "kv",
+      "rows": [
+        {
+          "label": "when",
+          "en": "within 3 business days after the return reaches us and we've checked it.",
+          "ko": "반품이 도착해 확인한 뒤 3영업일 안에 환불해요."
+        },
+        {
+          "label": "card",
+          "en": "we cancel the payment. if it's already been billed, the refund shows on your next statement.",
+          "ko": "카드 승인을 취소해요. 이미 청구됐다면 다음 달 청구서에서 빠져요."
+        },
+        {
+          "label": "bank transfer",
+          "en": "to the account you tell us.",
+          "ko": "알려 주신 계좌로 보내요."
+        }
+      ]
+    },
+    {
+      "id": "membership",
+      "title": "membership",
+      "titleKo": "회원",
+      "kind": "p",
+      "paragraphs": [
+        {
+          "en": "joining is free. members see prices, keep their address for checkout and can find past orders.",
+          "ko": "가입은 무료예요. 가격은 회원에게 공개돼요."
+        }
+      ]
+    },
+    {
+      "id": "contact",
+      "title": "contact",
+      "titleKo": "문의",
+      "kind": "contact",
+      "contact": [
+        "email",
+        "phone",
+        "instagram"
+      ]
+    }
+  ],
+  "notIncluded": "적립금(배송 완료 20일 뒤 사용, 3년 새 적립 없으면 소멸 — 지금 사이트 설정)은 상품 화면에 표시가 꺼져 있어서 넣지 않았어요. 쓰기로 하면 한 묶음 더해요."
+}

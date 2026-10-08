@@ -1,0 +1,225 @@
+/* A21_Guide · A21_DGuide (README 8-14): .ggrid .gside .gtopidx .gidx */
+
+.main {
+  padding: 32px var(--space-gutter-mobile) 0;
+  display: flex;
+  flex-direction: column;
+}
+.col {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.side,
+.right {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  /* .ggrid — one 640px column up to 1099px, with the wrapping index under the title. */
+  .main {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 56px var(--space-gutter-desktop) 0;
+    display: grid;
+    grid-template-columns: minmax(0, var(--space-list-width));
+    justify-content: center;
+    column-gap: 48px;
+    align-items: start;
+  }
+}
+@media (min-width: 1100px) {
+  .main {
+    grid-template-columns: minmax(0, 1fr) minmax(0, var(--space-list-width)) minmax(0, 1fr);
+    justify-content: normal;
+  }
+  /* .gside — sticky index in the left column. */
+  .side {
+    display: block;
+    position: sticky;
+    top: var(--space-sticky-top);
+    align-self: start;
+  }
+  .right {
+    display: block;
+  }
+  .topIdx {
+    display: none;
+  }
+}
+
+.title {
+  margin: 0;
+  font-weight: 400;
+  font-size: var(--type-title-size);
+  line-height: var(--type-title-line);
+}
+.intro {
+  margin: 6px 0 0;
+  font-size: var(--type-note-size);
+  line-height: 1.55;
+  color: var(--color-ink-2);
+}
+.introKo {
+  margin-left: 6px;
+}
+
+/* Index links (.gidx): underline on hover / keyboard focus. */
+.ulbl {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s ease;
+}
+@media (hover: hover) {
+  .topLink:hover .ulbl,
+  .sideLink:hover .ulbl {
+    text-decoration-color: currentColor;
+  }
+}
+.topLink:focus-visible .ulbl,
+.sideLink:focus-visible .ulbl {
+  text-decoration-color: currentColor;
+}
+
+/* .gtopidx — 13px, 44px tall, 16px apart, wraps. */
+.topIdx {
+  margin-top: 12px;
+}
+.topList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 16px;
+}
+.topLink,
+.sideLink {
+  display: flex;
+  align-items: center;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+.topLink {
+  min-height: var(--space-tap);
+  font-size: var(--type-nav-size);
+}
+
+.sideLabel {
+  margin: 0 0 8px;
+  font-size: var(--type-note-size);
+  line-height: 1.5;
+  color: var(--color-ink-2);
+}
+.sideList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+.sideLink {
+  min-height: 36px;
+  font-size: var(--type-body-size);
+}
+
+/* Sections */
+.sections {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 900px) {
+  .sections {
+    margin-top: 40px;
+  }
+}
+.section + .section {
+  margin-top: 48px;
+}
+.heading {
+  margin: 0 0 8px;
+  font-weight: 400;
+  font-size: var(--type-body-size);
+  line-height: 1.5;
+  scroll-margin-top: 24px;
+}
+.headingKo {
+  margin-left: 8px;
+  font-size: var(--type-note-size);
+  color: var(--color-ink-2);
+}
+
+/* Key-value rows: 96px label on mobile, 112px on desktop. */
+.dl {
+  margin: 0;
+}
+.kv {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  column-gap: 12px;
+  padding: 8px 0;
+  font-size: var(--type-body-size);
+  line-height: 1.6;
+}
+@media (min-width: 900px) {
+  .kv {
+    grid-template-columns: 112px minmax(0, 1fr);
+    column-gap: 16px;
+  }
+}
+.dt {
+  color: var(--color-ink-2);
+}
+.dd {
+  margin: 0;
+}
+.ddKo {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--type-note-size);
+  line-height: 1.6;
+  color: var(--color-ink-2);
+}
+.valueLink {
+  color: var(--color-ink);
+  text-underline-offset: 3px;
+}
+
+/* Paragraphs */
+.p {
+  margin: 0;
+  font-size: var(--type-body-size);
+  line-height: 1.75;
+}
+.pNext {
+  margin-top: 14px;
+}
+.pKo {
+  margin: 6px 0 0;
+  font-size: var(--type-note-size);
+  line-height: 1.7;
+  color: var(--color-ink-2);
+}
+
+/* sign in or join · store hours and address */
+.textLink {
+  width: max-content;
+  height: var(--space-tap);
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  color: var(--color-ink);
+  font-size: var(--type-nav-size);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ulbl {
+    transition: none;
+  }
+}

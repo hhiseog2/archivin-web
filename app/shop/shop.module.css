@@ -15,8 +15,14 @@
   align-items: center;
 }
 
-/* Desktop — sort right-aligned 40px under the header. */
-.dSortRow {
+.toolRight {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Desktop — 40px under the header: subcategories wrap on the left, [size][sort] on the right (README 8-2). */
+.dRow {
   position: relative;
   z-index: 6;
   width: 100%;
@@ -24,16 +30,33 @@
   margin: 0 auto;
   padding: 40px var(--space-gutter-desktop) 0;
   display: flex;
-  justify-content: flex-end;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+.dSubs {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  margin-left: -12px;
+}
+.dTools {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
 }
 .dSort {
   margin-right: -12px;
 }
 
+/* Mobile: the note sits right under the top rows and the grid 16px below. Desktop: 16px under the row, grid 16px below the note. */
 .main {
-  padding: 16px var(--space-gutter-mobile) 0;
+  padding: 0 var(--space-gutter-mobile);
   display: flex;
   flex-direction: column;
+}
+.list {
+  margin-top: 16px;
 }
 @media (min-width: 900px) {
   .main {
@@ -41,6 +64,37 @@
     max-width: 1440px;
     margin: 0 auto;
     padding: 16px var(--space-gutter-desktop) 0;
+  }
+  .list {
+    margin-top: 0;
+  }
+}
+
+/* Members-only prices (README 8-2): 13px / 1.5 ink-2 + an ink underlined "sign in" (44px tall, 36px desktop). */
+.memberNote {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 6px;
+  font-size: var(--type-note-size);
+  line-height: var(--type-note-line);
+  color: var(--color-ink-2);
+}
+.signIn {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+@media (min-width: 900px) {
+  .memberNote {
+    margin-bottom: 16px;
+  }
+  .signIn {
+    min-height: 36px;
   }
 }
 
@@ -60,6 +114,10 @@
 .emptyText {
   margin: 0;
   font-size: var(--type-body-size);
+}
+.emptyActions {
+  display: flex;
+  gap: 8px;
 }
 
 .underlined {

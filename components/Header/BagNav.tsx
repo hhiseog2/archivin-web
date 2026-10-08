@@ -5,8 +5,11 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useId, useRef, useState, type MouseEvent } from 'react';
 import { BagDot } from '../BagDot/BagDot';
 import { BagPreview } from '../BagPreview/BagPreview';
+import { useCanSeePrices } from '@/lib/auth';
 import { useBag } from '@/lib/cart';
 import styles from './BagNav.module.css';
+
+const EMPTY: string[] = [];
 
 /**
  * "bag" + count ring, with the preview underneath (README 5, 8-5).
@@ -17,7 +20,10 @@ import styles from './BagNav.module.css';
  * tapping outside or Esc closes it. Client request — the v4 README (8-5) had touch go straight to /bag.
  */
 export function BagNav({ align }: { align: 'mobile' | 'desktop' }) {
-  const ids = useBag();
+  const saved = useBag();
+  // Members-only prices: signed-out visitors can't add, so the ring stays empty (README 8-2).
+  const canBuy = useCanSeePrices();
+  const ids = canBuy ? saved : EMPTY;
   const n = ids.length;
   // The preview is optional on the bag page itself (README 8-5) — it's off there.
   const preview = usePathname() !== '/bag';

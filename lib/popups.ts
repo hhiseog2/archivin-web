@@ -7,7 +7,7 @@ import { useSyncExternalStore } from 'react';
  * closes both (README 8-2). The category menu sits in the desktop header and sort in the shop row,
  * so they share this tiny store instead of props.
  */
-export type PopupId = 'cat' | 'sort' | null;
+export type PopupId = 'cat' | 'sort' | 'size' | 'shopnav' | null;
 
 let current: PopupId = null;
 const listeners = new Set<() => void>();

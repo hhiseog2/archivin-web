@@ -1,13 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowRight } from '@/components/Icons';
-import { Placeholder } from '@/components/Placeholder';
-import { ProductCard, ProductGrid } from '@/components/ProductCard/ProductCard';
 import { SiteChrome } from '@/components/SiteChrome';
-import { getProduct, lookbooks } from '@/lib/catalog';
-import ui from '@/components/ui.module.css';
-import styles from './lookbook.module.css';
+import { getProduct, lookbooks, type LookPiece } from '@/lib/catalog';
+import { Looks, type LookView } from './Looks';
+import { Pieces } from './Pieces';
+import styles from '../lookbook.module.css';
 
 type Params = { n: string };
 
@@ -15,99 +13,85 @@ export function generateStaticParams(): Params[] {
   return lookbooks.map((l) => ({ n: String(l.n) }));
 }
 
+export const dynamicParams = false;
+
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { n } = await params;
-  const lb = lookbooks.find((l) => String(l.n) === n);
-  return { title: lb?.title ?? 'Lookbook' };
+  return { title: lookbooks.find((l) => String(l.n) === n)?.title ?? 'lookbook' };
 }
 
-export default async function LookbookPage({ params }: { params: Promise<Params> }) {
+/** Sold if the lookbook says so or the shop piece has sold since. */
+const isSold = (piece: LookPiece) => piece.sold || Boolean(piece.productId && getProduct(piece.productId)?.sold);
+
+/** A21_LookbookIssue · A21_DLookbookIssue (README 8-13). */
+export default async function LookbookIssuePage({ params }: { params: Promise<Params> }) {
   const { n } = await params;
   const idx = lookbooks.findIndex((l) => String(l.n) === n);
   if (idx < 0) notFound();
   const lb = lookbooks[idx];
   const next = lookbooks[(idx + 1) % lookbooks.length];
-  const [first, ...rest] = lb.looks;
-  const total = lb.looks.length;
+
+  // TODO(client): looks for issues that only have a look count so far — grey 3:4 wells until then.
+  const looks: LookView[] = lb.looks.length
+    ? lb.looks.map((look) => ({
+        label: look.label,
+        photo: look.photo,
+        pieces: look.pieces.map((p) => ({
+          name: p.name,
+          href: p.productId && getProduct(p.productId) ? `/product/${p.productId}` : null,
+          sold: isSold(p),
+        })),
+      }))
+    : Array.from({ length: lb.lookCount }, (_, i) => ({
+        label: `look ${String(i + 1).padStart(2, '0')}`,
+        photo: null,
+        pieces: [],
+      }));
+
+  const pieces = lb.pieces.map((p) => ({
+    name: p.name,
+    sold: isSold(p),
+    product: (p.productId && getProduct(p.productId)) || null,
+  }));
 
   return (
-    <SiteChrome>
-      <main className={styles.main}>
-        <div className={styles.head}>
-          <p className={styles.kicker}>Lookbook</p>
-          <h1 className={styles.title}>{lb.title}</h1>
-          {/* TODO: season */}
-          <p className={styles.season}>
-            {lb.season} · {total} looks
+    <SiteChrome fullWidth>
+      <main className={styles.issueMain}>
+        <div className={styles.issueHead}>
+          <Link href="/lookbook" className={styles.back}>
+            lookbook
+          </Link>
+          <p className={styles.issueMeta}>
+            {lb.season} · {lb.lookCount} looks
           </p>
+          <h1 className={styles.issueTitle}>{lb.title}</h1>
+          {/* TODO(client): season, intro and looks (data/lookbooks.json is a placeholder) */}
+          <p className={styles.issueIntro}>{lb.intro}</p>
         </div>
 
-        {/* Look 01 + intro. Desktop: side by side. */}
-        <div className={styles.lead}>
-          <figure className={styles.leadFig}>
-            <div className={ui.labelRow}>
-              <span className={ui.label}>{first.label}</span>
-              <span className={ui.caption}>1 / {total}</span>
-            </div>
-            {/* TODO: lookbook photos */}
-            <Placeholder src={first.photo} label={`[${first.label.toUpperCase()} · 4:5]`} ratio="4 / 5" />
-            <figcaption className={`m-only ${styles.figcap}`}>{first.caption}</figcaption>
-          </figure>
-          <div className={styles.leadText}>
-            <p className={styles.intro}>{lb.intro}</p>
-            <p className={`d-only ${styles.leadCaption}`}>
-              {first.label} · {first.caption}
-            </p>
-          </div>
-        </div>
+        <Looks looks={looks} />
 
-        <div className={styles.pair}>
-          {rest.map((look, i) => (
-            <figure key={look.label} className={styles.fig}>
-              <div className={ui.labelRow}>
-                <span className={ui.label}>{look.label}</span>
-                <span className={ui.caption}>
-                  {i + 2} / {total}
-                </span>
-              </div>
-              <Placeholder src={look.photo} label={`[${look.label.toUpperCase()} · 3:4]`} ratio="3 / 4" />
-              <figcaption className={styles.figcap}>{look.caption}</figcaption>
-            </figure>
-          ))}
-        </div>
-
-        <section aria-labelledby="shop-look" className={styles.pieces}>
-          <div className={ui.labelRow}>
-            <h2 id="shop-look" className={ui.label}>
-              Pieces in this lookbook
+        {pieces.length > 0 && (
+          <section aria-labelledby="lbi-pieces" className={styles.pieces}>
+            <h2 id="lbi-pieces" className={styles.piecesTitle}>
+              pieces in this issue
             </h2>
-            <span className={ui.caption}>1 OF 1 EACH</span>
-          </div>
-          <ProductGrid>
-            {lb.pieces.map((piece, i) => {
-              const p = piece.productId ? getProduct(piece.productId) : undefined;
-              return (
-                <ProductCard
-                  key={i}
-                  name={p?.name ?? piece.name}
-                  href={p ? `/product/${p.id}` : '/shop'}
-                  price={p?.price ?? null}
-                  sold={p?.sold ?? piece.sold}
-                  sizeLabel={p?.sizeLabel}
-                  image={p?.images[0]?.src}
-                />
-              );
-            })}
-          </ProductGrid>
-        </section>
+            <Pieces pieces={pieces} />
+          </section>
+        )}
 
-        <Link href={`/lookbook/${next.n}`} className={styles.next}>
-          <span className={styles.nextText}>
-            <span className={styles.nextKicker}>Next</span>
-            <span className={styles.nextTitle}>{next.title}</span>
-          </span>
-          <ArrowRight />
-        </Link>
+        {next !== lb && (
+          <div className={styles.nextWrap}>
+            <Link href={`/lookbook/${next.n}`} className={styles.lbnext}>
+              <span className={styles.nextLabel}>next</span>
+              <span className={styles.nextTitle}>
+                <span className={styles.lbt}>
+                  {next.title} · {next.season}
+                </span>
+              </span>
+            </Link>
+          </div>
+        )}
       </main>
     </SiteChrome>
   );

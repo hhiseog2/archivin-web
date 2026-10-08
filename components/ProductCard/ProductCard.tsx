@@ -16,15 +16,21 @@ type Props = {
   hoverImage?: string | null;
   /** Already in the bag → "in bag" under the price line (stitch ②, small). */
   inBag?: boolean;
+  /**
+   * Members-only prices (README 8-2, `useCanSeePrices()`): false → the second line is the size only,
+   * aria says "price for members", and there's no "in bag".
+   */
+  showPrice?: boolean;
 };
 
 /**
  * Card (README 5): 3:4 photo on white, name 14/20 clamped to two lines, then "₩ 000,000 · L–XL" or "sold",
  * then "in bag" if it's in the bag. The whole card is one link; its aria-label describes the photo (alt="").
  */
-export function ProductCard({ name, href, price, sold, sizeLabel, image, hoverImage, inBag }: Props) {
-  const priceText = sold ? 'sold' : formatPrice(price);
-  const line2 = sold ? 'sold' : sizeLabel ? `${priceText} · ${sizeLabel}` : priceText;
+export function ProductCard({ name, href, price, sold, sizeLabel, image, hoverImage, inBag: inBagProp, showPrice = true }: Props) {
+  const inBag = showPrice && inBagProp;
+  const priceText = sold ? 'sold' : showPrice ? formatPrice(price) : 'price for members';
+  const line2 = sold ? 'sold' : !showPrice ? (sizeLabel ?? '') : sizeLabel ? `${priceText} · ${sizeLabel}` : priceText;
   const aria = `${name}, ${priceText}${sizeLabel ? `, size ${sizeLabel}` : ''}${inBag ? ', in bag' : ''}`;
   return (
     <Link href={href} aria-label={aria} className={styles.card}>

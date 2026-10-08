@@ -12,7 +12,8 @@
   text-decoration: none;
   cursor: pointer;
 }
-.navy {
+.navy,
+.navy:hover {
   background: var(--color-navy);
   color: var(--color-on-navy);
 }
@@ -24,7 +25,27 @@
 .off {
   background: var(--color-fill);
   color: var(--color-ink-2);
-  cursor: not-allowed;
+  cursor: default;
+}
+
+/* Sold: "more like this" text link 4px under the pill (13px, 44px tall). */
+.more {
+  align-self: flex-start;
+  min-height: var(--space-tap);
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  font-size: var(--type-note-size);
+  color: var(--color-ink);
+  text-underline-offset: 4px;
+}
+
+/* Signed out: "new here? you can join on the next step." 8px under the pill. */
+.help {
+  margin: 8px 0 0;
+  font-size: var(--type-note-size);
+  line-height: var(--type-note-line);
+  color: var(--color-ink-2);
 }
 
 .label {

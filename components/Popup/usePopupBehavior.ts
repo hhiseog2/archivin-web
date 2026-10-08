@@ -18,7 +18,7 @@ export function usePopupBehavior(
     // The shop renders a mobile and a desktop copy; only the one on screen listens.
     if (!open || !wrap.current || wrap.current.getClientRects().length === 0) return;
     if (focusFirst) {
-      const el = list.current?.querySelector<HTMLElement>('[aria-selected="true"], [aria-checked="true"]') ?? list.current?.querySelector('button');
+      const el = list.current?.querySelector<HTMLElement>('[aria-selected="true"], [aria-checked="true"]') ?? list.current?.querySelector<HTMLElement>('button, a');
       requestAnimationFrame(() => el?.focus({ preventScroll: true }));
     }
     const onDown = (e: PointerEvent) => {
@@ -43,7 +43,7 @@ export function usePopupBehavior(
 export function arrowKeys(e: KeyboardEvent<HTMLElement>) {
   if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
   e.preventDefault();
-  const items = [...e.currentTarget.querySelectorAll<HTMLElement>('button')];
+  const items = [...e.currentTarget.querySelectorAll<HTMLElement>('button, a')];
   const i = items.indexOf(document.activeElement as HTMLElement);
   items[(i + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length]?.focus();
 }

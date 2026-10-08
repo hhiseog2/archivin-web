@@ -1,41 +1,63 @@
 {
-  "_todo": "Replace with real reviews. rating: null renders as '[N] / 5'. productId: null links to /shop.",
+  "_todo": "실제 후기로 바꿔 주세요(본문은 지어내지 않았어요). title은 v5 화면에 쓰지 않아요. author는 첫 글자만 남기고 가려요. 날짜는 2026.10.01 형식.",
   "reviews": [
     {
       "id": "r1",
-      "productName": "[PRODUCT]",
+      "productName": "80's Pet Shop Boys",
+      "productSize": "M–L",
+      "productId": "3593",
+      "rating": 5,
+      "title": "",
+      "lang": "en",
+      "body": "[the buyer's review as written — fit, fabric, print, how it arrived. Long reviews are cut to three lines with a more button.]",
+      "author": "[A****]",
+      "date": "2026.09.18",
+      "photo": true
+    },
+    {
+      "id": "r2",
+      "productName": "[piece]",
+      "productSize": "",
       "productId": null,
       "rating": 5,
       "title": "배송",
       "lang": "ko",
-      "body": "[Review text as the buyer wrote it]",
+      "body": "[구매자가 쓴 후기 원문 — 배송]",
       "author": "Y****",
-      "date": "Mar 4, 2021",
+      "date": "2021.03.04",
       "photo": false
     },
     {
-      "id": "r2",
-      "productName": "80's Iggy Pop",
-      "productId": "3599",
-      "rating": null,
-      "title": "[Review title]",
+      "id": "r3",
+      "productName": "90's Levis 517",
+      "productSize": "W38 L30",
+      "productId": "3542",
+      "rating": 4,
+      "title": "",
       "lang": "en",
-      "body": "[Review text as the buyer wrote it]",
-      "author": "[A****]",
-      "date": "[DATE]",
+      "body": "[the buyer's review as written]",
+      "author": "[K****]",
+      "date": "2026.08.27",
       "photo": true
     },
     {
-      "id": "r3",
-      "productName": "00's Justice",
-      "productId": null,
-      "rating": null,
-      "title": "[Review title]",
+      "id": "r4",
+      "productName": "00's John Varvatos",
+      "productSize": "260",
+      "productId": "3596",
+      "rating": 5,
+      "title": "",
       "lang": "en",
-      "body": "[Review text as the buyer wrote it]",
-      "author": "[A****]",
-      "date": "[DATE]",
-      "photo": true
+      "body": "[the buyer's review as written — a short one]",
+      "author": "[J****]",
+      "date": "2026.08.03",
+      "photo": false
     }
-  ]
+  ],
+  "write": {
+    "minLength": 10,
+    "maxLength": 1000,
+    "maxPhotos": 5,
+    "who": "산 사람만(my page의 배송 완료 주문 → write a review). 상품은 내 주문에 있는 것만 고를 수 있어요."
+  }
 }

@@ -2,304 +2,417 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { ChevronLeft } from '@/components/Icons';
-import { useBag } from '@/lib/cart';
-import { catalog, getProduct, site } from '@/lib/catalog';
-import { formatPrice, sumPrices } from '@/lib/format';
-import ui from '@/components/ui.module.css';
-import parked from '@/components/parked.module.css';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { Checkbox, Radio, Select, TextField, formClasses as fc } from '@/components/Form/Form';
+import { signInHref, useSession } from '@/lib/auth';
+import { clearBag, useBag } from '@/lib/cart';
+import { checkoutConfig, getProduct, site } from '@/lib/catalog';
+import { formatDate, formatPrice } from '@/lib/format';
+import { SAMPLE_ORDERS, newOrderId, payByDate, saveOrder, useMyOrders, type Order } from '@/lib/orders';
+import { OrderSummary, orderTotals } from './OrderSummary';
 import styles from './checkout.module.css';
 
-const METHODS = [
-  { id: 'card', label: 'Card', ko: '신용·체크카드' },
-  { id: 'bank', label: 'Bank transfer', ko: '무통장입금' },
-  { id: 'kakao', label: 'KakaoPay', ko: '카카오페이' },
-  { id: 'naver', label: 'Naver Pay', ko: '네이버페이' },
-  { id: 'toss', label: 'Toss Pay', ko: '토스페이' },
-] as const;
+type Field = 'name' | 'tel' | 'mail' | 'addr' | 'pay' | 'dep' | 'agree';
+type Method = 'card' | 'bank';
 
-type Method = (typeof METHODS)[number]['id'];
+/** Focus goes to the first invalid field in this order (README 8-7). */
+const FIELD_ORDER: Field[] = ['name', 'tel', 'mail', 'addr', 'pay', 'dep', 'agree'];
+const METHODS = checkoutConfig.paymentMethods as { id: Method; label: string; ko: string; button: string; note: string }[];
 
-export function CheckoutView() {
+/** "04029 서울 마포구 와우산로 00, 2층" → postcode · street · apt (the format orders save `shipTo.address` in). */
+function splitAddress(address: string) {
+  const m = /^(\d{5})\s+([^,]+?)(?:,\s*(.+))?$/.exec(address.trim());
+  return m ? { post: m[1], street: m[2], addr2: m[3] ?? '' } : null;
+}
+
+/**
+ * One-page checkout (A21_Checkout · A21_DCheckout, README 8-7). Prices are for members, so checkout is for
+ * signed-in members only (`guestCheckout: false`); a private payment link (`payCode`, 8-16) works signed out.
+ * Nothing is pre-selected: no payment method, agreement unchecked. Pieces aren't held — not even here.
+ */
+export function CheckoutView({ payCode }: { payCode?: string }) {
   const router = useRouter();
+  const session = useSession();
+  const mine = useMyOrders();
   const bag = useBag();
   const [ready, setReady] = useState(false);
   useEffect(() => setReady(true), []);
 
-  // Nothing is pre-selected or pre-checked (README 9).
-  const [pay, setPay] = useState<Method | null>(null);
-  const [agree, setAgree] = useState(false);
+  // TODO(backend): private payment links create/lookup — the prototype uses the one sample for any code.
+  const sample = checkoutConfig.privatePayment.sample;
+  const privatePay: Order['privatePay'] = payCode
+    ? { code: payCode, title: sample.title, amount: sample.amount as number | null, shippingIncluded: sample.shippingIncluded }
+    : undefined;
+
+  const mustSignIn = ready && !session && !checkoutConfig.guestCheckout && !privatePay;
+  useEffect(() => {
+    if (mustSignIn) router.replace(signInHref('/checkout'));
+  }, [mustSignIn, router]);
+
+  const [name, setName] = useState('');
   const [tel, setTel] = useState('');
-  const [telTouched, setTelTouched] = useState(false);
+  const [mail, setMail] = useState('');
+  const [post, setPost] = useState('');
+  const [street, setStreet] = useState('');
+  const [addr2, setAddr2] = useState('');
+  const [note, setNote] = useState('none');
+  const [pay, setPay] = useState<Method | ''>('');
+  const [depValue, setDepValue] = useState('');
+  const [depTouched, setDepTouched] = useState(false);
+  const [agree, setAgree] = useState(false);
   const [tried, setTried] = useState(false);
 
-  const items = bag.map(getProduct).filter((p): p is NonNullable<typeof p> => !!p);
-  const subtotal = sumPrices(items.map((p) => p.price));
-  const empty = ready && items.length === 0;
-  const total = empty ? 0 : subtotal == null ? null : subtotal + catalog.shippingFee;
+  // Signed-in member with a saved address: name · mobile · email · address come filled in (method and agreement don't).
+  const prefilled = useRef(false);
+  useEffect(() => {
+    if (!ready || !session || prefilled.current) return;
+    prefilled.current = true;
+    // TODO(backend): the member's saved address from their profile. Prototype: the latest order's shipping details.
+    const last = [...mine, ...SAMPLE_ORDERS].find((o) => o.shipTo)?.shipTo;
+    const addr = last ? splitAddress(last.address) : null;
+    setName((v) => v || session.name || last?.name || '');
+    setTel((v) => v || last?.phone || '');
+    setMail((v) => v || session.email || '');
+    if (addr) {
+      setPost((v) => v || addr.post);
+      setStreet((v) => v || addr.street);
+      setAddr2((v) => v || addr.addr2);
+    }
+  }, [ready, session, mine]);
 
-  const telOk = /^\d{11}$/.test(tel);
-  const showTelErr = (telTouched || tried) && !telOk;
-  const payErr = tried && !pay;
-  const agreeErr = tried && !agree;
+  // After placing the order the bag is cleared; keep showing what was ordered until the next page loads.
+  const [frozen, setFrozen] = useState<string[] | null>(null);
+  const ids = privatePay ? [] : (frozen ?? bag);
+  // Prototype of the stock check right before payment: pieces that sold meanwhile drop out of the order.
+  const soldNames = ids.map(getProduct).filter((p) => p?.sold).map((p) => p!.name);
+  const buyIds = ids.filter((id) => getProduct(id)?.sold === false);
+  const totals = orderTotals(buyIds, privatePay);
+  const nothingToBuy = !privatePay && buyIds.length === 0;
 
-  const tryPay = () => {
-    setTried(true);
-    if (!pay || !agree || !telOk || items.length === 0) return;
-    // TODO: payment. Card / easy pay open the PG window here (e.g. PortOne, Toss Payments);
-    // bank transfer creates an order awaiting payment. Save the order server-side before redirecting.
-    router.push(`/order/complete?method=${pay === 'bank' ? 'bank' : 'card'}`);
+  const el = useRef<Partial<Record<Field, HTMLElement | null>>>({});
+  const refFor = (k: Field) => (node: HTMLElement | null) => {
+    el.current[k] = node;
   };
 
-  return (
-    <>
-      <header className={`m-only ${styles.header}`}>
-        <Link href="/bag" className={styles.back}>
-          <ChevronLeft />
-          Bag
-        </Link>
-        <Link href="/shop" aria-label="ARCHIVIN, go to Shop" className={styles.wordmark}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo/archivin-stitch-navy.png" alt="" width={138} height={32} />
-        </Link>
-        <span />
-      </header>
+  const digits = tel.replace(/\D/g, '');
+  const dep = depTouched ? depValue : name;
+  const bad: Record<Field, boolean> = {
+    name: !name.trim(),
+    tel: digits.length < 10 || digits.length > 11,
+    mail: !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail.trim()),
+    addr: !post || !street,
+    pay: !pay,
+    dep: pay === 'bank' && !dep.trim(),
+    agree: !agree,
+  };
+  const show = (k: Field) => tried && bad[k];
+  const anyBad = FIELD_ORDER.some((k) => bad[k]);
 
-      <main className={parked.column}>
-        <div className={styles.head}>
-          <h1 className={ui.pageTitle}>Checkout</h1>
-          <p className={parked.lead}>
-            You&apos;re checking out as a guest. <Link href="/signin">Sign in</Link> to use a saved address.
+  const method = METHODS.find((m) => m.id === pay);
+  const amount = formatPrice(totals.total).replace(/^₩\s/, '');
+  const payLabel = (method ?? METHODS.find((m) => m.id === 'card')!).button.replace('{total}', amount);
+  const payNote = method ? method.note : checkoutConfig.noMethodNote;
+
+  const submit = (e: FormEvent) => {
+    e.preventDefault();
+    const first = FIELD_ORDER.find((k) => bad[k]);
+    if (first) {
+      setTried(true);
+      el.current[first]?.focus();
+      return;
+    }
+    if (nothingToBuy || !pay) return;
+    // TODO(backend): stock check right before payment. If a piece sold meanwhile, charge nothing: drop it,
+    // recalculate and show the "sold while you were checking out" notice (no holds, no timers).
+    // TODO(backend): PG card window — for card, open it here and go on only when it reports success.
+    // TODO(backend): auto-cancel after 7 days (`depositDays`) — bank-transfer orders that are never paid.
+    const now = new Date();
+    const id = newOrderId(now);
+    const noteKo = checkoutConfig.deliveryNotes.find((n) => n.id === note)?.ko;
+    saveOrder({
+      id,
+      date: formatDate(now),
+      status: pay === 'bank' ? 'waiting for payment' : 'paid',
+      method: pay,
+      items: buyIds,
+      payBy: pay === 'bank' ? payByDate(now) : undefined,
+      depositor: pay === 'bank' ? dep.trim() : undefined,
+      email: mail.trim(),
+      shipTo: { name: name.trim(), phone: tel.trim(), address: `${post} ${street}${addr2.trim() ? `, ${addr2.trim()}` : ''}` },
+      // The courier gets the Korean line (data/checkout.json deliveryNotes).
+      note: noteKo || undefined,
+      privatePay,
+    });
+    if (!privatePay) {
+      setFrozen(ids);
+      clearBag(buyIds);
+    }
+    router.push(`/order/complete?id=${encodeURIComponent(id)}`);
+  };
+
+  if (!ready || mustSignIn) return <main className={styles.shell} />;
+
+  const head = (
+    <>
+      <h1 className={styles.title}>checkout</h1>
+      {checkoutConfig.guestCheckout && !session && (
+        <p className={styles.guest}>
+          checking out as a guest. <Link href={signInHref(payCode ? `/checkout?pay=${encodeURIComponent(payCode)}` : '/checkout')}>sign in</Link> to
+          use a saved address.
+        </p>
+      )}
+      {soldNames.length > 0 && (
+        <div role="alert" className={styles.soldNotice}>
+          <p className={styles.soldLine}>{soldNames.join(', ')} sold while you were checking out.</p>
+          <p className={styles.soldBody}>
+            we took {soldNames.length === 1 ? 'it' : 'them'} out of your order and updated the total.
+          </p>
+          <p lang="ko" className={styles.soldKo}>
+            결제하는 사이 다른 분이 먼저 구매했어요. 주문에서 빼고 금액을 다시 계산했어요.
           </p>
         </div>
+      )}
+    </>
+  );
 
-        <form
-          noValidate
-          onSubmit={(e) => {
-            e.preventDefault();
-            tryPay();
-          }}
-        >
-          <section aria-labelledby="s1" className={`${parked.section} ${styles.first}`}>
-            <h2 id="s1" className={parked.sectionTitle}>
-              1 · Contact
+  if (nothingToBuy) {
+    // TODO(design): checkout with nothing buyable has no design — the bag's empty state.
+    return (
+      <main className={styles.shell}>
+        <div className={styles.form}>
+          <div className={styles.main}>
+            {head}
+            <div className={styles.empty}>
+              <p>your bag is empty.</p>
+              <Link href="/shop" className={styles.emptyLink}>
+                shop new pieces
+              </Link>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  return (
+    <main className={styles.shell}>
+      <form noValidate onSubmit={submit} className={styles.form}>
+        <div className={styles.main}>
+          {head}
+
+          <section aria-labelledby="co-h-contact" className={`${styles.section} ${styles.first}`}>
+            <h2 id="co-h-contact" className={styles.h2}>
+              contact
             </h2>
-            <div>
-              <label htmlFor="f-name" className={ui.fieldLabel}>
-                Name
-              </label>
-              <input id="f-name" type="text" autoComplete="name" className={ui.input} />
-            </div>
-            <div>
-              <label htmlFor="f-tel" className={ui.fieldLabel}>
-                Mobile number
-              </label>
-              <input
-                id="f-tel"
-                type="tel"
-                inputMode="numeric"
-                autoComplete="tel"
-                placeholder="01012345678"
-                value={tel}
-                onChange={(e) => setTel(e.target.value)}
-                onBlur={() => setTelTouched(tel.length > 0)}
-                aria-invalid={showTelErr}
-                aria-describedby={showTelErr ? 'f-tel-err' : undefined}
-                className={ui.input}
-              />
-              {showTelErr && (
-                <p id="f-tel-err" className={ui.error}>
-                  Enter an 11-digit mobile number, numbers only.
-                </p>
-              )}
-            </div>
-            <div>
-              <label htmlFor="f-mail" className={ui.fieldLabel}>
-                Email
-              </label>
-              <input id="f-mail" type="email" autoComplete="email" aria-describedby="f-mail-hint" className={ui.input} />
-              <p id="f-mail-hint" className={ui.hint}>
-                We send the order and shipping updates here.
-              </p>
-            </div>
+            <TextField
+              id="co-name"
+              ref={refFor('name')}
+              label="name"
+              type="text"
+              autoComplete="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              error={show('name') ? 'enter your name.' : null}
+            />
+            <TextField
+              id="co-tel"
+              ref={refFor('tel')}
+              label="mobile number"
+              type="tel"
+              inputMode="numeric"
+              autoComplete="tel"
+              placeholder="010-0000-0000"
+              value={tel}
+              onChange={(e) => setTel(e.target.value)}
+              error={show('tel') ? 'enter your mobile number, like 010-1234-5678.' : null}
+              help="we text you the tracking number."
+            />
+            <TextField
+              id="co-mail"
+              ref={refFor('mail')}
+              label="email"
+              type="email"
+              inputMode="email"
+              autoComplete="email"
+              autoCapitalize="none"
+              spellCheck={false}
+              placeholder="name@example.com"
+              value={mail}
+              onChange={(e) => setMail(e.target.value)}
+              error={show('mail') ? 'enter an email like name@example.com.' : null}
+              help="your receipt and order updates go here."
+            />
           </section>
 
-          <section aria-labelledby="s2" className={parked.section}>
-            <h2 id="s2" className={parked.sectionTitle}>
-              2 · Delivery
+          <section aria-labelledby="co-h-ship" className={styles.section}>
+            <h2 id="co-h-ship" className={styles.h2}>
+              shipping address
             </h2>
             <div>
-              <label htmlFor="f-post" className={ui.fieldLabel}>
-                Address
+              <label className={fc.label} htmlFor="co-post">
+                address
               </label>
               <div className={styles.postRow}>
                 <input
-                  id="f-post"
+                  id="co-post"
+                  className={`${fc.input} ${styles.post}`}
                   type="text"
                   readOnly
                   autoComplete="postal-code"
-                  placeholder="Postcode"
-                  className={`${ui.input} ${styles.postInput}`}
+                  placeholder="postcode"
+                  value={post}
+                  aria-invalid={show('addr') ? true : undefined}
+                  aria-describedby={show('addr') ? 'co-addr-err' : undefined}
                 />
-                {/* TODO: Korean address search (e.g. Daum Postcode) fills postcode + street address. */}
-                <button type="button" className={`${ui.btnSecondary} ${styles.findBtn}`}>
-                  Find address
+                <button
+                  type="button"
+                  ref={refFor('addr')}
+                  className={styles.find}
+                  onClick={() => {
+                    // TODO(backend): Kakao (Daum) postcode window — fills the postcode and road address it returns.
+                    setPost('04029');
+                    setStreet('서울 마포구 와우산로 00');
+                  }}
+                >
+                  find address
                 </button>
               </div>
+              {/* Shares the "address" label, so it's named with aria-label (README 8-7). */}
               <input
+                className={`${fc.input} ${styles.street}`}
                 type="text"
                 readOnly
-                aria-label="Street address"
+                aria-label="street address"
                 autoComplete="address-line1"
-                placeholder="Street address appears after search"
-                className={`${ui.input} ${styles.street}`}
+                placeholder="street address shows after you search"
+                value={street}
+                aria-invalid={show('addr') ? true : undefined}
               />
+              {show('addr') && (
+                <p className={fc.error} id="co-addr-err">
+                  search for your address.
+                </p>
+              )}
             </div>
-            <div>
-              <label htmlFor="f-addr2" className={ui.fieldLabel}>
-                Apt, unit, floor
-              </label>
-              <input id="f-addr2" type="text" autoComplete="address-line2" className={ui.input} />
-            </div>
-            <div>
-              <label htmlFor="f-req" className={ui.fieldLabel}>
-                Delivery note (optional)
-              </label>
-              <select id="f-req" className={ui.input}>
-                <option>No note</option>
-                <option>Leave at the door</option>
-                <option>Leave with the building security office</option>
-                <option>Call before delivery</option>
-              </select>
-            </div>
+            <TextField
+              id="co-addr2"
+              label="apt, unit, floor"
+              type="text"
+              autoComplete="address-line2"
+              value={addr2}
+              onChange={(e) => setAddr2(e.target.value)}
+            />
+            <Select
+              id="co-note"
+              label="delivery note (optional)"
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+              options={checkoutConfig.deliveryNotes.map((n) => ({ value: n.id, label: n.label }))}
+            />
           </section>
 
-          <section aria-labelledby="s3" className={parked.section}>
-            <h2 id="s3" className={parked.sectionTitle}>
-              3 · Payment
+          <section aria-labelledby="co-h-pay" className={`${styles.section} ${styles.paySection}`}>
+            <h2 id="co-h-pay" className={`${styles.h2} ${styles.payTitle}`}>
+              payment
             </h2>
-            <div>
-              <div
-                role="radiogroup"
-                aria-labelledby="s3"
-                aria-describedby={payErr ? 'pay-err' : undefined}
-                className={styles.methods}
-              >
-                {METHODS.map((m) => (
-                  <label key={m.id} className={`${styles.method} ${pay === m.id ? styles.methodOn : ''}`}>
-                    <input
-                      type="radio"
-                      name="pay"
+            <div
+              role="radiogroup"
+              aria-labelledby="co-h-pay"
+              aria-describedby={show('pay') ? 'co-pay-err' : undefined}
+              className={`${styles.methods} ${show('pay') ? styles.methodsBad : ''}`}
+            >
+              {METHODS.map((m, i) => (
+                <div key={m.id}>
+                  {i > 0 && <div aria-hidden="true" className={styles.methodRule} />}
+                  <label className={styles.method}>
+                    <Radio
+                      ref={i === 0 ? refFor('pay') : undefined}
+                      name="co-pay"
                       value={m.id}
                       checked={pay === m.id}
                       onChange={() => setPay(m.id)}
-                      className={ui.checkbox}
                     />
-                    <span className={styles.methodLabel}>{m.label}</span>
+                    <span className={styles.methodName}>{m.label}</span>
                     <span lang="ko" className={styles.methodKo}>
                       {m.ko}
                     </span>
                   </label>
-                ))}
-              </div>
-              {payErr && (
-                <p id="pay-err" className={ui.error}>
-                  Choose a payment method.
-                </p>
-              )}
-              {pay === 'bank' && (
-                <div className={styles.bankBox}>
-                  <label htmlFor="f-dep" className={ui.fieldLabel}>
-                    Depositor name
-                  </label>
-                  <input id="f-dep" type="text" className={ui.input} />
-                  <p className={styles.bankNote}>
-                    The account number shows on the next screen. Your order is confirmed once the payment arrives.
-                  </p>
+                  {m.id === 'bank' && pay === 'bank' && (
+                    <div className={styles.dep}>
+                      <TextField
+                        id="co-dep"
+                        ref={refFor('dep')}
+                        label="depositor name"
+                        type="text"
+                        value={dep}
+                        onChange={(e) => {
+                          setDepValue(e.target.value);
+                          setDepTouched(true);
+                        }}
+                        error={show('dep') ? 'enter the name the payment will come from.' : null}
+                        help="we show our account number after you place the order. pay within 7 days, or the order is cancelled."
+                      />
+                      <p lang="ko" className={`${fc.help} ${styles.depKo}`}>
+                        주문 후 7일 안에 입금하지 않으면 주문이 취소돼요.
+                      </p>
+                    </div>
+                  )}
                 </div>
-              )}
+              ))}
             </div>
-          </section>
-
-          <section aria-labelledby="s4" className={parked.section}>
-            <h2 id="s4" className={parked.sectionTitle}>
-              4 · Order summary
-            </h2>
-            <div>
-              {empty ? (
-                <p className={styles.emptyNote}>
-                  Your bag is empty. <Link href="/shop">Shop new in</Link>
-                </p>
-              ) : (
-                <ul className={styles.items}>
-                  {items.map((p) => (
-                    <li key={p.id}>
-                      <span aria-hidden="true" className={styles.itemThumb} />
-                      <span className={styles.itemText}>
-                        <span className={styles.itemName}>{p.name}</span>
-                        <span className={styles.itemSize}>size {p.sizeLabel}</span>
-                      </span>
-                      <span className={styles.itemPrice}>{formatPrice(p.price)}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <dl className={styles.sum}>
-                <div>
-                  <dt>Subtotal</dt>
-                  <dd>{formatPrice(subtotal)}</dd>
-                </div>
-                <div>
-                  <dt>Shipping</dt>
-                  <dd>{formatPrice(empty ? 0 : catalog.shippingFee)}</dd>
-                </div>
-                <div className={styles.total}>
-                  <dt>Total</dt>
-                  <dd>{formatPrice(total)}</dd>
-                </div>
-              </dl>
-            </div>
-          </section>
-
-          <section className={styles.agreeSection}>
-            <label className={styles.agree}>
-              <input
-                type="checkbox"
-                checked={agree}
-                onChange={() => setAgree(!agree)}
-                aria-describedby={agreeErr ? 'agree-err' : undefined}
-                aria-invalid={agreeErr}
-                className={`${ui.checkbox} ${styles.agreeBox}`}
-              />
-              <span>
-                I agree to the terms of purchase. Pieces can&apos;t be exchanged or refunded unless they&apos;re defective.
-                (Required)
-              </span>
-            </label>
-            {/* TODO: terms of purchase URL */}
-            <a href={site.links.terms} className={styles.terms}>
-              Read the terms
-            </a>
-            {agreeErr && (
-              <p id="agree-err" className={`${ui.error} ${styles.agreeErr}`}>
-                Check the box to agree before you pay.
+            {show('pay') && (
+              <p className={fc.error} id="co-pay-err">
+                choose how to pay.
               </p>
             )}
           </section>
+        </div>
 
-          <section className={styles.paySection}>
-            <button
-              type="submit"
-              aria-disabled={empty}
-              className={`${empty ? ui.btnDisabled : ui.btnPrimary} ${styles.payBtn}`}
-            >
-              {empty ? 'Pay' : `Pay ${formatPrice(total)}`}
+        <aside className={styles.side}>
+          <div className={styles.sumWrap}>
+            <OrderSummary headingId="co-h-sum" ids={buyIds} privatePay={privatePay} />
+          </div>
+
+          <div className={styles.agreeWrap}>
+            <div className={styles.agreeRow}>
+              <Checkbox
+                id="co-agree"
+                ref={refFor('agree')}
+                checked={agree}
+                onChange={() => setAgree(!agree)}
+                invalid={show('agree')}
+                aria-describedby={show('agree') ? 'co-agree-err' : undefined}
+              />
+              <label htmlFor="co-agree" className={styles.agreeLabel}>
+                {checkoutConfig.purchaseAgreement.en} <span className={styles.required}>(required)</span>
+                <span lang="ko" className={styles.agreeKo}>
+                  {checkoutConfig.purchaseAgreement.ko}
+                </span>
+              </label>
+            </div>
+            <Link href={site.links.terms} className={styles.terms}>
+              view terms of purchase
+            </Link>
+            {show('agree') && (
+              <p className={`${fc.error} ${styles.agreeErr}`} id="co-agree-err">
+                check the box to agree before you pay.
+              </p>
+            )}
+          </div>
+
+          <div aria-hidden="true" className={styles.spacer} />
+          <div className={styles.payBar}>
+            <button type="submit" className={styles.payBtn}>
+              {payLabel}
             </button>
-            <p className={styles.payNote}>Card and easy pay open their own window to finish payment.</p>
-          </section>
-        </form>
-      </main>
-    </>
+            <p className={styles.payNote}>{payNote}</p>
+          </div>
+        </aside>
+
+        <p role="status" className="visually-hidden">
+          {tried && anyBad ? 'some details are missing. check the marked fields.' : ''}
+        </p>
+      </form>
+    </main>
   );
 }

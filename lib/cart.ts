@@ -52,6 +52,10 @@ export function removeFromBag(id: string) {
   bagStore.set((ids) => ids.filter((x) => x !== id));
 }
 
+export function clearBag(ids?: string[]) {
+  bagStore.set((list) => (ids ? list.filter((x) => !ids.includes(x)) : []));
+}
+
 /** Reviews written on this device. TODO: POST to a reviews API once accounts and orders exist. */
 const NO_REVIEWS: Review[] = [];
 const myReviewStore = createPersistentStore<Review[]>('archivin:my-reviews', NO_REVIEWS);

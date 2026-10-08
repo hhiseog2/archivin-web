@@ -82,7 +82,7 @@ export function SearchField({ variant }: { variant: 'mobile' | 'desktop' }) {
                 e.preventDefault();
                 close();
               } else if (e.key === 'Enter' && !onShop && value.trim()) {
-                // TODO(design): search from pages other than the shop isn't designed; Enter opens the shop filtered.
+                // Other pages (DHeader, v5): Enter opens the shop filtered by the search.
                 router.push(shopHref({ q: value.trim() }));
               }
             }}

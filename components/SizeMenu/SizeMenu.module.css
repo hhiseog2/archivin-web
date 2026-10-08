@@ -1,0 +1,82 @@
+/* `size` + window (A21_Shop / A21_DShop, README 8-2). Shape and motion come from Popup.module.css `.pop`. */
+
+/* Mobile: the window hangs off the whole top row (12px from the screen's right edge), so this box isn't positioned. */
+.wrapMobile {
+  flex-shrink: 0;
+}
+/* Desktop: its own positioned box, the window lines up with the button's right edge. */
+.wrapDesktop {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.trigger {
+  white-space: nowrap;
+}
+
+/* 300px, 14px top · 18px sides · 4px bottom (doubled class: wins over the shared `.pop` padding whatever the CSS order). */
+.pop.pop {
+  width: 300px;
+  max-width: calc(100vw - 24px);
+  padding: 14px 18px 4px;
+}
+.pop.mobile {
+  right: 12px;
+}
+.pop.desktop {
+  right: 0;
+}
+
+.title {
+  margin: 0 0 8px;
+  font-size: var(--type-nav-size);
+  line-height: 1.5;
+  color: var(--color-ink-2);
+}
+.gap {
+  margin-top: 16px;
+}
+
+.chips {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.rule {
+  height: 1px;
+  margin-top: 14px;
+  background: var(--color-rule);
+}
+
+.foot {
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.help {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-ink-2);
+}
+.ko {
+  font-family: var(--font-kr);
+}
+.clear {
+  flex-shrink: 0;
+  height: 44px;
+  margin-right: -8px;
+  padding: 0 8px;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font-size: var(--type-nav-size);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}

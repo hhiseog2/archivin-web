@@ -1,145 +1,168 @@
-.head {
-  padding: 40px 16px 0;
-}
-.title {
-  margin: 0;
-  font-weight: 400;
-  font-size: 40px;
-  line-height: 0.95;
-}
-.lead {
-  margin: 16px 0 0;
-  font-size: 15px;
-  line-height: 1.55;
+/* Order complete — A21_OrderDone · A21_OrderPaid (README 8-8). Mobile: 32px top · 16px sides. */
+.main {
+  padding: 32px var(--space-gutter-mobile) 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.box {
-  margin: 32px 16px 0;
-  padding: 20px 16px;
-  background: var(--color-fill);
-}
-.boxTitle {
+.number {
   margin: 0;
-  font-weight: 400;
-  font-size: 15px;
-}
-.boxNote {
-  margin: 8px 0 0;
-  font-size: 13px;
+  font-size: var(--type-note-size);
   line-height: 1.5;
   color: var(--color-ink-2);
 }
-.paid {
-  margin: 8px 0 0;
-  font-size: 14px;
-  line-height: 1.5;
+.title {
+  margin: 4px 0 0;
+  font-weight: 400;
+  font-size: var(--type-title-size);
+  line-height: var(--type-title-line);
+}
+.lead {
+  margin: 6px 0 0;
+  font-size: var(--type-body-size);
+  line-height: 1.55;
+}
+.ko {
+  margin: 4px 0 0;
+  font-family: var(--font-kr);
+  font-size: var(--type-note-size);
+  line-height: var(--type-kr-note-line);
+  color: var(--color-ink-2);
 }
 
-.dl {
-  margin: 16px 0 0;
-  font-size: 14px;
+/* Bank-transfer box: fill, 12px radius, 8px 18px 16px inside, rows at least 36px. */
+.bankBox {
+  margin-top: 24px;
+  padding: 8px 18px 16px;
+  border-radius: var(--radius-panel);
+  background: var(--color-fill);
 }
-.dl > div {
-  min-height: 40px;
+.kv {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-size: var(--type-body-size);
+  line-height: 1.5;
+}
+.kv > div {
+  min-height: 36px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  border-top: 1px solid var(--color-fill);
+  gap: 12px;
 }
-.dl > div:last-child {
-  border-bottom: 1px solid var(--color-fill);
-}
-.dl > .accRow {
+.kv > .accountRow {
   min-height: 48px;
 }
-.dl dt {
+.kv dt {
   color: var(--color-ink-2);
 }
-.dl dd {
+.kv dd {
   margin: 0;
 }
-.accDd {
+.accountDd {
   display: flex;
   align-items: center;
-  gap: 8px;
-}
-.accNo,
-.strong {
-  font-weight: 400;
-  font-variant-numeric: tabular-nums;
+  gap: 10px;
 }
 .copy {
-  height: 36px;
-  min-width: 72px;
-  padding: 0 10px;
+  height: 32px;
+  padding: 0 14px;
   border: 0;
   border-radius: var(--radius-pill);
-  background: var(--color-fill);
+  background: var(--color-paper);
   color: var(--color-ink);
-  font-weight: 400;
-  font-size: 11px;
+  font-size: var(--type-note-size);
   cursor: pointer;
 }
-.copied {
-  background: var(--color-navy);
-  color: var(--color-on-navy);
-}
-.ko {
-  margin: 12px 0 0;
-  font-family: var(--font-kr);
-  font-weight: 400;
+.bankNote {
+  margin: 10px 0 0;
   font-size: 12px;
-  line-height: 1.6;
+  line-height: 1.5;
   color: var(--color-ink-2);
 }
-.copyStatus {
-  margin: 8px 0 0;
-  min-height: 18px;
+.bankKo {
+  margin: 2px 0 0;
+  font-family: var(--font-kr);
   font-size: 12px;
+  line-height: var(--type-kr-note-line);
+  color: var(--color-ink-2);
 }
 
 .next {
-  padding: 32px 16px 0;
+  margin-top: 32px;
 }
-.next h2 {
-  margin-bottom: 8px;
+.h2 {
+  margin: 0;
+  font-weight: 400;
+  font-size: var(--type-body-size);
+  line-height: 1.5;
 }
 .body {
-  margin: 0;
-  font-size: 15px;
+  margin: 6px 0 0;
+  font-size: var(--type-body-size);
   line-height: 1.55;
+}
+
+.items {
+  margin-top: 40px;
+}
+.shipTo {
+  margin: 16px 0 0;
+  font-size: var(--type-note-size);
+  line-height: 1.55;
+  color: var(--color-ink-2);
 }
 
 .actions {
-  padding: 32px 16px 0;
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
 }
-
-.account {
-  margin: 32px 16px 0;
-  padding-top: 24px;
-  border-top: 1px solid var(--color-fill);
-  display: flex;
-  flex-direction: column;
-}
-.accountNote {
-  margin: 8px 0 0;
-  font-size: 13px;
-  line-height: 1.55;
-  color: var(--color-ink-2);
-}
-.create {
-  margin-top: 16px;
-}
-.notNow {
-  min-height: 44px;
+.primary {
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: var(--radius-pill);
+  background: var(--color-navy);
+  color: var(--color-on-navy);
+  font-size: var(--type-button-size);
+  text-decoration: none;
+}
+.primary:hover {
+  color: var(--color-on-navy);
+}
+.textLink {
+  align-self: center;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-ink);
+  font-size: var(--type-note-size);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.guest {
+  margin: 24px 0 0;
+  font-size: var(--type-note-size);
+  line-height: 1.55;
   color: var(--color-ink-2);
-  font-size: 13px;
+  text-align: center;
+}
+.guest a {
+  color: var(--color-ink);
   text-underline-offset: 3px;
+}
+
+/* Desktop — A21_DOrderDone · A21_DOrderPaid: centred 560px (max 608), 72px top. */
+@media (min-width: 900px) {
+  .main {
+    width: 100%;
+    max-width: 608px;
+    margin: 0 auto;
+    padding: 72px 24px 0;
+  }
 }

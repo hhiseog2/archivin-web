@@ -1,0 +1,44 @@
+/* .subrow (A21_Shop / A21_DShop). Buttons are `.poptrig` (44px, 0 12px, 13px) + `.ulbl`. */
+
+/* Doubled class: beats the shared `.trigger` ink whatever the CSS order. */
+.item.item {
+  flex-shrink: 0;
+  color: var(--color-ink-2);
+  white-space: nowrap;
+}
+.item.on {
+  color: var(--color-ink);
+}
+/* Picked: the 1px underline stays (`.poptrig[aria-pressed="true"] .ulbl`). */
+.on > span {
+  text-decoration-color: currentColor;
+}
+
+/* Mobile: its own 44px row under the top row (4px sides, so the first word sits at 16px). Scrolls sideways, no scrollbar. */
+.mobile {
+  height: 44px;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.mobile::-webkit-scrollbar {
+  display: none;
+}
+/* 6+ items: the right 40px fades, and 28px of end space lets the last item clear the fade. */
+.isLong {
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+}
+.isLong::after {
+  content: '';
+  flex: 0 0 28px;
+}
+
+/* Desktop: left of the size · sort row, wrapping. */
+.desktop {
+  display: flex;
+  flex-wrap: wrap;
+}
