@@ -49,9 +49,9 @@ export function IntroPanel() {
       <div className={`m-only ${styles.mobile}`}>
         <h1 className={styles.h1}>
           <Link href="/shop" className={`ienter ${styles.enter} ${styles.enterMobile}`} aria-label="ARCHIVIN, enter the shop" onClick={enter}>
-            {/* Client request: white page with a black logo (the white PNG turned black in CSS). TODO: black logo file / SVG. */}
+            {/* Client request: white page with a black logo — archivin-stitch-black.png (scripts/make-intro-logo.mjs). TODO: vector logo. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo/archivin-stitch-white.png" alt="" width={330} height={77} className={styles.logoMobile} />
+            <img src="/logo/archivin-stitch-black.png" alt="" width={330} height={77} className={styles.logoMobile} />
             <span className={styles.lineMobile}>
               <span className={styles.tagline}>selected vintage clothing.</span>
               <ExitDoorIcon size="mobile" />
@@ -68,7 +68,7 @@ export function IntroPanel() {
           <Link href="/shop" className={`ienter ${styles.enter} ${styles.enterDesktop}`} aria-label="ARCHIVIN, enter the shop" onClick={enter}>
             <span className={styles.logoRow}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo/archivin-stitch-white.png" alt="" width={800} height={186} className={styles.logoDesktop} />
+              <img src="/logo/archivin-stitch-black.png" alt="" width={800} height={186} className={styles.logoDesktop} />
               <ExitDoorIcon size="desktop" />
             </span>
             <span className={styles.taglineDesktop}>selected vintage clothing.</span>

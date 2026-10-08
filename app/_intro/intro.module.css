@@ -44,11 +44,7 @@
   outline: 2px solid var(--color-ink);
   outline-offset: 6px;
 }
-/* The stitch logo PNG is white thread on transparent; this turns the thread black. */
-.logoMobile,
-.logoDesktop {
-  filter: brightness(0);
-}
+
 
 .tagline,
 .taglineDesktop {
