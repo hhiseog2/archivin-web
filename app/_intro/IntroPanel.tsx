@@ -4,14 +4,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState, type MouseEvent } from 'react';
 import { ExitDoorIcon } from '@/components/ExitDoorIcon/ExitDoorIcon';
-import { catalog } from '@/lib/catalog';
 import styles from './intro.module.css';
 
 // Arrow 0–0.42s, figure 0.04–0.66s, door 0.547–0.807s, panel lifts 0.847–1.167s, then /shop (README 8-1, 9).
 const GO_AT_MS = 1187;
 
 /**
- * Navy intro panel. Logo + line + icon are one link ("ARCHIVIN, enter the shop"). Hover / focus only
+ * Intro panel — white with a black logo and copy (client request; the v4 design was navy). Logo + line + icon are one link ("ARCHIVIN, enter the shop"). Hover / focus only
  * nudges the arrow 2px — it never navigates. Click / tap / Enter adds `is-go` and the CSS plays the run-in;
  * reduced motion goes straight to /shop.
  */
@@ -37,25 +36,20 @@ export function IntroPanel() {
     timer.current = setTimeout(() => router.push('/shop'), GO_AT_MS);
   };
 
-  const list = (
+  // Client request: the band · designer · rap · skate · archive list is gone; "love you all." stays.
+  const love = (
     <div className={styles.bottom}>
-      {/* Plain text, not links (README 8-1). TODO(design): may become shop filters once products are tagged. */}
-      <ul aria-label="What we carry" className={styles.list}>
-        {catalog.introCategories.map((c) => (
-          <li key={c}>{c}</li>
-        ))}
-      </ul>
       <p className={styles.love}>love you all.</p>
     </div>
   );
 
   return (
     <div className={`ipanel ${go ? 'is-go' : ''} ${styles.panel}`}>
-      {/* Mobile: logo, then the line with the icon at its right end; the list 92px below. */}
+      {/* Mobile: logo, then the line with the icon at its right end; "love you all." 92px below. */}
       <div className={`m-only ${styles.mobile}`}>
         <h1 className={styles.h1}>
           <Link href="/shop" className={`ienter ${styles.enter} ${styles.enterMobile}`} aria-label="ARCHIVIN, enter the shop" onClick={enter}>
-            {/* TODO: client to confirm white for the logo and copy — the original thread is cream (README 12). */}
+            {/* Client request: white page with a black logo (the white PNG turned black in CSS). TODO: black logo file / SVG. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo/archivin-stitch-white.png" alt="" width={330} height={77} className={styles.logoMobile} />
             <span className={styles.lineMobile}>
@@ -64,10 +58,10 @@ export function IntroPanel() {
             </span>
           </Link>
         </h1>
-        <div className={styles.listMobile}>{list}</div>
+        <div className={styles.listMobile}>{love}</div>
       </div>
 
-      {/* Desktop: logo with the icon 28px to its right (bottoms aligned), the line 40px below; list at the bottom. */}
+      {/* Desktop: logo with the icon 28px to its right (bottoms aligned), the line 40px below; "love you all." at the bottom. */}
       <div className={`d-only ${styles.desktop}`}>
         <div aria-hidden="true" className={styles.spaceTop} />
         <h1 className={styles.h1}>
@@ -81,7 +75,7 @@ export function IntroPanel() {
           </Link>
         </h1>
         <div aria-hidden="true" className={styles.spaceMid} />
-        {list}
+        {love}
       </div>
     </div>
   );

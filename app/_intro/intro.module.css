@@ -13,7 +13,8 @@
   overflow: hidden;
 }
 
-/* Navy panel (.ipanel — `is-go` and the lift keyframes are in components/ExitDoorIcon/exit-door.css). */
+/* Intro panel (.ipanel — `is-go` and the lift keyframes are in components/ExitDoorIcon/exit-door.css).
+   White with black logo, copy and icon (client request; the v4 design was navy with white). */
 .panel {
   position: relative;
   z-index: 1;
@@ -21,8 +22,8 @@
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  background: var(--color-navy);
-  color: var(--color-on-navy);
+  background: var(--color-paper);
+  color: var(--color-ink);
 }
 
 .h1 {
@@ -31,17 +32,22 @@
   font-size: var(--type-intro-tagline-size);
 }
 
-/* .ienter — one link for logo + line + icon. White text, white 2px focus ring 6px out. */
+/* .ienter — one link for logo + line + icon. Black text, 2px focus ring 6px out. */
 .enter {
-  color: var(--color-on-navy);
+  color: var(--color-ink);
   text-decoration: none;
 }
 .enter:hover {
-  color: var(--color-on-navy);
+  color: var(--color-ink);
 }
 .enter:focus-visible {
-  outline: 2px solid var(--color-on-navy);
+  outline: 2px solid var(--color-ink);
   outline-offset: 6px;
+}
+/* The stitch logo PNG is white thread on transparent; this turns the thread black. */
+.logoMobile,
+.logoDesktop {
+  filter: brightness(0);
 }
 
 .tagline,
@@ -53,15 +59,8 @@
 .bottom {
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 16px;
-}
-.list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font-size: var(--type-intro-list-size);
-  line-height: var(--type-intro-list-line);
 }
 .love {
   margin: 0;

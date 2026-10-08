@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#323850',
+  themeColor: '#ffffff',
 };
 
 // Neue Haas Grotesk Text is an Adobe Fonts face. Set NEXT_PUBLIC_TYPEKIT_ID in .env once the web kit exists.
