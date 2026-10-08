@@ -18,6 +18,7 @@ const DESKTOP = '(min-width: 900px)';
 type MeasureKey = Exclude<keyof Measurements, 'unit'>;
 const TOPS: MeasureKey[] = ['shoulder', 'chest', 'sleeve', 'length'];
 const BOTTOMS: MeasureKey[] = ['waist', 'rise', 'thigh', 'hem', 'length'];
+const FLAT: MeasureKey[] = ['width', 'height']; // hats · bags (archivin.kr 가로 · 세로)
 
 const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -40,9 +41,9 @@ function askHref(name: string) {
   return site.productQuestions.mailto.replace('{email}', site.contact.email).replace('{productName}', subject);
 }
 
-/** Tops / outer: shoulder · chest · sleeve · length; bottoms: waist · rise · thigh · hem · length. Only the ones we have. */
+/** Tops / outer: shoulder · chest · sleeve · length; bottoms: waist · rise · thigh · hem · length; hats · bags: width · height. Only the ones we have. */
 function measureRows(m: Measurements) {
-  const keys = m.waist != null ? BOTTOMS : TOPS;
+  const keys = m.waist != null ? BOTTOMS : m.width != null || m.height != null ? FLAT : TOPS;
   return keys.filter((k) => m[k] != null).map((k) => [k, m[k]!] as const);
 }
 

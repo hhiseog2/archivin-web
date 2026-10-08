@@ -13,7 +13,7 @@ export type ProductImage = { src: string; alt: string };
 
 /** Tops / outer measure shoulder · chest · sleeve · length; bottoms waist · rise · thigh · hem · length. */
 export type Measurements = { unit: string } & Partial<
-  Record<'shoulder' | 'chest' | 'sleeve' | 'length' | 'waist' | 'rise' | 'thigh' | 'hem', number>
+  Record<'shoulder' | 'chest' | 'sleeve' | 'length' | 'waist' | 'rise' | 'thigh' | 'hem' | 'width' | 'height', number>
 >;
 
 export type Product = {
@@ -34,10 +34,11 @@ export type Product = {
   waist?: number | null;
   /** Shoes: fit in mm (size filter "shoes · mm"). */
   fitMm?: number | null;
-  /** Size on the tag. Shown as "· tag M" only when it differs from sizeLabel. */
-  tagSize: string | null;
+  /** Size on the tag. Shown as "· tag M" only when it differs from sizeLabel. Detail field (server). */
+  tagSize?: string | null;
   price: number | null;
   sold: boolean;
+  /** In the browser list only the first photo; the product page gets them all (lib/product-details.ts). */
   images: ProductImage[];
   /** Second angle shown when a card is hovered or focused. Missing → the card photo doesn't change. */
   hoverImage?: { src: string; kind: string };
@@ -110,7 +111,23 @@ type BrandShortcut = { label: string; brands: string[]; subsBy: 'model' | 'brand
 
 // TODO(backend): migrate products and members from cafe24 (strip the size prefix from names, e.g. "38)90's Levis 517";
 // member id → email; review board). `products[].cafe24` keeps each piece's archivin.kr number and category.
-export const products = productData.products as Product[];
+/**
+ * data/products.json holds the list fields only (cards, filters, bag) — it ships to the browser on every page,
+ * so measurements, details and the full photo list live in data/product-details.json (server only).
+ */
+type ProductRow = Omit<Product, 'images' | 'hoverImage'> & { image: string | null; hover?: string };
+
+/**
+ * Sold pieces keep their photos on archivin.kr (cafe24), stored as "~/big/…" to keep the list small.
+ * TODO(client): move them to image storage before the cafe24 shop closes — they disappear with it.
+ */
+export const photoUrl = (src: string) => (src.startsWith('~/') ? `https://archivin.kr/web/product/${src.slice(2)}` : src);
+
+export const products: Product[] = (productData.products as ProductRow[]).map(({ image, hover, ...p }) => ({
+  ...p,
+  images: image ? [{ src: photoUrl(image), alt: p.name }] : [],
+  ...(hover ? { hoverImage: { src: photoUrl(hover), kind: 'other angle' } } : {}),
+}));
 export const catalog = {
   categories: productData.categories as CategoryDef[],
   brandShortcuts: productData.brandShortcuts as BrandShortcut[],

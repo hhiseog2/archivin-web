@@ -89,7 +89,7 @@ function ReviewItem({ review: r, expanded, onToggle }: { review: Review; expande
   }, []);
 
   return (
-    <article aria-label={`review of ${product}`} className={styles.review}>
+    <article aria-label={product ? `review of ${product}` : 'review'} className={styles.review}>
       {r.photo ? (
         // TODO(backend): buyer photos (up to 5). Grey placeholder until real photos exist (README 12).
         <div role="img" aria-label="buyer photo" className={styles.photo}>
@@ -110,9 +110,9 @@ function ReviewItem({ review: r, expanded, onToggle }: { review: Review; expande
             <Link href={`/product/${r.productId}`} className={styles.product}>
               {product}
             </Link>
-          ) : (
+          ) : product ? (
             <span className={styles.product}>{product}</span>
-          )}
+          ) : null}
         </div>
         <p ref={bodyRef} lang={r.lang} className={`${styles.body} ${expanded ? '' : styles.clamp3}`}>
           {r.body}
