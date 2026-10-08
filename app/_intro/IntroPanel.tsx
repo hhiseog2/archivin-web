@@ -45,7 +45,7 @@ export function IntroPanel() {
 
   return (
     <div className={`ipanel ${go ? 'is-go' : ''} ${styles.panel}`}>
-      {/* Mobile: logo, then the line with the icon at its right end; "love you all." 92px below. */}
+      {/* Mobile: logo, then the line with the icon at its right end, centred; "love you all." at the bottom right. */}
       <div className={`m-only ${styles.mobile}`}>
         <h1 className={styles.h1}>
           <Link href="/shop" className={`ienter ${styles.enter} ${styles.enterMobile}`} aria-label="ARCHIVIN, enter the shop" onClick={enter}>

@@ -66,6 +66,7 @@
 
 /* Mobile — A_Intro (390×844): 30px sides, stacked in the vertical middle. */
 .mobile {
+  position: relative;
   flex: 1;
   padding: 48px var(--space-gutter-intro-mobile);
   display: flex;
@@ -90,8 +91,12 @@
   justify-content: space-between;
   gap: 16px;
 }
+/* Client request: on phones "love you all." sits at the bottom right (48px up), the logo stays centred. */
 .listMobile {
-  margin-top: 92px;
+  position: absolute;
+  left: var(--space-gutter-intro-mobile);
+  right: var(--space-gutter-intro-mobile);
+  bottom: 48px;
 }
 
 /* Desktop — A_DIntro: 48px all round; [space 1] → logo row → [space 1] → bottom row. */
