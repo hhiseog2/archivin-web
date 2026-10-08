@@ -108,6 +108,8 @@ type SubDef = { id: string; label: string; cafe24?: string };
 type CategoryDef = { id: CategoryId; label: string; cafe24?: string; subs: SubDef[] };
 type BrandShortcut = { label: string; brands: string[]; subsBy: 'model' | 'brand'; subs: string[] };
 
+// TODO(backend): migrate products and members from cafe24 (strip the size prefix from names, e.g. "38)90's Levis 517";
+// member id → email; review board). `products[].cafe24` keeps each piece's archivin.kr number and category.
 export const products = productData.products as Product[];
 export const catalog = {
   categories: productData.categories as CategoryDef[],
