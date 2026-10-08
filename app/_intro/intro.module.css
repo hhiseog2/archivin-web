@@ -14,7 +14,7 @@
 }
 
 /* Intro panel (.ipanel — `is-go` and the lift keyframes are in components/ExitDoorIcon/exit-door.css).
-   v5: white with the navy logo, copy and icon. */
+   White with a black (ink) logo, copy and icon — client request; the v5 design is navy. */
 .panel {
   position: relative;
   z-index: 1;
@@ -23,7 +23,7 @@
   display: flex;
   flex-direction: column;
   background: var(--color-paper);
-  color: var(--color-navy);
+  color: var(--color-ink);
 }
 /* Seen this session (inline script in page.tsx): never paint the panel, /shop takes over. */
 :global(html[data-intro-seen]) .panel {
@@ -36,16 +36,16 @@
   font-size: var(--type-intro-tagline-size);
 }
 
-/* .ienter — one link for logo + line + icon. Navy text, navy 2px focus ring 6px out. */
+/* .ienter — one link for logo + line + icon. Black text, black 2px focus ring 6px out. */
 .enter {
-  color: var(--color-navy);
+  color: var(--color-ink);
   text-decoration: none;
 }
 .enter:hover {
-  color: var(--color-navy);
+  color: var(--color-ink);
 }
 .enter:focus-visible {
-  outline: 2px solid var(--color-navy);
+  outline: 2px solid var(--color-ink);
   outline-offset: 6px;
 }
 

@@ -6,7 +6,7 @@
  *
  * The only change: the hover / focus nudge is `var(--door-nudge)` (2px in screen pixels, in viewBox units:
  * 13 at 28px tall, 6.067 at 60px tall), set per size by ExitDoorIcon.tsx.
- * `.ienter` is the intro's enter link and `.ipanel.is-go` its navy panel (app/page.tsx).
+ * `.ienter` is the intro's enter link and `.ipanel.is-go` its intro panel (app/page.tsx).
  */
 .door{cursor:pointer;flex-shrink:0;display:block}
 .door svg{display:block;overflow:visible}

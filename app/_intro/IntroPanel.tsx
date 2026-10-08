@@ -27,7 +27,8 @@ function seenBefore() {
 }
 
 /**
- * Intro panel (A_IntroNavy / A_DIntroNavy, v5): white with the navy logo, line, icon and "love you all.".
+ * Intro panel (A_IntroNavy / A_DIntroNavy, v5 layout). Client request: all black on white — logo, line, icon and
+ * "love you all." in ink instead of the design's navy.
  * Logo + line + icon are one link ("ARCHIVIN, enter the shop"). Hover / focus only
  * nudges the arrow 2px — it never navigates. Click / tap / Enter adds `is-go` and the CSS plays the run-in;
  * reduced motion goes straight to /shop.
@@ -90,7 +91,7 @@ export function IntroPanel() {
         <h1 className={styles.h1}>
           <Link href="/shop" className={`ienter ${styles.enter} ${styles.enterMobile}`} aria-label="ARCHIVIN, enter the shop" onClick={enter}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo/archivin-stitch-navy-intro.png" alt="" width={330} height={77} className={styles.logoMobile} />
+            <img src="/logo/archivin-stitch-black-intro.png" alt="" width={330} height={77} className={styles.logoMobile} />
             <span className={styles.lineMobile}>
               <span className={styles.tagline}>selected vintage clothing.</span>
               <ExitDoorIcon size="mobile" />
@@ -107,7 +108,7 @@ export function IntroPanel() {
           <Link href="/shop" className={`ienter ${styles.enter} ${styles.enterDesktop}`} aria-label="ARCHIVIN, enter the shop" onClick={enter}>
             <span className={styles.logoRow}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo/archivin-stitch-navy-intro.png" alt="" width={800} height={186} className={styles.logoDesktop} />
+              <img src="/logo/archivin-stitch-black-intro.png" alt="" width={800} height={186} className={styles.logoDesktop} />
               <ExitDoorIcon size="desktop" />
             </span>
             <span className={styles.taglineDesktop}>selected vintage clothing.</span>
