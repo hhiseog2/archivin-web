@@ -1,12 +1,12 @@
-// Intro logo from the handoff's navy stitch logo (archivin-stitch-navy-intro.png, v5), recoloured black
-// (client request: the whole intro in black, ink #1c1d21) and evened out.
-// The N's thread is ~17% thinner in the photographed logo (≈3.3px vs ≈3.9px elsewhere), so the N is thickened
-// by a fraction of a pixel, fading in from the left so there's no seam.
+// Step 1 of the logo: the handoff's navy stitch logo (archivin-stitch-navy-intro.png, v5) → an evened-out raster
+// (ink #1c1d21). The N's thread is ~17% thinner in the photographed logo (≈3.3px vs ≈3.9px elsewhere), so the N is
+// thickened by a fraction of a pixel, fading in from the left so there's no seam.
+// Step 2: scripts/trace-logo.mjs turns that raster into the SVGs the site uses.
 // Run: node scripts/make-intro-logo.mjs <handoff navy-intro.png> [out.png]  — TODO(client): replace with a vector logo when it arrives.
 import sharp from 'sharp';
 
 const SRC = process.argv[2];
-const OUT = process.argv[3] ?? 'public/logo/archivin-stitch-black-intro.png';
+const OUT = process.argv[3] ?? 'logo-raster.png'; // feed this to scripts/trace-logo.mjs (the site uses the SVGs)
 const COLOR = (process.env.COLOR ?? '#1c1d21').match(/[0-9a-f]{2}/gi).map((h) => parseInt(h, 16));
 const UP = 4; // work at 4× so the thickening can be a fraction of a source pixel
 const GROW = Number(process.env.GROW ?? 2); // extra thread on each side, in 4× pixels
